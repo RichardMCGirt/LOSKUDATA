@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open URL in New Window</title>
+</head>
+<body>
+    <button onclick="openLoginPage()">Open Login Page</button>
+
+    <script>
+        function openLoginPage() {
+            const username = 'richard.mcgirt';
+            const loginURL = `https://vanirlive.lbmlo.live/index.php?action=Login&module=Users&user_name=${encodeURIComponent(username)}`;
+            window.open(loginURL, '_blank');
+        }
+    </script>
+</body>
+</html>
