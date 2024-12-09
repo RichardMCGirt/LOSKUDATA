@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "A Node.js app for LOSKUDATA",
   "main": "server.js",
-  "scripts": {
-    "build": "./render-build.sh && npm install",
+ "scripts": {
+    "postinstall": "npx puppeteer install",
     "start": "node server.js"
-  },
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
