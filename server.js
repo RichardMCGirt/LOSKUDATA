@@ -19,7 +19,7 @@ app.get('/download-report', async (req, res) => {
     try {
         console.log('Launching browser...');
         const browser = await puppeteer.launch({
-            headless: false, // Non-headless mode
+            headless: true, // Non-headless mode
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
