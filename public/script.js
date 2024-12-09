@@ -1,8 +1,8 @@
 document.getElementById('downloadReport').addEventListener('click', () => {
     console.log('Download Report button clicked.');
 
-    fetch('/download-report')
-        .then((response) => {
+    fetch('https://your-app.render.com/download-report')
+    .then((response) => {
             console.log('Received response:', response);
 
             if (!response.ok) {
