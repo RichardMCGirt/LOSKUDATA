@@ -11,9 +11,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/download-report', async (req, res) => {
     try {
         const browser = await puppeteer.launch({
-            headless: false,
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
+            headless: true, // Ensure headless mode for cloud environments
+            executablePath: puppeteer.executablePath(),
         });
+        
 
         const page = await browser.newPage();
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');

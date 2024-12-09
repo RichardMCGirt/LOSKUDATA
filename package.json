@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "./render-build.sh"
+    "postinstall": "npx puppeteer install"
   },
   "keywords": [],
   "author": "",
