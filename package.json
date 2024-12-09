@@ -2,14 +2,10 @@
   "name": "loskudata",
   "version": "1.0.0",
   "description": "A Node.js app for LOSKUDATA",
-  "main": "script.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "postinstall": "./render-build.sh",
-    "build": "npm install"
-
-
+    "postinstall": "./render-build.sh"
   },
   "keywords": [],
   "author": "",
