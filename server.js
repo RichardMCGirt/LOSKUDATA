@@ -5,11 +5,18 @@ const path = require('path');
 const app = express();
 const PORT = 3010;
 
-// Custom delay function
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
+// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Root route for `/`
+app.get('/', (req, res) => {
+    res.send(`
+        <h1>Welcome to LOSKUDATA</h1>
+        <p>To download the report, go to <a href="/download-report">/download-report</a></p>
+    `);
+});
+
+// Puppeteer route for `/download-report`
 app.get('/download-report', async (req, res) => {
     try {
         console.log('Launching browser...');
@@ -47,7 +54,7 @@ app.get('/download-report', async (req, res) => {
         await page.click('input#generatenw');
 
         console.log('Waiting one minute for the report to generate...');
-        await delay(40000); // Custom delay function
+        await new Promise(resolve => setTimeout(resolve, 60000)); // Wait 60 seconds
 
         console.log('Waiting for the "Export To CSV" button to appear...');
         await page.waitForSelector('input#btnExport', { visible: true });
@@ -57,13 +64,13 @@ app.get('/download-report', async (req, res) => {
 
         console.log('"Export To CSV" button clicked successfully!');
         res.json({ message: '"Export To CSV" button clicked and export initiated!' });
-
     } catch (error) {
         console.error('An error occurred:', error);
         res.status(500).json({ message: 'Error occurred during navigation or interaction.' });
     }
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
