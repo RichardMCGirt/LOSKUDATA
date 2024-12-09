@@ -1,16 +1,30 @@
 document.getElementById('downloadReport').addEventListener('click', () => {
+    console.log('Download Report button clicked.');
+
     fetch('/download-report')
         .then((response) => {
+            console.log('Received response:', response);
+
             if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+                console.error('Response not OK:', response.status, response.statusText);
+                throw new Error('Failed to fetch the report. Status: ' + response.status + ' ' + response.statusText);
             }
+
             return response.json();
         })
         .then((data) => {
-            alert(data.message);
+            console.log('Report generation successful:', data);
+            alert('Success: ' + data.message);
         })
         .catch((err) => {
-            console.error('Error:', err);
-            alert('Error: ' + err.message);
+            console.error('Error during fetch:', err);
+
+            if (err.message.includes('Failed to fetch')) {
+                alert('Error: Unable to reach the server. Please try again later.');
+            } else if (err.message.includes('Network response')) {
+                alert('Error: Server responded with a bad status. Check logs for details.');
+            } else {
+                alert('Unexpected error occurred: ' + err.message);
+            }
         });
 });

@@ -4,11 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOSKUDATA</title>
+    <style>
+        #loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        #loading img {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to LOSKUDATA</h1>
     <button id="downloadReport">Download Report</button>
+    <div id="loading">
+        <p>Generating your report...</p>
+        <img src="spinner.gif" alt="Loading...">
+    </div>
 
-    <script src="/script.js"></script>
+    <script>
+        document.getElementById('downloadReport').addEventListener('click', () => {
+            const loadingDiv = document.getElementById('loading');
+            loadingDiv.style.display = 'block';
+
+            fetch('/download-report')
+                .then((response) => {
+                    loadingDiv.style.display = 'none';
+
+                    if (!response.ok) {
+                        throw new Error('Failed to generate the report.');
+                    }
+
+                    return response.blob();
+                })
+                .then((blob) => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'report.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    alert('Report downloaded successfully!');
+                })
+                .catch((err) => {
+                    loadingDiv.style.display = 'none';
+                    alert('Error: ' + err.message);
+                });
+        });
+    </script>
 </body>
 </html>
