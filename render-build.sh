@@ -1,3 +1,4 @@
-#!/usr/bin/env bash
-# Ensure Puppeteer downloads Chromium during build
-npx puppeteer install
+#!/bin/bash
+
+# Install Chromium
+apt-get update && apt-get install -y chromium-browser

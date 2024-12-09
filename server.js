@@ -7,19 +7,16 @@ const app = express();
 const PORT = process.env.PORT || 3010;
 
 // Ensure the download directory exists
-const downloadPath = path.resolve(__dirname, 'downloads');
+const downloadPath = path.resolve('/tmp', 'downloads'); // Use /tmp for Render
 if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
 }
-
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/download-report', async (req, res) => {
     try {
         console.log('Launching browser...');
         const browser = await puppeteer.launch({
-            headless: true, // Non-headless mode
+            headless: true,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
@@ -28,9 +25,7 @@ app.get('/download-report', async (req, res) => {
                 '--disable-infobars',
                 '--disable-popup-blocking',
                 '--window-size=1920,1080',
-                '--enable-features=NetworkService',
             ],
-            userDataDir: './user_data', // Ensure consistent session for downloads
         });
 
         const page = await browser.newPage();
@@ -45,54 +40,38 @@ app.get('/download-report', async (req, res) => {
         console.log('Navigating to login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
         
-        try {
-            // Check if the login field exists
-            const loginFieldExists = await page.$('#user_name');
-            if (loginFieldExists) {
-                console.log('Login fields detected. Proceeding to log in...');
-                await page.type('#user_name', 'richard.mcgirt');
-                await page.type('#user_password', '84625');
-                await page.keyboard.press('Enter');
-                await page.waitForNavigation();
-            } else {
-                console.log('Login skipped as the user is already logged in.');
-            }
-        } catch (error) {
-            console.log('Error during login check:', error.message);
+        // Log in or skip if already logged in
+        const loginFieldExists = await page.$('#user_name');
+        if (loginFieldExists) {
+            console.log('Login fields detected. Proceeding to log in...');
+            await page.type('#user_name', 'richard.mcgirt');
+            await page.type('#user_password', '84625');
+            await page.keyboard.press('Enter');
+            await page.waitForNavigation();
+        } else {
+            console.log('Login skipped as the user is already logged in.');
         }
-        
+
         console.log('Navigating to report page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
-        
         await page.waitForSelector('select#ddlSavedTemplate', { visible: true });
         await page.select('select#ddlSavedTemplate', '248');
-        await page.waitForSelector('input#generatenw', { visible: true });
         await page.click('input#generatenw');
 
         console.log('Waiting for the report to generate...');
-        const countdown = async (seconds) => {
-            for (let i = seconds; i > 0; i--) {
-                console.log(`Time remaining: ${i} seconds`);
-                await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
-            }
-        };
-        await countdown(30);
+        await new Promise((resolve) => setTimeout(resolve, 30000)); // Wait for 30 seconds
 
         console.log('Exporting report to CSV...');
-        const isButtonVisible = await page.$eval('input#btnExport', (el) => el && !el.disabled);
-console.log('Is Export Button Visible and Enabled:', isButtonVisible);
+        await page.waitForSelector('input#btnExport[value="Export To CSV"]', { visible: true });
+        await page.click('input#btnExport[value="Export To CSV"]');
 
-await page.waitForSelector('input#btnExport[value="Export To CSV"]', { visible: true });
-const exportButtons = await page.$$('input#btnExport');
-await exportButtons[1].click(); // Click the second button
-
-        console.log('Waiting for CSV file to be downloaded...');
+        console.log('Waiting for CSV file to download...');
         let csvFile;
-        for (let i = 0; i < 60; i++) { // Poll for up to 60 seconds
+        for (let i = 0; i < 60; i++) {
             const files = fs.readdirSync(downloadPath);
             csvFile = files.find((file) => file.endsWith('.csv'));
             if (csvFile) break;
-            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         }
 
         if (!csvFile) {
@@ -109,7 +88,6 @@ await exportButtons[1].click(); // Click the second button
     }
 });
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
