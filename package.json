@@ -5,13 +5,17 @@
   "main": "server.js",
   "scripts": {
     "postinstall": "npx puppeteer install",
-    "start": "node server.js"
+    "start": "node server.js",
+    "install": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install"
+
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chrome-aws-lambda": "^10.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "puppeteer": "^23.10.2"
   }

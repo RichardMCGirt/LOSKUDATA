@@ -1,8 +1,12 @@
+require('dotenv').config();
+
+
 const express = require('express');
 const cors = require('cors');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
 
 const app = express(); // Initialize app here
 
@@ -28,8 +32,7 @@ async function launchPuppeteer() {
     console.log('Launching Puppeteer...');
     return await puppeteer.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'], // Render-specific flags
-        executablePath: puppeteer.executablePath(), // Use Puppeteer's bundled Chromium
+        args: ['--no-sandbox', '--disable-setuid-sandbox'] // Render-specific flags
     });
 }
 
