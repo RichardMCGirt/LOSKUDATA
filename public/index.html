@@ -50,11 +50,11 @@
                     window.URL.revokeObjectURL(url);
                     alert('Report downloaded successfully!');
                 })
-                .catch(err => {
-    console.error('Error:', err);
-    process.exit(1); // Exit the script with a failure status
-});
-
+                .catch((err) => {
+                    loadingDiv.style.display = 'none';
+                    console.error('Error:', err);
+                    alert('An error occurred while generating the report. Please try again.');
+                });
         });
     </script>
 </body>
