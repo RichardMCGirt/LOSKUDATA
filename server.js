@@ -12,21 +12,37 @@ if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
 }
 
+// Reusable Puppeteer Launcher
+async function launchPuppeteer() {
+    console.log('Launching Puppeteer...');
+    return await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome/linux-<version>/chrome-linux64/chrome',
+    });
+}
+
+// Route to test Puppeteer with example.com
+app.get('/test-puppeteer', async (req, res) => {
+    try {
+        const browser = await launchPuppeteer();
+        const page = await browser.newPage();
+        await page.goto('https://example.com');
+        const title = await page.title();
+        console.log('Page title:', title);
+        await browser.close();
+        res.json({ message: `Page title: ${title}` });
+    } catch (error) {
+        console.error('Error occurred during Puppeteer test:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Route to download the report
 app.get('/download-report', async (req, res) => {
     try {
-        console.log('Launching browser...');
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-extensions',
-                '--disable-infobars',
-                '--disable-popup-blocking',
-                '--window-size=1920,1080',
-            ],
-        });
+        console.log('Launching Puppeteer...');
+        const browser = await launchPuppeteer();
 
         const page = await browser.newPage();
 
@@ -88,6 +104,7 @@ app.get('/download-report', async (req, res) => {
     }
 });
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
