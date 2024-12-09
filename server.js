@@ -38,8 +38,12 @@ app.get('/download-report', async (req, res) => {
         console.log('Waiting for login navigation to complete...');
         await page.waitForNavigation();
 
+        console.log('Current URL after login:', page.url());
+
         console.log('Login successful! Navigating to the report page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
+
+        console.log('Current URL after navigating to report:', page.url());
 
         console.log('Waiting for the dropdown to appear...');
         await page.waitForSelector('select#ddlSavedTemplate', { visible: true });
@@ -54,7 +58,7 @@ app.get('/download-report', async (req, res) => {
         await page.click('input#generatenw');
 
         console.log('Waiting one minute for the report to generate...');
-        await new Promise(resolve => setTimeout(resolve, 60000)); // Wait 60 seconds
+        await new Promise((resolve) => setTimeout(resolve, 35000));
 
         console.log('Waiting for the "Export To CSV" button to appear...');
         await page.waitForSelector('input#btnExport', { visible: true });
@@ -64,11 +68,14 @@ app.get('/download-report', async (req, res) => {
 
         console.log('"Export To CSV" button clicked successfully!');
         res.json({ message: '"Export To CSV" button clicked and export initiated!' });
+
     } catch (error) {
         console.error('An error occurred:', error);
-        res.status(500).json({ message: 'Error occurred during navigation or interaction.' });
+        res.status(500).json({ error: error.message });
     }
 });
+
+
 
 // Start the server
 app.listen(PORT, () => {
