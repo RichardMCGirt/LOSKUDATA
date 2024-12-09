@@ -4,6 +4,7 @@ const path = require('path');
 
 const app = express();
 const PORT = 3010;
+console.log('Puppeteer Chromium Path:', puppeteer.executablePath());
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
