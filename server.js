@@ -22,7 +22,7 @@ app.get('/download-report', async (req, res) => {
         console.log('Launching browser...');
         const browser = await puppeteer.launch({
             headless: false,
-            executablePath: '/opt/render/.cache/puppeteer/chrome-linux/chrome', // Ensure this path is correct
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome-linux/chrome',
         });
                 const page = await browser.newPage();
 
