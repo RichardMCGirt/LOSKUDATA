@@ -2,9 +2,11 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3010;
+app.use(cors());
 
 // Ensure the download directory exists
 const downloadPath = path.resolve('/tmp', 'downloads'); // Use /tmp for Render
