@@ -29,8 +29,8 @@
             const loadingDiv = document.getElementById('loading');
             loadingDiv.style.display = 'block';
 
-            fetch('https://loskudata-2.onrender.com/', { mode: 'no-cors' })
-            .then((response) => {
+            fetch('/download-report')
+                .then((response) => {
                     loadingDiv.style.display = 'none';
 
                     if (!response.ok) {

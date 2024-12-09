@@ -9,12 +9,13 @@ const app = express(); // Initialize app here
 const PORT = process.env.PORT || 3010;
 
 // Middleware setup
-app.use(cors({ origin: 'http://localhost:5500' })); // Replace with your frontend origin
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Root route
 app.get('/', (req, res) => {
-    res.send('Welcome to LOSKUDATA!');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
 
 // Ensure the download directory exists
 const downloadPath = path.resolve('/tmp', 'downloads'); // Use /tmp for Render
@@ -107,7 +108,6 @@ app.get('/download-report', async (req, res) => {
         console.log(`Serving file: ${csvFile}`);
         res.download(path.join(downloadPath, csvFile), 'report.csv');
 
-        await browser.close();
     } catch (error) {
         console.error('Error occurred during Puppeteer execution:', error);
         res.status(500).json({ error: error.message });
