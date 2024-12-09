@@ -1,8 +1,8 @@
 document.getElementById('downloadReport').addEventListener('click', () => {
     console.log('Download Report button clicked.');
 
-    fetch('https://your-app.render.com/download-report')
-    .then((response) => {
+fetch('https://loskudata-2.onrender.com/')
+        .then((response) => {
             console.log('Received response:', response);
 
             if (!response.ok) {

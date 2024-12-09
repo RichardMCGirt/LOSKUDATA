@@ -1,12 +1,20 @@
 const express = require('express');
+const cors = require('cors');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
-const cors = require('cors');
 
-const app = express();
+const app = express(); // Initialize app here
+
 const PORT = process.env.PORT || 3010;
-app.use(cors());
+
+// Middleware setup
+app.use(cors({ origin: 'http://localhost:5500' })); // Replace with your frontend origin
+
+// Root route
+app.get('/', (req, res) => {
+    res.send('Welcome to LOSKUDATA!');
+});
 
 // Ensure the download directory exists
 const downloadPath = path.resolve('/tmp', 'downloads'); // Use /tmp for Render
