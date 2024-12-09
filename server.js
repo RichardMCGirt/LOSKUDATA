@@ -8,14 +8,6 @@ const PORT = 3010;
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Root route for `/`
-app.get('/', (req, res) => {
-    res.send(`
-        <h1>Welcome to LOSKUDATA</h1>
-        <p>To download the report, go to <a href="/download-report">/download-report</a></p>
-    `);
-});
-
 // Puppeteer route for `/download-report`
 app.get('/download-report', async (req, res) => {
     try {
@@ -24,7 +16,7 @@ app.get('/download-report', async (req, res) => {
             headless: false,
             executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || '/opt/render/.cache/puppeteer/chrome-linux/chrome',
         });
-                const page = await browser.newPage();
+        const page = await browser.newPage();
 
         console.log('Navigating to the login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
@@ -41,12 +33,8 @@ app.get('/download-report', async (req, res) => {
         console.log('Waiting for login navigation to complete...');
         await page.waitForNavigation();
 
-        console.log('Current URL after login:', page.url());
-
         console.log('Login successful! Navigating to the report page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
-
-        console.log('Current URL after navigating to report:', page.url());
 
         console.log('Waiting for the dropdown to appear...');
         await page.waitForSelector('select#ddlSavedTemplate', { visible: true });
@@ -72,13 +60,12 @@ app.get('/download-report', async (req, res) => {
         console.log('"Export To CSV" button clicked successfully!');
         res.json({ message: '"Export To CSV" button clicked and export initiated!' });
 
+        await browser.close();
     } catch (error) {
         console.error('An error occurred:', error);
         res.status(500).json({ error: error.message });
     }
 });
-
-
 
 // Start the server
 app.listen(PORT, () => {

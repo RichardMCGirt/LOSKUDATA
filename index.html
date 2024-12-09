@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Download Report</title>
-    <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOSKUDATA</title>
 </head>
 <body>
+    <h1>Welcome to LOSKUDATA</h1>
     <button id="downloadReport">Download Report</button>
+
+    <script>
+        document.getElementById('downloadReport').addEventListener('click', () => {
+            fetch('/download-report')
+                .then(response => response.json())
+                .then(data => alert(data.message))
+                .catch(err => console.error('Error: ' + err));
+              });
+    </script>
 </body>
 </html>
