@@ -30,31 +30,29 @@
             loadingDiv.style.display = 'block';
 
             fetch('/download-report')
-                .then((response) => {
-                    loadingDiv.style.display = 'none';
+    .then((response) => {
+        console.log('Response status:', response.status); // Log response status
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.blob();
+    })
+    .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'report.csv';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        alert('Report downloaded successfully!');
+    })
+    .catch((err) => {
+        console.error('Error in fetch:', err);
+        alert('An error occurred while generating the report. Please try again.');
+    });
 
-                    if (!response.ok) {
-                        throw new Error('Failed to generate the report.');
-                    }
-
-                    return response.blob();
-                })
-                .then((blob) => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = 'report.csv';
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    alert('Report downloaded successfully!');
-                })
-                .catch((err) => {
-                    loadingDiv.style.display = 'none';
-                    console.error('Error:', err);
-                    alert('An error occurred while generating the report. Please try again.');
-                });
         });
     </script>
 </body>

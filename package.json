@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "A Node.js app for LOSKUDATA",
   "main": "server.js",
-  "scripts": {
-    "postinstall": "npx puppeteer install",
-    "start": "node server.js",
-    "install": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install"
-
-  },
+"scripts": {
+  "start": "node server.js",
+  "postinstall": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true"
+}
+,
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3010;
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Root route
-app.get('/', (req, res) => {
+app.get('/public/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
@@ -29,12 +29,21 @@ if (!fs.existsSync(downloadPath)) {
 
 // Reusable Puppeteer Launcher
 async function launchPuppeteer() {
-    console.log('Launching Puppeteer...');
-    return await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'] // Render-specific flags
-    });
+    console.log('Starting Puppeteer launch process...');
+    try {
+        console.log('Configuring Puppeteer launch options...');
+        const browser = await puppeteer.launch({
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Render-specific flags
+        });
+        console.log('Puppeteer launched successfully.');
+        return browser;
+    } catch (error) {
+        console.error('Error occurred during Puppeteer launch:', error.message);
+        throw error; // Re-throw the error to handle it in the calling function
+    }
 }
+
 
 // Route to test Puppeteer with example.com
 app.get('/test-puppeteer', async (req, res) => {
@@ -44,7 +53,6 @@ app.get('/test-puppeteer', async (req, res) => {
         await page.goto('https://example.com');
         const title = await page.title();
         console.log('Page title:', title);
-        await browser.close();
         res.json({ message: `Page title: ${title}` });
     } catch (error) {
         console.error('Error occurred during Puppeteer test:', error);
@@ -55,12 +63,11 @@ app.get('/test-puppeteer', async (req, res) => {
 // Route to download the report
 app.get('/download-report', async (req, res) => {
     try {
-        console.log('Launching Puppeteer...');
+        console.log('Generating report...');
         const browser = await launchPuppeteer();
 
         const page = await browser.newPage();
 
-        // Set download behavior
         console.log('Setting download path...');
         await page._client().send('Page.setDownloadBehavior', {
             behavior: 'allow',
@@ -70,7 +77,7 @@ app.get('/download-report', async (req, res) => {
         console.log('Navigating to login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
         
-        // Log in or skip if already logged in
+        // Check and perform login
         const loginFieldExists = await page.$('#user_name');
         if (loginFieldExists) {
             console.log('Login fields detected. Proceeding to log in...');
@@ -109,13 +116,27 @@ app.get('/download-report', async (req, res) => {
         }
 
         console.log(`Serving file: ${csvFile}`);
-        res.download(path.join(downloadPath, csvFile), 'report.csv');
+        const filePath = path.join(downloadPath, csvFile);
+
+        // Serve the file
+        res.download(filePath, 'report.csv', (err) => {
+            if (err) {
+                console.error('Error while sending file:', err);
+                res.status(500).send('Failed to send file.');
+            } else {
+                console.log('File sent successfully.');
+            }
+           
+        });
 
     } catch (error) {
         console.error('Error occurred during Puppeteer execution:', error);
-        res.status(500).json({ error: error.message });
+        if (!res.headersSent) {
+            res.status(500).json({ error: 'Failed to generate the report.' });
+        }
     }
 });
+
 
 // Start the server
 app.listen(PORT, () => {
