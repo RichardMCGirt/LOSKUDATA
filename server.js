@@ -20,8 +20,11 @@ app.get('/', (req, res) => {
 app.get('/download-report', async (req, res) => {
     try {
         console.log('Launching browser...');
-        const browser = await puppeteer.launch({ headless: false });
-        const page = await browser.newPage();
+        const browser = await puppeteer.launch({
+            headless: false,
+            executablePath: '/opt/render/.cache/puppeteer/chrome-linux/chrome', // Ensure this path is correct
+        });
+                const page = await browser.newPage();
 
         console.log('Navigating to the login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
