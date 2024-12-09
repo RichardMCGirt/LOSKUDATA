@@ -17,16 +17,11 @@ app.get('/download-report', async (req, res) => {
         console.log('Launching browser...');
         const browser = await puppeteer.launch({
             headless: true,
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-extensions',
-                '--disable-infobars',
-                '--disable-popup-blocking',
-                '--window-size=1920,1080',
-            ],
+            executablePath: process.env.CHROME_BINARY || '/usr/bin/chromium-browser',
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
+        
+        
 
         const page = await browser.newPage();
 

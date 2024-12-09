@@ -4,8 +4,9 @@
   "description": "A Node.js app for LOSKUDATA",
   "main": "server.js",
   "scripts": {
+    "build": "./render-build.sh && npm install",
     "start": "node server.js",
-    "build": "./render-build.sh && npm install"
+    "postinstall": "npx puppeteer install --browser=chrome"
 
   },
   "keywords": [],
