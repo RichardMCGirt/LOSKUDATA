@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Filter with Hardcoded Dropdown</title>
+
+        <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <h1>City Filter with File Upload</h1>
+
+    <!-- File upload -->
+    <label for="file-input">Upload CSV File:</label>
+    <input type="file" id="file-input" accept=".csv">
+
+    <!-- Dropdown for selecting a city -->
+    <div>
+        <label for="city-dropdown">Select a City:</label>
+        <select id="city-dropdown" disabled>
+            <option value="">-- Select City --</option>
+            <option value="Raleigh">Raleigh</option>
+            <option value="Myrtle Beach">Myrtle Beach</option>
+            <option value="Greensboro">Greensboro</option>
+            <option value="Columbia">Columbia</option>
+            <option value="Wilmington">Wilmington</option>
+            <option value="Greenville">Greenville</option>
+            <option value="Charlotte">Charlotte</option>
+        </select>
+    </div>
+
+    <!-- Table to display filtered results -->
+    <table id="result-table">
+        <thead>
+            <tr>
+                <th>Counter Person</th>
+                <th>Branch</th>
+                <th>Job Name</th>
+                <th>SO Number</th>
+                <th>Created Date</th>
+                <th>SO Total</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script src="script2.js"></script>
+
+</body>
+</html>
