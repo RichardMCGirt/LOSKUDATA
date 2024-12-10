@@ -1,28 +1,14 @@
 require('dotenv').config();
-
-
 const express = require('express');
-const cors = require('cors');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
-process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
 
-const app = express(); // Initialize app here
-
+const app = express();
 const PORT = process.env.PORT || 3010;
 
-// Middleware setup
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Root route
-app.get('/public/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-
 // Ensure the download directory exists
-const downloadPath = path.resolve('/tmp', 'downloads'); // Use /tmp for Render
+const downloadPath = path.resolve(__dirname, 'downloads'); // Use local directory
 if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
 }
@@ -31,7 +17,6 @@ if (!fs.existsSync(downloadPath)) {
 async function launchPuppeteer() {
     console.log('Starting Puppeteer launch process...');
     try {
-        console.log('Configuring Puppeteer launch options...');
         const browser = await puppeteer.launch({
             headless: true,
             args: ['--no-sandbox', '--disable-setuid-sandbox'], // Render-specific flags
@@ -44,28 +29,11 @@ async function launchPuppeteer() {
     }
 }
 
-
-// Route to test Puppeteer with example.com
-app.get('/test-puppeteer', async (req, res) => {
-    try {
-        const browser = await launchPuppeteer();
-        const page = await browser.newPage();
-        await page.goto('https://example.com');
-        const title = await page.title();
-        console.log('Page title:', title);
-        res.json({ message: `Page title: ${title}` });
-    } catch (error) {
-        console.error('Error occurred during Puppeteer test:', error);
-        res.status(500).json({ error: error.message });
-    }
-});
-
 // Route to download the report
 app.get('/download-report', async (req, res) => {
     try {
         console.log('Generating report...');
         const browser = await launchPuppeteer();
-
         const page = await browser.newPage();
 
         console.log('Setting download path...');
@@ -76,7 +44,7 @@ app.get('/download-report', async (req, res) => {
 
         console.log('Navigating to login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
-        
+
         // Check and perform login
         const loginFieldExists = await page.$('#user_name');
         if (loginFieldExists) {
@@ -124,21 +92,19 @@ app.get('/download-report', async (req, res) => {
                 console.error('Error while sending file:', err);
                 res.status(500).send('Failed to send file.');
             } else {
-                console.log('File sent successfully.');
+                console.log('File downloaded successfully.');
             }
-           
         });
 
     } catch (error) {
         console.error('Error occurred during Puppeteer execution:', error);
-        if (!res.headersSent) {
-            res.status(500).json({ error: 'Failed to generate the report.' });
-        }
+        res.status(500).json({ error: 'Failed to generate the report.' });
     }
 });
 
+// Serve the HTML page
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });

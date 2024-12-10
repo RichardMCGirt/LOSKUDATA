@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "A Node.js app for LOSKUDATA",
   "main": "server.js",
-"scripts": {
-  "start": "node server.js",
-  "postinstall": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true"
-}
-,
+  "scripts": {
+    "start": "node server.js",
+    "postinstall": ""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

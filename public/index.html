@@ -3,57 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOSKUDATA</title>
-    <style>
-        #loading {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
+    <title>Download Report</title>
+    <script>
+        async function downloadReport() {
+            try {
+                const response = await fetch('/download-report');
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'report.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    console.log('Report downloaded successfully.');
+                } else {
+                    console.error('Failed to download report:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error during report download:', error);
+            }
         }
-        #loading img {
-            width: 50px;
-            height: 50px;
-        }
-    </style>
+    </script>
 </head>
 <body>
-    <h1>Welcome to LOSKUDATA</h1>
-    <button id="downloadReport">Download Report</button>
-    <div id="loading">
-        <p>Generating your report...</p>
-        <img src="spinner.gif" alt="Loading...">
-    </div>
-
-    <script>
-        document.getElementById('downloadReport').addEventListener('click', () => {
-            const loadingDiv = document.getElementById('loading');
-            loadingDiv.style.display = 'block';
-
-            fetch('/download-report')
-    .then((response) => {
-        console.log('Response status:', response.status); // Log response status
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.blob();
-    })
-    .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.style.display = 'none';
-        a.href = url;
-        a.download = 'report.csv';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        alert('Report downloaded successfully!');
-    })
-    .catch((err) => {
-        console.error('Error in fetch:', err);
-        alert('An error occurred while generating the report. Please try again.');
-    });
-
-        });
-    </script>
+    <button id="downloadReport" onclick="downloadReport()">Download Report</button>
 </body>
 </html>
