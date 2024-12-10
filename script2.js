@@ -108,4 +108,7 @@ exportButton.addEventListener('click', () => {
     document.body.appendChild(a);
     a.click();
     a.remove();
+
+    // Display success alert
+    alert(`CSV file for "${cityDropdown.value}" has been successfully exported.`);
 });

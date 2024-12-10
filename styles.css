@@ -1,15 +1,71 @@
 body {
     font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
 }
+
+h1 {
+    color: #2c3e50;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input, select, button {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 14px;
+}
+
 #result-table {
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
 }
+
 #result-table th, #result-table td {
     border: 1px solid #ddd;
     padding: 8px;
+    text-align: left;
 }
+
 #result-table th {
-    background-color: #f2f2f2;
+    background-color: #2c3e50;
+    color: #fff;
+}
+
+#result-table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light gray for odd rows */
+}
+
+#result-table tbody tr:nth-child(even) {
+    background-color: #fff; /* White for even rows */
+}
+
+#result-table tbody tr:hover {
+    background-color: #dcdcdc; /* Highlighted row on hover */
+}
+
+button {
+    background-color: #2c3e50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #34495e;
+}
+
+button:disabled {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
 }
