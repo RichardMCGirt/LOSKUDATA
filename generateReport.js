@@ -11,18 +11,23 @@ process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
 // Ensure the download directory exists
 const downloadPath = path.resolve(__dirname, 'downloads'); // Local directory
 if (!fs.existsSync(downloadPath)) {
+    console.log('Creating downloads directory...');
     fs.mkdirSync(downloadPath);
+} else {
+    console.log('Downloads directory already exists:', downloadPath);
 }
 
 async function logExecutablePath() {
+    console.log('Checking Puppeteer executable path...');
     const executablePath = await chromium.executablePath || puppeteer.executablePath();
-    console.log('Executable Path:', executablePath);
+    console.log('Executable Path:', executablePath || 'No executable path found');
 }
 
 async function launchPuppeteer() {
     console.log('Launching Puppeteer...');
     try {
         const executablePath = await chromium.executablePath || puppeteer.executablePath();
+        console.log('Using executablePath:', executablePath);
 
         const browser = await puppeteer.launch({
             headless: true,
@@ -41,8 +46,9 @@ async function launchPuppeteer() {
 
 async function generateAndDownloadReport() {
     try {
+        console.log('Starting report generation...');
         await logExecutablePath();
-        console.log('Generating report...');
+
         const browser = await launchPuppeteer();
         const page = await browser.newPage();
 
@@ -55,21 +61,26 @@ async function generateAndDownloadReport() {
         console.log('Navigating to login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
 
+        console.log('Checking for login fields...');
         const loginFieldExists = await page.$('#user_name');
         if (loginFieldExists) {
-            console.log('Login fields detected. Logging in...');
+            console.log('Login fields detected. Proceeding to login...');
             await page.type('#user_name', 'richard.mcgirt');
             await page.type('#user_password', '84625');
+            console.log('Submitting login...');
             await page.keyboard.press('Enter');
             await page.waitForNavigation();
+            console.log('Login successful.');
         } else {
-            console.log('Already logged in.');
+            console.log('Already logged in or login fields not found.');
         }
 
         console.log('Navigating to report page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
         await page.waitForSelector('select#ddlSavedTemplate', { visible: true });
+        console.log('Selecting report template...');
         await page.select('select#ddlSavedTemplate', '248');
+        console.log('Generating report...');
         await page.click('input#generatenw');
 
         console.log('Waiting for the report to generate...');
@@ -83,9 +94,13 @@ async function generateAndDownloadReport() {
         let csvFile;
         for (let i = 0; i < 60; i++) {
             const files = fs.readdirSync(downloadPath);
+            console.log(`Download attempt ${i + 1}: Checking for CSV files...`);
             csvFile = files.find((file) => file.endsWith('.csv'));
-            if (csvFile) break;
-            await new Promise((resolve) => setTimeout(resolve, 1000));
+            if (csvFile) {
+                console.log(`CSV file found: ${csvFile}`);
+                break;
+            }
+            await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
         }
 
         if (!csvFile) {
@@ -93,11 +108,12 @@ async function generateAndDownloadReport() {
         }
 
         const filePath = path.join(downloadPath, csvFile);
-        console.log(`Report downloaded: ${filePath}`);
-        console.log('Report generation completed successfully.');
+        console.log(`Report downloaded successfully: ${filePath}`);
+        console.log('Report generation completed.');
 
+        await browser.close();
     } catch (error) {
-        console.error('Error generating report:', error.message);
+        console.error('Error during report generation:', error.message);
         process.exit(1); // Ensure process exits with failure
     }
 }
