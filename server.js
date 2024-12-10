@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express = require('express');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const path = require('path');
 const fs = require('fs');
+const chromium = require('chrome-aws-lambda');
+
 
 const app = express();
 const PORT = process.env.PORT || 3010;
@@ -15,20 +17,13 @@ if (!fs.existsSync(downloadPath)) {
 
 // Reusable Puppeteer Launcher
 async function launchPuppeteer() {
-    console.log('Starting Puppeteer launch process...');
-    try {
-        const browser = await puppeteer.launch({
-            headless: true,
-            executablePath: puppeteer.executablePath(), // Use Puppeteer's Chromium
-            args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        });
-
-        console.log('Puppeteer launched successfully.');
-        return browser;
-    } catch (error) {
-        console.error('Error occurred during Puppeteer launch:', error.message);
-        throw error;
-    }
+    const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: await chromium.executablePath,
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+    });
+    return browser;
 }
 
 
