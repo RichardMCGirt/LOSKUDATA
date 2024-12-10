@@ -1,39 +1,49 @@
 require('dotenv').config();
 const chromium = require('chrome-aws-lambda');
-
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 const path = require('path');
 const fs = require('fs');
 
-// Skip Chromium download for Puppeteer
+// Set Puppeteer cache directory
+process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
 process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
 
 // Ensure the download directory exists
-const downloadPath = path.resolve(__dirname, 'downloads'); // Use local directory
+const downloadPath = path.resolve(__dirname, 'downloads'); // Local directory
 if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
 }
 
-// Reusable Puppeteer Launcher
+console.log('Starting Puppeteer script...');
+console.log('Executable Path:', await chromium.executablePath || puppeteer.executablePath());
 
 async function launchPuppeteer() {
-    const browser = await puppeteer.launch({
-        headless: true,
-        executablePath: await chromium.executablePath,
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-    });
-    return browser;
+    console.log('Launching Puppeteer...');
+    try {
+        const executablePath = await chromium.executablePath || puppeteer.executablePath();
+
+        const browser = await puppeteer.launch({
+            headless: true,
+            executablePath: executablePath,
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+        });
+
+        console.log('Puppeteer launched successfully.');
+        return browser;
+    } catch (error) {
+        console.error('Error launching Puppeteer:', error.message);
+        throw error;
+    }
 }
 
-// Function to generate and download the report
 async function generateAndDownloadReport() {
     try {
         console.log('Generating report...');
         const browser = await launchPuppeteer();
         const page = await browser.newPage();
 
-        console.log('Setting download path...');
+        console.log('Setting download behavior...');
         await page._client().send('Page.setDownloadBehavior', {
             behavior: 'allow',
             downloadPath: downloadPath,
@@ -42,16 +52,15 @@ async function generateAndDownloadReport() {
         console.log('Navigating to login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
 
-        // Check and perform login
         const loginFieldExists = await page.$('#user_name');
         if (loginFieldExists) {
-            console.log('Login fields detected. Proceeding to log in...');
+            console.log('Login fields detected. Logging in...');
             await page.type('#user_name', 'richard.mcgirt');
             await page.type('#user_password', '84625');
             await page.keyboard.press('Enter');
             await page.waitForNavigation();
         } else {
-            console.log('Login skipped as the user is already logged in.');
+            console.log('Already logged in.');
         }
 
         console.log('Navigating to report page...');
@@ -80,15 +89,16 @@ async function generateAndDownloadReport() {
             throw new Error('CSV file not downloaded within timeout period');
         }
 
-        console.log(`Report downloaded: ${csvFile}`);
         const filePath = path.join(downloadPath, csvFile);
-        console.log(`File is saved at: ${filePath}`);
+        console.log(`Report downloaded: ${filePath}`);
         console.log('Report generation completed successfully.');
 
+        await browser.close();
     } catch (error) {
-        console.error('Error occurred during Puppeteer execution:', error);
+        console.error('Error generating report:', error.message);
+        process.exit(1); // Ensure process exits with failure
     }
 }
 
-// Execute the function directly
+// Run the report generation
 generateAndDownloadReport();
