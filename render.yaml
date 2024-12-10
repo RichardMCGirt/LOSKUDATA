@@ -1,1 +1,2 @@
-buildCommand: "npm install && npx puppeteer install"
+buildCommand: "./render-build.sh && npm install"
+startCommand: "node generateReport.js"

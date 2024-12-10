@@ -24,13 +24,13 @@ async function logExecutablePath() {
 }
 
 async function launchPuppeteer() {
-    console.log('Launching Puppeteer...');
     try {
-        const executablePath = await chromium.executablePath || puppeteer.executablePath();
-        console.log('Using executablePath:', executablePath);
+        const executablePath = await chromium.executablePath;
+
+        console.log('Resolved Executable Path:', executablePath);
 
         const browser = await puppeteer.launch({
-            headless: true,
+            headless: false,
             executablePath: executablePath,
             args: chromium.args,
             defaultViewport: chromium.defaultViewport,
@@ -43,6 +43,9 @@ async function launchPuppeteer() {
         throw error;
     }
 }
+
+
+
 
 async function generateAndDownloadReport() {
     try {
@@ -111,7 +114,6 @@ async function generateAndDownloadReport() {
         console.log(`Report downloaded successfully: ${filePath}`);
         console.log('Report generation completed.');
 
-        await browser.close();
     } catch (error) {
         console.error('Error during report generation:', error.message);
         process.exit(1); // Ensure process exits with failure

@@ -17,13 +17,24 @@ if (!fs.existsSync(downloadPath)) {
 
 // Reusable Puppeteer Launcher
 async function launchPuppeteer() {
-    const browser = await puppeteer.launch({
-        headless: true,
-        executablePath: await chromium.executablePath,
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-    });
-    return browser;
+    try {
+        const executablePath = await chromium.executablePath;
+
+        console.log('Resolved Executable Path:', executablePath);
+
+        const browser = await puppeteer.launch({
+            headless: true,
+            executablePath: executablePath,
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+        });
+
+        console.log('Puppeteer launched successfully.');
+        return browser;
+    } catch (error) {
+        console.error('Error launching Puppeteer:', error.message);
+        throw error;
+    }
 }
 
 
