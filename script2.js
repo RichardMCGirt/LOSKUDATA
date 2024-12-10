@@ -16,12 +16,17 @@ function displayRows(filteredRows) {
     filteredRows.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${row.master}</td>
-            <td>${row.city}</td>
-            <td>${row.soNumber}</td>
-            <td>${row.date}</td>
-            <td>${row.total}</td>
-            <td>${row.SOtotal}</td>
+            <td>${row.cperson}</td>
+            <td>${row.branch}</td>
+            <td>${row.jobname}</td>
+            <td>${row.sonumber}</td>
+             <td>${row.productnumber}</td>
+             <td>${row.Description}</td>
+            <td>${row.sellqty}</td>
+              <td>${row.sellprice}</td>
+              <td>${row.productcost}</td>
+              <td>${row.xsellprice}</td>
+            <td>${row.xproductcost}</td>
         `;
         tableBody.appendChild(tr);
     });
@@ -38,23 +43,34 @@ fileInput.addEventListener('change', (event) => {
             console.log("File Content:", text); // Log raw file content
             const lines = text.split('\n'); // Split by line
             console.log("Lines Extracted from File:", lines); // Log extracted lines
-            const headers = lines.shift().split(','); // Extract headers
-            console.log("Headers:", headers); // Log headers
+            // Skip the first two rows and extract headers from the third row
+const headers = lines[2].split(',').map(header => header.trim());
+console.log("Headers:", headers);
 
-            rows = lines.map(line => {
-                const columns = line.split(',');
-                return {
-                    master: columns[0]?.trim(), // Master Account Name (First Column)
-                    city: columns[1]?.trim(),   // City (Second Column)
-                    soNumber: columns[2]?.trim(),
-                    date: columns[3]?.trim(),
-                    total: columns[4]?.trim(),   // SO Total (Fifth Column)
-                    SOtotal: columns[5]?.trim()   // SO Total (Fifth Column)
-                };
-            }).filter(row => row.city); // Filter out empty rows
+// Skip the first three rows to process only the data rows
+rows = lines.slice(3)
+    .map(line => line.split(','))
+    .filter(columns => columns.length > 11) // Ensure at least 12 columns
+    .map(columns => ({
+        cperson: columns[0]?.trim(),
+        branch: columns[1]?.trim(),
+        jobname: columns[2]?.trim(),
+        sonumber: columns[3]?.trim(),
+        productnumber: columns[5]?.trim(),
+        Description: columns[6]?.trim(),
+        sellqty: columns[7]?.trim(),
+        sellprice: columns[8]?.trim(),
+        productcost: columns[9]?.trim(),
+        xsellprice: columns[10]?.trim(),
+        xproductcost: columns[11]?.trim(),
+    }))
+    .filter(row => row.branch); // Filter out empty rows
+
 
             console.log("Parsed Rows:", rows); // Log parsed rows
-
+            console.log("Header Rows:", lines.slice(0, 3));
+            console.log("Data Rows Start:", lines.slice(3, 6)); // Log first few data rows
+            
             // Enable the dropdown after file is uploaded
             cityDropdown.disabled = false;
             console.log("Dropdown enabled.");
@@ -71,7 +87,7 @@ cityDropdown.addEventListener('change', (event) => {
     console.log("City Selected:", selectedCity); // Log the selected city
     if (selectedCity) {
         filteredRows = rows.filter(row => 
-            row.city.toLowerCase().includes(selectedCity) // Case-insensitive contains check on the second column (city)
+            row.branch?.toLowerCase().includes(selectedCity) // Use 'branch' instead of 'city'
         );
         console.log("Rows Matching Selected City:", filteredRows); // Log rows matching the city
         displayRows(filteredRows);
@@ -82,6 +98,7 @@ cityDropdown.addEventListener('change', (event) => {
     }
 });
 
+
 // Handle CSV export
 exportButton.addEventListener('click', () => {
     if (!filteredRows.length) {
@@ -91,7 +108,7 @@ exportButton.addEventListener('click', () => {
 
     // Escape special characters and generate CSV content
     const escapeValue = (value) => `"${(value || '').replace(/"/g, '""')}"`;
-    const headers = ['Master Account Name', 'City', 'SO Number', 'Date', 'Total', 'SO Total'];
+    const headers = ['Master Account Name', 'Branch', 'SO Number', 'Date', 'Total', 'SO Total'];
     const csvContent = [
         headers.join(','),
         ...filteredRows.map(row =>
