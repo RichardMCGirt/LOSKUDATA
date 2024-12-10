@@ -14,8 +14,10 @@ if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
 }
 
-console.log('Starting Puppeteer script...');
-console.log('Executable Path:', await chromium.executablePath || puppeteer.executablePath());
+async function logExecutablePath() {
+    const executablePath = await chromium.executablePath || puppeteer.executablePath();
+    console.log('Executable Path:', executablePath);
+}
 
 async function launchPuppeteer() {
     console.log('Launching Puppeteer...');
@@ -39,6 +41,7 @@ async function launchPuppeteer() {
 
 async function generateAndDownloadReport() {
     try {
+        await logExecutablePath();
         console.log('Generating report...');
         const browser = await launchPuppeteer();
         const page = await browser.newPage();
@@ -93,7 +96,6 @@ async function generateAndDownloadReport() {
         console.log(`Report downloaded: ${filePath}`);
         console.log('Report generation completed successfully.');
 
-        await browser.close();
     } catch (error) {
         console.error('Error generating report:', error.message);
         process.exit(1); // Ensure process exits with failure
