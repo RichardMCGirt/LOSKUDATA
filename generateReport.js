@@ -1,4 +1,6 @@
 require('dotenv').config();
+const chromium = require('chrome-aws-lambda');
+
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
@@ -13,21 +15,15 @@ if (!fs.existsSync(downloadPath)) {
 }
 
 // Reusable Puppeteer Launcher
-async function launchPuppeteer() {
-    console.log('Starting Puppeteer launch process...');
-    try {
-        console.log('Configuring Puppeteer launch options...');
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Render-specific flags
-        });
 
-        console.log('Puppeteer launched successfully.');
-        return browser;
-    } catch (error) {
-        console.error('Error occurred during Puppeteer launch:', error.message);
-        throw error; // Re-throw the error to handle it in the calling function
-    }
+async function launchPuppeteer() {
+    const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: await chromium.executablePath,
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+    });
+    return browser;
 }
 
 // Function to generate and download the report
