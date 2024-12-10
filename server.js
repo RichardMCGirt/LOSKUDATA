@@ -19,15 +19,18 @@ async function launchPuppeteer() {
     try {
         const browser = await puppeteer.launch({
             headless: true,
-            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Render-specific flags
+            executablePath: puppeteer.executablePath(), // Use Puppeteer's Chromium
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
+
         console.log('Puppeteer launched successfully.');
         return browser;
     } catch (error) {
         console.error('Error occurred during Puppeteer launch:', error.message);
-        throw error; // Re-throw the error to handle it in the calling function
+        throw error;
     }
 }
+
 
 // Route to download the report
 app.get('/download-report', async (req, res) => {
