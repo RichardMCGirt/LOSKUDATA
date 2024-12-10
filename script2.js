@@ -1,8 +1,10 @@
 const cityDropdown = document.getElementById('city-dropdown');
 const fileInput = document.getElementById('file-input');
 const tableBody = document.querySelector('#result-table tbody');
+const exportButton = document.getElementById('export-button');
 
 let rows = []; // To store the parsed data from the uploaded file
+let filteredRows = []; // Store filtered rows based on dropdown selection
 
 // Function to display filtered rows in the table
 function displayRows(filteredRows) {
@@ -19,8 +21,7 @@ function displayRows(filteredRows) {
             <td>${row.soNumber}</td>
             <td>${row.date}</td>
             <td>${row.total}</td>
-             <td>${row.SOtotal}</td>
-
+            <td>${row.SOtotal}</td>
         `;
         tableBody.appendChild(tr);
     });
@@ -49,7 +50,6 @@ fileInput.addEventListener('change', (event) => {
                     date: columns[3]?.trim(),
                     total: columns[4]?.trim(),   // SO Total (Fifth Column)
                     SOtotal: columns[5]?.trim()   // SO Total (Fifth Column)
-
                 };
             }).filter(row => row.city); // Filter out empty rows
 
@@ -70,7 +70,7 @@ cityDropdown.addEventListener('change', (event) => {
     const selectedCity = event.target.value.toLowerCase(); // Convert selected city to lowercase
     console.log("City Selected:", selectedCity); // Log the selected city
     if (selectedCity) {
-        const filteredRows = rows.filter(row => 
+        filteredRows = rows.filter(row => 
             row.city.toLowerCase().includes(selectedCity) // Case-insensitive contains check on the second column (city)
         );
         console.log("Rows Matching Selected City:", filteredRows); // Log rows matching the city
@@ -78,5 +78,34 @@ cityDropdown.addEventListener('change', (event) => {
     } else {
         console.log("No city selected, clearing table.");
         tableBody.innerHTML = ''; // Clear table if no city selected
+        filteredRows = []; // Clear filtered rows
     }
+});
+
+// Handle CSV export
+exportButton.addEventListener('click', () => {
+    if (!filteredRows.length) {
+        alert('No data available for the selected city.');
+        return;
+    }
+
+    // Escape special characters and generate CSV content
+    const escapeValue = (value) => `"${(value || '').replace(/"/g, '""')}"`;
+    const headers = ['Master Account Name', 'City', 'SO Number', 'Date', 'Total', 'SO Total'];
+    const csvContent = [
+        headers.join(','),
+        ...filteredRows.map(row =>
+            [escapeValue(row.master), escapeValue(row.city), escapeValue(row.soNumber), escapeValue(row.date), escapeValue(row.total), escapeValue(row.SOtotal)].join(',')
+        )
+    ].join('\n').trim();
+
+    // Create a Blob and trigger download
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${cityDropdown.value}_filtered_export.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
 });
