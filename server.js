@@ -8,7 +8,7 @@ const http = require('http');
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3001;
 
 // Create HTTP server and initialize Socket.IO
 const server = http.createServer(app);
@@ -130,5 +130,9 @@ app.get('/download-report', async (req, res) => {
 
 // Start the server
 server.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    if (process.env.NODE_ENV === 'production') {
+        console.log(`Server running at your Vercel deployment URL.`);
+    } else {
+        console.log(`Server running at http://localhost:${PORT}`);
+    }
 });

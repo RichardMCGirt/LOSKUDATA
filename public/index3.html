@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Generator</title>
-    <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <h1>Welcome to the Report Generator</h1>
@@ -16,6 +16,39 @@
         <progress id="progressBar" max="100" value="0"></progress>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('downloadReport').addEventListener('click', async () => {
+            try {
+                const progressContainer = document.getElementById('progressContainer');
+                const progressMessage = document.getElementById('progressMessage');
+                const progressBar = document.getElementById('progressBar');
+
+                // Show progress bar and message
+                progressContainer.style.display = 'block';
+                progressMessage.textContent = 'Generating report...';
+                progressBar.value = 0;
+
+                // Fetch the report
+                const response = await fetch('/download-report');
+                if (response.ok) {
+                    progressMessage.textContent = 'Report generated! Downloading now...';
+                    progressBar.value = 100;
+
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'report.csv';
+                    link.click();
+
+                    progressMessage.textContent = 'Report downloaded successfully!';
+                } else {
+                    throw new Error('Failed to generate report.');
+                }
+            } catch (error) {
+                alert(`Error: ${error.message}`);
+            }
+        });
+    </script>
 </body>
 </html>
