@@ -3,7 +3,6 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
-const chromium = require('chrome-aws-lambda');
 const { Server } = require('socket.io');
 const http = require('http');
 
@@ -27,28 +26,32 @@ const isProduction = process.env.NODE_ENV === 'production';
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
 async function launchPuppeteer() {
     try {
-        const executablePath = isProduction
-            ? await chromium.executablePath
-            : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'; // Path to Google Chrome on macOS
+        // Replace this with the path to Google Chrome on your system
+        const executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 
-        console.log('Resolved Executable Path:', executablePath);
+        console.log('Using Google Chrome executable at:', executablePath);
 
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: executablePath,
-            args: isProduction ? chromium.args : [], // Use default arguments in production
-            defaultViewport: isProduction ? chromium.defaultViewport : null,
+            executablePath: executablePath, // Use Google Chrome
+            args: ['--no-sandbox', '--disable-setuid-sandbox'], // Required for many hosting platforms
         });
 
-        console.log('Puppeteer launched successfully.');
+        console.log('Google Chrome launched successfully.');
         return browser;
     } catch (error) {
         console.error('Error launching Puppeteer:', error.message);
         throw error;
     }
 }
+
+
+
+
+
 
 // Serve index3.html for the root route
 app.get('/', (req, res) => {
