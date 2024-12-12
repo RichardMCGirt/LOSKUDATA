@@ -5,27 +5,33 @@ const path = require('path');
 const fs = require('fs');
 const { Server } = require('socket.io');
 const http = require('http');
+const os = require('os');
+const cors = require('cors');
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3001;
 
-// Create HTTP server and initialize Socket.IO
-const server = http.createServer(app);
-const io = new Server(server);
+// Enable CORS middleware for all requests
+app.use(cors({
+  origin: 'http://localhost:5500',  // Allow requests from localhost:5500
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
+const homeDir = os.homedir();
+const downloadPath = path.join(homeDir, 'Desktop', 'LOSKUDATA', 'custom', 'downloads');
 
 // Ensure the download directory exists
-const downloadPath = path.resolve(__dirname, 'downloads'); // Use local directory
 if (!fs.existsSync(downloadPath)) {
-    fs.mkdirSync(downloadPath);
+    fs.mkdirSync(downloadPath, { recursive: true });
 }
+
+console.log('Download path is set to:', downloadPath);
 
 // Reusable Puppeteer Launcher
 const isProduction = process.env.NODE_ENV === 'production';
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 async function launchPuppeteer() {
     try {
@@ -52,7 +58,6 @@ async function launchPuppeteer() {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index3.html'));
 });
-
 
 // Route to download the report
 app.get('/download-report', async (req, res) => {
@@ -128,11 +133,16 @@ app.get('/download-report', async (req, res) => {
     }
 });
 
+// Create the HTTP server
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5500", // Allow connections from localhost:5500 (your front-end)
+    methods: ["GET", "POST"],
+  }
+});
+
 // Start the server
-server.listen(PORT, () => {
-    if (process.env.NODE_ENV === 'production') {
-        console.log(`Server running at your Vercel deployment URL.`);
-    } else {
-        console.log(`Server running at http://localhost:${PORT}`);
-    }
+server.listen(process.env.PORT || 3001, () => {
+    console.log(`Server running at http://localhost:${process.env.PORT || 3001}`);
 });
