@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 const chromium = require('chrome-aws-lambda');
@@ -16,17 +16,21 @@ if (!fs.existsSync(downloadPath)) {
 }
 
 // Reusable Puppeteer Launcher
+const isProduction = process.env.NODE_ENV === 'production';
+
 async function launchPuppeteer() {
     try {
-        const executablePath = await chromium.executablePath;
+        const executablePath = isProduction
+            ? await chromium.executablePath
+            : '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'; // Path to Google Chrome on macOS
 
         console.log('Resolved Executable Path:', executablePath);
 
         const browser = await puppeteer.launch({
             headless: true,
             executablePath: executablePath,
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
+            args: isProduction ? chromium.args : [], // Use default arguments in production
+            defaultViewport: isProduction ? chromium.defaultViewport : null,
         });
 
         console.log('Puppeteer launched successfully.');
@@ -36,6 +40,9 @@ async function launchPuppeteer() {
         throw error;
     }
 }
+
+
+
 
 
 // Route to download the report
