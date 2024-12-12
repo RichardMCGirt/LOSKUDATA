@@ -4,10 +4,16 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
 const chromium = require('chrome-aws-lambda');
+const { Server } = require('socket.io');
+const http = require('http');
 
-
+// Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3010;
+
+// Create HTTP server and initialize Socket.IO
+const server = http.createServer(app);
+const io = new Server(server);
 
 // Ensure the download directory exists
 const downloadPath = path.resolve(__dirname, 'downloads'); // Use local directory
@@ -41,24 +47,26 @@ async function launchPuppeteer() {
     }
 }
 
-
-
-
+// Serve index3.html for the root route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index3.html'));
+});
 
 // Route to download the report
 app.get('/download-report', async (req, res) => {
+    const socketId = req.query.socketId;
     try {
-        console.log('Generating report...');
+        io.to(socketId).emit('status', 'Generating report...');
         const browser = await launchPuppeteer();
         const page = await browser.newPage();
 
-        console.log('Setting download path...');
+        io.to(socketId).emit('status', 'Setting download path...');
         await page._client().send('Page.setDownloadBehavior', {
             behavior: 'allow',
             downloadPath: downloadPath,
         });
 
-        console.log('Navigating to login page...');
+        io.to(socketId).emit('status', 'Navigating to login page...');
         await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
 
         // Check and perform login
@@ -113,14 +121,12 @@ app.get('/download-report', async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error occurred during Puppeteer execution:', error);
+        io.to(socketId).emit('status', 'Error occurred during report generation.');
         res.status(500).json({ error: 'Failed to generate the report.' });
     }
 });
 
-// Serve the HTML page
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.listen(PORT, () => {
+// Start the server
+server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
