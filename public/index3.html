@@ -17,15 +17,19 @@
 
     <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
     <script>
-        const socket = io('http://localhost:3001'); // Connect to your Socket.IO server
+        // Change the URL based on where your server is running.
+        const socket = io('http://localhost:3001'); // Localhost for local development
+        // or use the live server URL if deployed:
+        // const socket = io('https://your-live-site-url.com'); // Replace with your actual live server URL
+    
         let socketId = null;
-
+    
         // When the connection is established, capture the socketId
         socket.on('connect', () => {
             socketId = socket.id;
             console.log('Socket connected with socketId:', socketId);
         });
-
+    
         document.getElementById('downloadReport').addEventListener('click', async () => {
             // Wait for socketId to be initialized before making the request
             if (!socketId) {
@@ -33,7 +37,7 @@
                 alert('Socket ID is not defined. Unable to make request.');
                 return;
             }
-
+    
             try {
                 const progressContainer = document.getElementById('progressContainer');
                 const progressMessage = document.getElementById('progressMessage');
@@ -77,5 +81,6 @@
             }
         });
     </script>
+    
 </body>
 </html>

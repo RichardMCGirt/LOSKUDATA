@@ -11,9 +11,9 @@ const cors = require('cors');
 // Initialize Express app
 const app = express();
 
-// Enable CORS middleware for all requests
+// Enable CORS middleware for both localhost and live site
 app.use(cors({
-  origin: 'http://localhost:5500',  // Allow requests from localhost:5500
+  origin: ['http://localhost:5500', 'https://richardmcgirt.github.io'],  // Allow both localhost and live site
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -137,7 +137,7 @@ app.get('/download-report', async (req, res) => {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5500", // Allow connections from localhost:5500 (your front-end)
+    origin: ['http://localhost:5500', 'https://richardmcgirt.github.io'], // Allow both localhost and live site
     methods: ["GET", "POST"],
   }
 });
