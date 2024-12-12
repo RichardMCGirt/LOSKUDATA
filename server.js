@@ -24,6 +24,9 @@ if (!fs.existsSync(downloadPath)) {
 // Reusable Puppeteer Launcher
 const isProduction = process.env.NODE_ENV === 'production';
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 async function launchPuppeteer() {
     try {
         const executablePath = isProduction
@@ -51,6 +54,7 @@ async function launchPuppeteer() {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index3.html'));
 });
+
 
 // Route to download the report
 app.get('/download-report', async (req, res) => {
