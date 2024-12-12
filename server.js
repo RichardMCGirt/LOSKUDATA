@@ -8,7 +8,7 @@ const http = require('http');
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3010;
 
 // Create HTTP server and initialize Socket.IO
 const server = http.createServer(app);
