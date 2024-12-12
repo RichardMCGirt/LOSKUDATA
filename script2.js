@@ -108,11 +108,27 @@ exportButton.addEventListener('click', () => {
 
     // Escape special characters and generate CSV content
     const escapeValue = (value) => `"${(value || '').replace(/"/g, '""')}"`;
-    const headers = ['Master Account Name', 'Branch', 'SO Number', 'Date', 'Total', 'SO Total'];
+
+    // Updated headers based on your row data
+    const headers = ['Counter Person', 'Branch', 'Job Name', 'SO Number', 'Product #', 'Description', 'Sell Qty', 'Sell Price', 'Product Cost', 'Ext Sellprice', 'Ext Product Cost'];
+
+    // Updated row mapping to match your parsed data structure
     const csvContent = [
         headers.join(','),
         ...filteredRows.map(row =>
-            [escapeValue(row.master), escapeValue(row.city), escapeValue(row.soNumber), escapeValue(row.date), escapeValue(row.total), escapeValue(row.SOtotal)].join(',')
+            [
+                escapeValue(row.cperson),
+                escapeValue(row.branch),
+                escapeValue(row.jobname),
+                escapeValue(row.sonumber),
+                escapeValue(row.productnumber),
+                escapeValue(row.Description),
+                escapeValue(row.sellqty),
+                escapeValue(row.sellprice),
+                escapeValue(row.productcost),
+                escapeValue(row.xsellprice),
+                escapeValue(row.xproductcost)
+            ].join(',')
         )
     ].join('\n').trim();
 
