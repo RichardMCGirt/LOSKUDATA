@@ -8,7 +8,7 @@ const http = require('http');
 
 // Initialize Express app
 const app = express();
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3001;
 
 // Create HTTP server and initialize Socket.IO
 const server = http.createServer(app);
@@ -47,11 +47,6 @@ async function launchPuppeteer() {
         throw error;
     }
 }
-
-
-
-
-
 
 // Serve index3.html for the root route
 app.get('/', (req, res) => {
