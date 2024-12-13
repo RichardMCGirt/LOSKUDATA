@@ -49,65 +49,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Function to load and parse the file content
 function loadAndParseFile(fileName) {
-    // For development, you would replace this with a real file path or use a local server to serve the file.
     fetch(fileName)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`Could not fetch the file: ${fileName}`);
-            }
+            if (!response.ok) throw new Error(`Could not fetch the file: ${fileName}`);
             return response.text();
         })
         .then(text => {
-            console.log("File Content:", text); // Log raw file content
+            const lines = text.split('\n');
 
-            const lines = text.split('\n'); // Split by line
-            console.log("Lines Extracted from File:", lines); // Log extracted lines
-
-            // Check if the file has enough lines
+            console.log("Raw Lines:", lines); // Debug: Log all lines
             if (lines.length < 4) {
-                console.error("File does not contain enough lines. Expected at least 4.");
+                console.error("File does not contain enough rows.");
                 return;
             }
 
-            // Skip the first two rows and extract headers from the third row
+            // Skip the first three rows and parse the data rows
             const headers = lines[2].split(',').map(header => header.trim());
-            console.log("Headers:", headers);
+            console.log("Headers:", headers); // Debug: Log headers
 
-            // Skip the first three rows to process only the data rows
             rows = lines.slice(3)
-                .map(line => line.split(','))
-                .filter(columns => columns.length > 12) // Ensure there are enough columns
-                .map(columns => ({
-                    department: columns[0]?.trim(),
-                    class: columns[1]?.trim(),
-                    productn: columns[2]?.trim(),
-                    productd: columns[3]?.trim(),
-                    qohb: columns[5]?.trim(),
-                    qoha: columns[6]?.trim(),
-                    costb: columns[7]?.trim(),
-                    costa: columns[8]?.trim(),
-                    countv: columns[9]?.trim(),
-                    costv: columns[10]?.trim(),
-                    qa: columns[11]?.trim(),
-                    qoo: columns[12]?.trim(),
-                }))
-                .filter(row => row.department && row.class && row.productn); // Filter out empty rows
+                .map(line => {
+                    const columns = line.split(',');
+                    console.log("Columns:", columns); // Debug: Log columns for each row
+                    return {
+                        department: columns[0]?.trim(),
+                        class: columns[1]?.trim(),
+                        productn: columns[2]?.trim(),
+                        productd: columns[3]?.trim(),
+                        qohb: columns[5]?.trim(),
+                        qoha: columns[6]?.trim(),
+                        costb: columns[7]?.trim(),
+                        costa: columns[8]?.trim(),
+                        countv: columns[9]?.trim(),
+                        costv: columns[10]?.trim(),
+                        qa: columns[11]?.trim(),
+                        qoo: columns[12]?.trim(),
+                    };
+                })
+                .filter(row => {
+                    const isValid = row.department && row.class && row.productn;
+                    if (!isValid) console.warn("Filtered Row:", row); // Debug: Log filtered rows
+                    return isValid;
+                });
 
-            // Debugging: Log the parsed rows to check data processing
-            console.log("Parsed Rows:", rows);
-
-            if (rows.length === 0) {
-                console.warn("Parsed rows are empty. Check the input file format or processing logic.");
-            } else {
-                console.log("Parsed rows are available. Displaying them in the table.");
-            }
-
-            displayRows(); // Display the rows in the table
+            console.log("Parsed Rows:", rows); // Debug: Log parsed rows
+            displayRows();
         })
-        .catch(error => {
-            console.error("Error loading file:", error);
-        });
+        .catch(error => console.error("Error loading file:", error));
 }
+
 
 // Handle CSV export
 exportButton.addEventListener('click', () => {
