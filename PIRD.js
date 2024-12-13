@@ -58,19 +58,26 @@ function loadAndParseFile(fileName) {
             const lines = text.split('\n');
 
             console.log("Raw Lines:", lines); // Debug: Log all lines
+
             if (lines.length < 4) {
                 console.error("File does not contain enough rows.");
                 return;
             }
 
-            // Skip the first three rows and parse the data rows
+            // Parse headers and data
             const headers = lines[2].split(',').map(header => header.trim());
             console.log("Headers:", headers); // Debug: Log headers
 
             rows = lines.slice(3)
-                .map(line => {
-                    const columns = line.split(',');
-                    console.log("Columns:", columns); // Debug: Log columns for each row
+                .map((line, index) => {
+                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g); // Improved parsing
+                    console.log(`Row ${index + 4} Columns:`, columns); // Debug: Log columns for each row
+
+                    if (!columns || columns.length < headers.length) {
+                        console.warn(`Row ${index + 4} has insufficient columns:`, columns);
+                        return null; // Skip malformed rows
+                    }
+
                     return {
                         department: columns[0]?.trim(),
                         class: columns[1]?.trim(),
@@ -86,17 +93,14 @@ function loadAndParseFile(fileName) {
                         qoo: columns[12]?.trim(),
                     };
                 })
-                .filter(row => {
-                    const isValid = row.department && row.class && row.productn;
-                    if (!isValid) console.warn("Filtered Row:", row); // Debug: Log filtered rows
-                    return isValid;
-                });
+                .filter(row => row); // Remove null rows
 
             console.log("Parsed Rows:", rows); // Debug: Log parsed rows
             displayRows();
         })
         .catch(error => console.error("Error loading file:", error));
 }
+
 
 
 // Handle CSV export
