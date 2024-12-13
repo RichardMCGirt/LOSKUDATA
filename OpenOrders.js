@@ -16,21 +16,33 @@ function displayRows(filteredRows) {
     filteredRows.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td>${row.cperson}</td>
+            <td class="hidden">${row.cperson}</td> <!-- Add a class to hide this column -->
             <td>${row.branch}</td>
             <td>${row.jobname}</td>
             <td>${row.sonumber}</td>
-             <td>${row.productnumber}</td>
-             <td>${row.Description}</td>
+            <td>${row.productnumber}</td>
+            <td>${row.Description}</td>
             <td>${row.sellqty}</td>
-              <td>${row.sellprice}</td>
-              <td>${row.productcost}</td>
-              <td>${row.xsellprice}</td>
+            <td>${row.sellprice}</td>
+            <td>${row.productcost}</td>
+            <td>${row.xsellprice}</td>
             <td>${row.xproductcost}</td>
         `;
         tableBody.appendChild(tr);
     });
 }
+
+// Add the class to hide the first column
+document.addEventListener('DOMContentLoaded', () => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .hidden {
+            display: none;
+        }
+    `;
+    document.head.appendChild(style);
+});
+
 
 // Handle file upload
 fileInput.addEventListener('change', (event) => {

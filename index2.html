@@ -3,57 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Filter with Hardcoded Dropdown</title>
-
-        <link rel="stylesheet" href="styles.css">
-
+    <title>Report Generator</title>
 </head>
 <body>
-    <h1>City Filter with File Upload</h1>
+    
+    <p>
+        <a href="/OpenOrders.html" target="_blank">Open orders</a>
+    </p>
+    
 
-    <!-- File upload -->
-    <label for="file-input">Upload CSV File:</label>
-    <input type="file" id="file-input" accept=".csv">
+    <h1>Welcome to the Report Generator</h1>
+    <p>Click the button below to generate and download your report:</p>
+    <button id="downloadReport">Download Report</button>
 
-    <!-- Dropdown for selecting a city -->
-    <div>
-        <label for="city-dropdown">Select a City:</label>
-        <select id="city-dropdown" disabled>
-            <option value="">-- Select City --</option>
-            <option value="Raleigh">Raleigh</option>
-            <option value="Myrtle Beach">Myrtle Beach</option>
-            <option value="Greensboro">Greensboro</option>
-            <option value="Columbia">Columbia</option>
-            <option value="Wilmington">Wilmington</option>
-            <option value="Greenville">Greenville</option>
-            <option value="Charlotte">Charlotte</option>
-        </select>
+    <div id="progressContainer" style="display:none;">
+        <p id="progressMessage">Generating report...</p>
+        <progress id="progressBar" max="100" value="0"></progress>
     </div>
 
-    <!-- Table to display filtered results -->
-    <table id="result-table">
-        <thead>
-            <tr>
-                <th>Counter Person</th>
-                <th>Branch</th>
-                <th>Job Name</th>
-                <th>SO Number</th>
-                <th>Created Date</th>
-                <th>Description</th>
-                <th>Sell Qty</th>
-                <th>Sell Price</th>
-                <th>Product Cost</th>
-                <th>Ext Sellprice</th>
-                <th>Ext Sellprice</th>
-
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-    <button id="export-button">Export CSV</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-
-    <script src="script2.js"></script>
-
+    <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
+    <script>
+        // Change the URL based on where your server is running.
+        const socket = io('http://localhost:3001'); // Localhost for local development
+        // or use the live server URL if deployed:
+        // const socket = io('https://your-live-site-url.com'); // Replace with your actual live server URL
+    
+        let socketId = null;
+    
+        // When the connection is established, capture the socketId
+        socket.on('connect', () => {
+            socketId = socket.id;
+            console.log('Socket connected with socketId:', socketId);
+        });
+    
+        document.getElementById('downloadReport').addEventListener('click', async () => {
+            // Wait for socketId to be initialized before making the request
+            if (!socketId) {
+                console.error('Socket ID is not defined. Unable to make request.');
+                alert('Socket ID is not defined. Unable to make request.');
+                return;
+            }
+    
+            try {
+                const progressContainer = document.getElementById('progressContainer');
+                const progressMessage = document.getElementById('progressMessage');
+                const progressBar = document.getElementById('progressBar');
+    
+                // Show progress bar and message
+                progressContainer.style.display = 'block';
+                progressMessage.textContent = 'Generating report...';
+                progressBar.value = 0;
+    
+                // Fetch the report
+                console.log('Fetching report from /download-report...');
+                const response = await fetch(`http://localhost:3001/download-report?socketId=${socketId}`);
+                console.log(`Response status: ${response.status}`);
+    
+                if (response.ok) {
+                    progressMessage.textContent = 'Report generated! Downloading now...';
+                    progressBar.value = 100;
+    
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'report.csv';
+                    link.click();
+    
+                    progressMessage.textContent = 'Report downloaded successfully!';
+                    console.log('Report downloaded successfully.');
+                } else {
+                    if (response.status === 404) {
+                        console.error('Error: Report not found (404)');
+                        alert('Error: Report not found.');
+                    } else {
+                        console.error(`Error: ${response.status} - ${response.statusText}`);
+                        alert(`Error: ${response.statusText}`);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching report:', error);
+                alert(`Error: ${error.message}`);
+            }
+        });
+    </script>
+    
 </body>
 </html>

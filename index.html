@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Filter with Hardcoded Dropdown</title>
+    <title>Open Orders by Counter Person D</title>
 
         <link rel="stylesheet" href="styles.css">
 
@@ -12,43 +12,29 @@
     <h1>City Filter with File Upload</h1>
 
     <p>
-        <a href="public/index3.html" target="_blank">download csv file</a>
+        <a href="public/GenerateOpenorderReport.html" target="_blank">download csv file</a>
+        <a href="/OpenOrders.html" target="_blank">Open orders</a>
+
     </p>
 
     <!-- File upload -->
-    <label for="file-input">Upload CSV File:</label>
-    <input type="file" id="file-input" accept=".csv">
+   <!-- <label for="file-input">Upload CSV File:</label>
+    <input type="file" id="file-input" accept=".csv"> -->
 
-    <!-- Dropdown for selecting a city -->
-    <div>
-        <label for="city-dropdown">Select a City:</label>
-        <select id="city-dropdown" disabled>
-            <option value="">-- Select City --</option>
-            <option value="Raleigh">Raleigh</option>
-            <option value="Myrtle Beach">Myrtle Beach</option>
-            <option value="Greensboro">Greensboro</option>
-            <option value="Columbia">Columbia</option>
-            <option value="Wilmington">Wilmington</option>
-            <option value="Greenville">Greenville</option>
-            <option value="Charlotte">Charlotte</option>
-        </select>
-    </div>
 
     <!-- Table to display filtered results -->
     <table id="result-table">
         <thead>
             <tr>
-                <th>Counter Person</th>
-                <th>Branch</th>
-                <th>Job Name</th>
-                <th>SO Number</th>
-                <th>Product #</th>
-                <th>Description</th>
-                <th>Sell Qty</th>
-                <th>Sell Price</th>
-                <th>Product Cost</th>
-                <th>Ext Sellprice</th>
-                <th>Ext Sellprice</th>
+                <th>Product Number</th>
+                <th>Product Description</th>
+                <th>QOH Before</th>
+                <th>QOH After</th>
+                <th>Cost Before</th>
+                <th>Cost After</th>
+                <th>Count Variance</th>
+                <th>QA</th>
+                <th>QOO</th>
 
             </tr>
         </thead>
@@ -57,7 +43,7 @@
     <button id="export-button">Export CSV</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
-    <script src="script2.js"></script>
+    <script src="PIRD.js"></script>
 
 </body>
 </html>
