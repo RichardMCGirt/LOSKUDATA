@@ -1,10 +1,11 @@
 const cityDropdown = document.getElementById('city-dropdown');
-const fileInput = document.getElementById('file-input');
 const tableBody = document.querySelector('#result-table tbody');
 const exportButton = document.getElementById('export-button');
-
-let rows = []; // To store the parsed data from the uploaded file
+let rows = []; // To store the parsed data from the hardcoded CSV file
 let filteredRows = []; // Store filtered rows based on dropdown selection
+
+// Disable city dropdown initially
+cityDropdown.disabled = true;
 
 // Function to display filtered rows in the table
 function displayRows(filteredRows) {
@@ -23,7 +24,6 @@ function displayRows(filteredRows) {
             <td>${row.productnumber}</td>
             <td>${row.Description}</td>
             <td>${row.sellqty}</td>
-            
         `;
         tableBody.appendChild(tr);
     });
@@ -38,61 +38,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+
+    // Fetch the CSV file on page load
+    loadCSV();
 });
 
-
-// Handle file upload
-fileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        console.log("File Uploaded:", file.name); // Log file upload
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const text = e.target.result;
+// Function to load the hardcoded CSV file
+function loadCSV() {
+    const filePath = '/custom/downloads/OpenOrdersByCounterPerson-Detail-1734033634-1221046826.csv';
+    fetch(filePath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to load CSV file: ${response.statusText}`);
+            }
+            return response.text();
+        })
+        .then(text => {
+            const lines = text.split('\n');
             console.log("File Content:", text); // Log raw file content
-            const lines = text.split('\n'); // Split by line
             console.log("Lines Extracted from File:", lines); // Log extracted lines
+
             // Skip the first two rows and extract headers from the third row
-const headers = lines[2].split(',').map(header => header.trim());
-console.log("Headers:", headers);
+            const headers = lines[2].split(',').map(header => header.trim());
+            console.log("Headers:", headers);
 
-// Skip the first three rows to process only the data rows
-rows = lines.slice(3)
-    .map(line => line.split(','))
-    .filter(columns => columns.length > 11) // Ensure at least 12 columns
-    .map(columns => ({
-        cperson: columns[0]?.trim(),
-        branch: columns[1]?.trim(),
-        jobname: columns[2]?.trim(),
-        sonumber: columns[3]?.trim(),
-        productnumber: columns[5]?.trim(),
-        Description: columns[6]?.trim(),
-        sellqty: columns[7]?.trim(),
-    
-    }))
-    .filter(row => row.branch); // Filter out empty rows
-
+            // Skip the first three rows to process only the data rows
+            rows = lines.slice(3)
+                .map(line => line.split(','))
+                .filter(columns => columns.length > 11) // Ensure at least 12 columns
+                .map(columns => ({
+                    cperson: columns[0]?.trim(),
+                    branch: columns[1]?.trim(),
+                    jobname: columns[2]?.trim(),
+                    sonumber: columns[3]?.trim(),
+                    productnumber: columns[5]?.trim(),
+                    Description: columns[6]?.trim(),
+                    sellqty: columns[7]?.trim(),
+                }))
+                .filter(row => row.branch); // Filter out empty rows
 
             console.log("Parsed Rows:", rows); // Log parsed rows
-            console.log("Header Rows:", lines.slice(0, 3));
-            console.log("Data Rows Start:", lines.slice(3, 6)); // Log first few data rows
-            
-            // Enable the dropdown after file is uploaded
+
+            // Enable the city dropdown after data is loaded
             cityDropdown.disabled = false;
             console.log("Dropdown enabled.");
-        };
-        reader.readAsText(file);
-    } else {
-        console.error("No file selected.");
-    }
-});
+        })
+        .catch(error => {
+            console.error("Error loading CSV file:", error);
+
+            // Alert the user about the error and keep the dropdown disabled
+            alert("Failed to load data. Please try again later.");
+        });
+}
 
 // Handle city selection from the dropdown
 cityDropdown.addEventListener('change', (event) => {
     const selectedCity = event.target.value.toLowerCase(); // Convert selected city to lowercase
     console.log("City Selected:", selectedCity); // Log the selected city
     if (selectedCity) {
-        filteredRows = rows.filter(row => 
+        filteredRows = rows.filter(row =>
             row.branch?.toLowerCase().includes(selectedCity) // Use 'branch' instead of 'city'
         );
         console.log("Rows Matching Selected City:", filteredRows); // Log rows matching the city
@@ -114,8 +118,6 @@ cityDropdown.addEventListener('change', (event) => {
         filteredRows = []; // Clear filtered rows
     }
 });
-
-
 
 // Handle CSV export
 exportButton.addEventListener('click', () => {
@@ -142,7 +144,6 @@ exportButton.addEventListener('click', () => {
                 escapeValue(row.productnumber),
                 escapeValue(row.Description),
                 escapeValue(row.sellqty),
-               
             ].join(',')
         )
     ].join('\n').trim();
@@ -160,25 +161,3 @@ exportButton.addEventListener('click', () => {
     // Display success alert
     alert(`CSV file for "${cityDropdown.value}" has been successfully exported.`);
 });
-
-// Function to store data and navigate to jobreport.html
-function exportJobReport() {
-    const filteredRows = rows.map(row => ({
-        jobname: row.productn || '',
-        partNumber: row.productd || '',
-        sellqty: row.qoha || ''
-    }));
-
-    console.log('Filtered Job Report Data:', filteredRows); // Debug the data
-
-    // Store the filtered data in sessionStorage
-    sessionStorage.setItem('jobReportData', JSON.stringify(filteredRows));
-    console.log('Data successfully stored in sessionStorage.');
-
-    // Navigate to jobreport.html
-    window.location.href = 'jobreport.html';
-}
-
-
-// Add export button functionality
-document.getElementById('export-job-report-button').addEventListener('click', exportJobReport);
