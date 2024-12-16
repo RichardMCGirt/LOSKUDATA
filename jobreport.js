@@ -71,7 +71,7 @@ function saveCheckboxStates() {
 
 function updateFinalCount(productnumber, quantity, isChecked) {
     console.log(`Updating Final Count: Product: ${productnumber}, Quantity: ${quantity}, Checked: ${isChecked}`);
-    const finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
+    let finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
 
     // Find the record in finalCountsData
     let skuRow = finalCountsData.find(row => row.stockSku.trim().toUpperCase() === productnumber);
@@ -81,15 +81,12 @@ function updateFinalCount(productnumber, quantity, isChecked) {
         if (isChecked) {
             skuRow.fieldCount = (parseFloat(skuRow.fieldCount) || 0) + quantity;
             console.log(`Appended ${quantity} to fieldCount for existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
-        } else {
-            skuRow.fieldCount = Math.max((parseFloat(skuRow.fieldCount) || 0) - quantity, 0);
-            console.log(`Subtracted ${quantity} from fieldCount for existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
-        }
+        } 
     } else if (isChecked) {
         // Add new SKU to finalCountsData
         skuRow = {
             stockSku: productnumber,
-            fieldCount: quantity, // Use the parameter `quantity` here
+            fieldCount: quantity,
             warehouseCount: 0,
             currentQOH: 0,
             discrepancy: 0
@@ -105,6 +102,7 @@ function updateFinalCount(productnumber, quantity, isChecked) {
     // Trigger a storage event manually for instant sync
     localStorage.setItem('finalCountsUpdated', Date.now().toString());
 }
+
 
 
 
