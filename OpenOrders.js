@@ -16,17 +16,14 @@ function displayRows(filteredRows) {
     filteredRows.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-            <td class="hidden">${row.cperson}</td> <!-- Add a class to hide this column -->
+            <td class="hidden">${row.cperson}</td> 
             <td>${row.branch}</td>
             <td>${row.jobname}</td>
             <td>${row.sonumber}</td>
             <td>${row.productnumber}</td>
             <td>${row.Description}</td>
             <td>${row.sellqty}</td>
-            <td>${row.sellprice}</td>
-            <td>${row.productcost}</td>
-            <td>${row.xsellprice}</td>
-            <td>${row.xproductcost}</td>
+            
         `;
         tableBody.appendChild(tr);
     });
@@ -71,10 +68,7 @@ rows = lines.slice(3)
         productnumber: columns[5]?.trim(),
         Description: columns[6]?.trim(),
         sellqty: columns[7]?.trim(),
-        sellprice: columns[8]?.trim(),
-        productcost: columns[9]?.trim(),
-        xsellprice: columns[10]?.trim(),
-        xproductcost: columns[11]?.trim(),
+    
     }))
     .filter(row => row.branch); // Filter out empty rows
 
@@ -102,13 +96,25 @@ cityDropdown.addEventListener('change', (event) => {
             row.branch?.toLowerCase().includes(selectedCity) // Use 'branch' instead of 'city'
         );
         console.log("Rows Matching Selected City:", filteredRows); // Log rows matching the city
-        displayRows(filteredRows);
+
+        if (filteredRows.length > 0) {
+            // Store the filtered rows in sessionStorage
+            sessionStorage.setItem('jobReportData', JSON.stringify(filteredRows));
+            console.log('Filtered rows stored in sessionStorage.');
+
+            // Redirect to jobreport.html
+            window.location.href = 'jobreport.html';
+        } else {
+            console.warn('No rows found for the selected city.');
+            alert('No data available for the selected city.');
+        }
     } else {
         console.log("No city selected, clearing table.");
         tableBody.innerHTML = ''; // Clear table if no city selected
         filteredRows = []; // Clear filtered rows
     }
 });
+
 
 
 // Handle CSV export
@@ -122,7 +128,7 @@ exportButton.addEventListener('click', () => {
     const escapeValue = (value) => `"${(value || '').replace(/"/g, '""')}"`;
 
     // Updated headers based on your row data
-    const headers = ['Counter Person', 'Branch', 'Job Name', 'SO Number', 'Product #', 'Description', 'Sell Qty', 'Sell Price', 'Product Cost', 'Ext Sellprice', 'Ext Product Cost'];
+    const headers = ['Counter Person', 'Branch', 'Job Name', 'SO Number', 'Product #', 'Description', 'Sell Qty'];
 
     // Updated row mapping to match your parsed data structure
     const csvContent = [
@@ -136,10 +142,7 @@ exportButton.addEventListener('click', () => {
                 escapeValue(row.productnumber),
                 escapeValue(row.Description),
                 escapeValue(row.sellqty),
-                escapeValue(row.sellprice),
-                escapeValue(row.productcost),
-                escapeValue(row.xsellprice),
-                escapeValue(row.xproductcost)
+               
             ].join(',')
         )
     ].join('\n').trim();
@@ -157,3 +160,25 @@ exportButton.addEventListener('click', () => {
     // Display success alert
     alert(`CSV file for "${cityDropdown.value}" has been successfully exported.`);
 });
+
+// Function to store data and navigate to jobreport.html
+function exportJobReport() {
+    const filteredRows = rows.map(row => ({
+        jobname: row.productn || '',
+        partNumber: row.productd || '',
+        sellqty: row.qoha || ''
+    }));
+
+    console.log('Filtered Job Report Data:', filteredRows); // Debug the data
+
+    // Store the filtered data in sessionStorage
+    sessionStorage.setItem('jobReportData', JSON.stringify(filteredRows));
+    console.log('Data successfully stored in sessionStorage.');
+
+    // Navigate to jobreport.html
+    window.location.href = 'jobreport.html';
+}
+
+
+// Add export button functionality
+document.getElementById('export-job-report-button').addEventListener('click', exportJobReport);

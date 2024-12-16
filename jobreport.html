@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        td:focus { outline: 2px solid blue; } /* Highlight focused cell */
+    </style>
+</head>
+<body>
+    <p>
+        <a href="index2.html" target="_blank">download csv file</a>
+        <a href="/OpenOrders.html" target="_blank">Open orders</a>
+        <a href="/jobreport.html" target="_blank">Job Report</a>
+        <a href="/FinalCounts.html" target="_blank">Finalcount</a>
+
+    </p>
+
+    <h1>Job Report</h1>
+    <table id="job-report-table">
+        <thead>
+            <tr>
+                <th>Counter Person</th>
+                <th>Job Name</th>
+                <th>Product #</th>
+                <th>Description</th>
+                <th>Sell Qty</th>
+                <th>In Feild</th> <!-- New column for the checkboxes -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated here -->
+        </tbody>
+    </table>
+    <script src="jobreport.js"></script>
+
+</body>
+</html>

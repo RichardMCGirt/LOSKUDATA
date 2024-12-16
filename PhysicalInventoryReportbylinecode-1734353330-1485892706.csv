@@ -1,0 +1,41 @@
+"12-16-2024","Physical Inventory Report by Department","","Raleigh","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","",""
+"Department","Class","Product Number","Product Description","Product Division","QOH Before","QOH After","Cost Before","Cost After","Count Variance","Cost Variance","QA","QOO","Zone","Shelf","Bin","Aisle","Reorder"
+"Siding","","VDC","STOCK ONLY #188 VINYL DRIP CAP","","77","77","554.40","554.40","0","0","0","2","","","","","Yes"
+"Alside","Accessories","STKPVCTXTCOIL","STOCK ONLY PVC Textured Coil White
+","","15","15","1618.05","1618.05","0","0","0","0","","","","","Yes"
+"Color Guard","Accessories","6610COLORGUARDW","STOCK ONLY 6x6x10 Colorguard Smooth Vinyl Post Wrap White","","37","37","2527.84","2527.84","0","0","64","27","","","","","Yes"
+"Color Guard","Accessories","STK4410COLORGUARDW","STOCK ONLY 4x4x10 Colorguard Smooth Vinyl Post Wrap White","Post Sleeve","116","116","0.00","0.00","0","0","0","24","","","","","Yes"
+"Fasteners & Sealants","Accessories","A23","STOCK ONLY Simpson A23 Anchor Bracket","","46","46","40.48","40.48","0","0","24","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","ABU44Z","STOCK ONLY ABU44Z Adjustable Post Base for 4x4
+","","46","46","0.00","0.00","0","0","3","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","BC4","STOCK ONLY BC4 Simpson Post Cap
+","","47","47","0.00","0.00","0","0","3","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","BUTYLTAPE6","STOCK ONLY DUPONT 6IN BUTYL TAPE","","58","58","2398.88","2398.88","0","0","103","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","WA50414","STOCK ONLY 1/2X4-1/2 Wedge Anchor
+","","42","42","0.00","0.00","0","0","3","0","","","","","Yes"
+"Fypon","Brackets","BKT9X11","STOCK ONLY FYPON BRACKET 11HX3-1/2WX9 PROJECTION
+","","15","15","516.90","516.90","0","0","75","0","","","","","Yes"
+"Fypon","Brackets","BKT14X14","STOCK ONLY FYPON BRACKET ANGLE 13-1/2HX3-1/2WX13-1/2 PROJECTION","","25","25","680.50","680.50","0","0","217","0","","","","","Yes"
+"Fypon","Brackets","BKT10X10X9","STOCK ONLY FYPON BRACKET 10HX9-1/8WX10 PROJECTION
+","","38","38","1405.24","1405.24","0","0","2","0","","","","","Yes"
+"Fypon","Brackets","BKT10X16X4","STOCK ONLY FYPON BRACKET 9-7/8X16X4-7/16 SMOOTH","","11","11","731.28","731.28","0","0","92","75","","","","","Yes"
+"Fypon","Brackets","BKT12X12X4","STOCK ONLY FYPON BRACKET 12HX3-1/2WX12 PROJECTION","","85","85","4144.60","4144.60","0","0","32","3","","","","","Yes"
+"Fypon","Vents","LV12X18","FYPON VERTICAL LOUVER DECORATIVE 12X18
+","","2","2","0.00","0.00","0","0","9","19","","","","","Yes"
+"Fypon","Vents","LV12X24","STOCK ONLY FYPON VERTICAL LOUVER DECORATIVE 12X24","","79","79","3057.30","3057.30","0","0","88","49","","","","","Yes"
+"Fypon","Vents","LV18X24","STOCK ONLY FYPON RECTANGLE VERTICAL LOUVER DECO 18X24X2 SMOOTH","","35","35","1804.95","1804.95","0","0","71","0","","","","","Yes"
+"James Hardie","Accessories","STKJH5CT","STOCK ONLY -James Hardie 5in Corner Tabs 50ct/box","","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"James Hardie","Accessories","STKJHFT","STOCK ONLY - James Hardie Flat Tabs 100ct/box","","5","5","0.00","0.00","0","0","0","0","","","","","Yes"
+"Lumber","Brackets","BKTBROWNSUGAR","STOCK ONLY BR2 Brown Sugar Bracket","","60","60","5230.80","5230.80","0","0","0","0","","","","","Yes"
+"Lumber","Columns","889BROWNSUGAR","STOCK ONLY 8x8x9 Brown Sugar Column","","81","81","11431.53","11431.53","0","0","0","0","","","","","Yes"
+"Lumber","Posts","STK8810TSQ","STOCK ONLY 8X8X10 Treated Square Column","","31","31","0.00","0.00","0","0","11","0","","","","","Yes"
+"Miscellaneous","Accessories","JOINTFLASH6X8","STOCK ONLY - JOINT FLASH 6IN X 8IN","","522","522","0.00","0.00","0","0","439","0","","","","","Yes"
+"Miscellaneous","Paint Kits","SPRAYPRIMER","STOCK ONLY Bullseye Spray Primer","","992","992","4563.20","4563.20","0","0","1210","0","","","","","Yes"
+"Miscellaneous","Vents","STKLOMC816WH","STOCK ONLY Under Eave Vent 8x16","","84","84","0.00","0.00","0","0","169","0","","","","","Yes"
+"PVC","Columns","51272PVC","STOCK ONLY 5-12x72 PVC Tapered Column Wrap (w/Rams Crown & Base)","","41","41","6232.00","6232.00","0","0","0","0","","","","","Yes"
+"PVC","Columns","102065PVC","STOCK ONLY 10-20x65 PVC Tapered Column Wrap (w/Cap and Base)","","33","33","8745.00","8745.00","0","0","0","3","","","","","Yes"
+"PVC","Trim","PVCRC","STOCK ONLY PVC Rams Crown 2x16","","8","8","234.24","234.24","0","0","0","0","","","","","Yes"
+"PVC","Columns","STK12129PVC","STOCK ONLY 12X12X9 PVC Column","","53","53","0.00","0.00","0","0","34","0","","","","","Yes"
+"PVC","Trim","358VC","STOCK ONLY 3-5/8 PVC CROWN #49","","21","21","265.44","265.44","0","0","0","11","","","","","Yes"
+"Total","","","","","2711","","56,182.63","56,182.63","","","","","","","",""

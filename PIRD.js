@@ -14,8 +14,17 @@ function displayRows() {
         return;
     }
 
-    rows.forEach(row => {
+    // Add "Total" to the productn field of the last row
+    if (rows.length > 0) {
+        rows[rows.length - 1].productn = 'Total'; // Modify the last row's productn
+    }
+
+    rows.forEach((row, index) => {
         const tr = document.createElement('tr');
+        if (index === rows.length - 1) {
+            // Add top border style to the last row
+            tr.style.borderTop = '2px solid black';
+        }
         tr.innerHTML = `
             <td class="hidden">${row.department}</td> 
             <td class="hidden">${row.class}</td> 
@@ -25,13 +34,15 @@ function displayRows() {
             <td>${row.qoha}</td>
             <td>${row.costb}</td>
             <td>${row.costa}</td>
-            <td>${row.countv}</td>
             <td>${row.qa}</td>
             <td>${row.qoo}</td>
         `;
         tableBody.appendChild(tr);
     });
 }
+
+
+
 
 // Add the class to hide the first column
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     // Simulate the file upload on page load
-    loadAndParseFile('PhysicalInventoryReportbylinecode-1734097390-1900905674.csv');
+    loadAndParseFile('PhysicalInventoryReportbylinecode-1734353330-1485892706.csv');
 });
 
 // Function to load and parse the file content
@@ -87,8 +98,6 @@ function loadAndParseFile(fileName) {
                         qoha: columns[6]?.trim(),
                         costb: columns[7]?.trim(),
                         costa: columns[8]?.trim(),
-                        countv: columns[9]?.trim(),
-                        costv: columns[10]?.trim(),
                         qa: columns[11]?.trim(),
                         qoo: columns[12]?.trim(),
                     };
@@ -124,12 +133,10 @@ exportButton.addEventListener('click', () => {
                 escapeValue(row.department),
                 escapeValue(row.class),
                 escapeValue(row.productn),
-                escapeValue(row.productd),
                 escapeValue(row.qohb),
                 escapeValue(row.qoha),
                 escapeValue(row.costb),
                 escapeValue(row.costa),
-                escapeValue(row.countv),
                 escapeValue(row.costv)
             ].join(',')
         )
@@ -148,3 +155,28 @@ exportButton.addEventListener('click', () => {
     // Display success alert
     alert('CSV file has been successfully exported.');
 });
+
+// Function to export data to finalCounts.html
+function exportToFinalCounts() {
+    if (!rows.length) {
+        alert('No data available to export.');
+        return;
+    }
+
+    // Prepare the data for finalCounts.html (only stockSku)
+    const finalData = rows.map(row => ({
+        stockSku: row.productn || '' // Replace with appropriate field
+    }));
+
+    console.log('Final Data:', finalData); // Debug final data
+
+    // Store the data in sessionStorage
+    sessionStorage.setItem('finalCountsData', JSON.stringify(finalData));
+    console.log('Data successfully stored in sessionStorage.');
+
+    // Redirect to finalCounts.html
+    window.location.href = 'finalCounts.html';
+}
+
+// Add event listener for exporting to finalCounts.html
+document.getElementById('export-button').addEventListener('click', exportToFinalCounts);
