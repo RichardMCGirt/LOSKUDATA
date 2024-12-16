@@ -3,7 +3,16 @@ let jobReportData = JSON.parse(sessionStorage.getItem('jobReportData') || '[]');
 const checkboxStates = JSON.parse(sessionStorage.getItem('checkboxStates') || '{}'); // Load saved checkbox states
 console.log('Retrieved Job Report Data:', jobReportData);
 
-// Populate the table with the retrieved data
+// Log details of the first five records
+jobReportData.slice(0, 5).forEach((row, index) => {
+    console.log(`Record ${index + 1}:`);
+    console.log(`  Counter Person: ${row.cperson}`);
+    console.log(`  Job Name: ${row.jobname}`);
+    console.log(`  Product #: ${row.productnumber}`);
+    console.log(`  Description: ${row.Description}`);
+    console.log(`  Sell Qty: ${row.sellqty}`);
+});
+
 const tableBody = document.querySelector('#job-report-table tbody');
 jobReportData
     .filter(row => row.productnumber &&
@@ -29,7 +38,8 @@ if (jobReportData.length === 0) {
     alert('No data available for the selected city.');
 }
 
-// Save checkbox states and update field count
+
+/// Save checkbox states and update field count
 function saveCheckboxStates() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const states = {};
@@ -38,16 +48,18 @@ function saveCheckboxStates() {
 
         const row = jobReportData[index];
         if (row) {
-            const sellqty = parseFloat(row.sellqty) || 0;
+            // Clean and normalize `sellqty`
+            const sellqty = parseFloat(row.sellqty.replace(/[^0-9.]/g, '')) || 0; // Remove non-numeric characters
+            const productnumber = row.productnumber.trim().toUpperCase(); // Normalize for consistent matching
+
+            console.log(`Processing Product: ${productnumber}, Sell Qty: "${row.sellqty}" (Parsed: ${sellqty}), Checked: ${checkbox.checked}`);
 
             if (checkbox.checked) {
-                console.log(`Checked: Product: ${row.productnumber}, Quantity: ${sellqty}`);
-                row.fieldCount = (parseFloat(row.fieldCount) || 0) + sellqty;
-                updateFinalCount(row.productnumber, sellqty, true);
+                console.log(`Checked: Product: ${productnumber}, Quantity: ${sellqty}`);
+                updateFinalCount(productnumber, sellqty, true);
             } else {
-                console.log(`Unchecked: Product: ${row.productnumber}, Quantity: ${sellqty}`);
-                row.fieldCount = Math.max((parseFloat(row.fieldCount) || 0) - sellqty, 0);
-                updateFinalCount(row.productnumber, sellqty, false);
+                console.log(`Unchecked: Product: ${productnumber}, Quantity: ${sellqty}`);
+                updateFinalCount(productnumber, sellqty, false);
             }
         }
     });
@@ -56,33 +68,34 @@ function saveCheckboxStates() {
     sessionStorage.setItem('jobReportData', JSON.stringify(jobReportData));
 }
 
+
 function updateFinalCount(productnumber, quantity, isChecked) {
     console.log(`Updating Final Count: Product: ${productnumber}, Quantity: ${quantity}, Checked: ${isChecked}`);
     const finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
 
     // Find the record in finalCountsData
-    let skuRow = finalCountsData.find(row => row.stockSku === productnumber);
+    let skuRow = finalCountsData.find(row => row.stockSku.trim().toUpperCase() === productnumber);
 
     if (skuRow) {
         // Update existing SKU
         if (isChecked) {
             skuRow.fieldCount = (parseFloat(skuRow.fieldCount) || 0) + quantity;
-            console.log(`Updated existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
+            console.log(`Appended ${quantity} to fieldCount for existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
         } else {
             skuRow.fieldCount = Math.max((parseFloat(skuRow.fieldCount) || 0) - quantity, 0);
-            console.log(`Updated existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
+            console.log(`Subtracted ${quantity} from fieldCount for existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
         }
     } else if (isChecked) {
         // Add new SKU to finalCountsData
         skuRow = {
             stockSku: productnumber,
-            fieldCount: quantity,
+            fieldCount: quantity, // Use the parameter `quantity` here
             warehouseCount: 0,
             currentQOH: 0,
             discrepancy: 0
         };
         finalCountsData.push(skuRow);
-        console.log(`Added new SKU: ${productnumber}, Field Count: ${quantity}`);
+        console.log(`Added new SKU: ${productnumber}, Initial Field Count: ${quantity}`);
     }
 
     // Save updated finalCountsData to localStorage
@@ -92,6 +105,10 @@ function updateFinalCount(productnumber, quantity, isChecked) {
     // Trigger a storage event manually for instant sync
     localStorage.setItem('finalCountsUpdated', Date.now().toString());
 }
+
+
+
+
 
 // Attach event listener to checkboxes
 tableBody.addEventListener('change', (e) => {
