@@ -16,24 +16,44 @@ function loadAndParseFile(fileName) {
             const lines = text.split('\n');
             const headers = lines[2].split(',').map(header => header.trim());
             console.log("Headers:", headers);
-
+         
+            
             jobReportData = lines.slice(3)
-                .map(line => {
-                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-                    if (!columns || columns.length < headers.length) return null;
-                    return {
-                        department: columns[0]?.trim(),
-                        jobname: columns[1]?.trim(),
-                        productnumber: columns[2]?.trim(),
-                        Description: columns[3]?.trim(),
-                        sellqty: parseFloat(columns[5]?.trim()) || 0,
-                    };
-                })
-                .filter(row => row);
+            .map(line => {
+                const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g); // Split CSV safely
+                console.log("Raw Columns:", columns); // Debug raw columns
+        
+                if (!columns || columns.length < 7) { // Check for valid row
+                    console.warn("Skipping invalid row:", line);
+                    return null;
+                }
+        
+                // Clean and log sellqty value
+                const rawSellQty = columns[8]?.trim().replace(/^"|"$/g, '');
+                console.log("Raw Sell Qty:", rawSellQty);
+        
+                const row = {
+                    cperson: columns[0]?.trim().replace(/^"|"$/g, ''),
+                    branch: columns[1]?.trim().replace(/^"|"$/g, ''),
+                    jobname: columns[2]?.trim().replace(/^"|"$/g, ''),
+                    sonumber: columns[3]?.trim().replace(/^"|"$/g, ''),
+                    productnumber: columns[4]?.trim().replace(/^"|"$/g, ''),
+                    Description: columns[5]?.trim().replace(/^"|"$/g, ''),
+                    sellqty: parseFloat(rawSellQty) || 0, // Safely parse the sellqty
+                };
+        
+                console.log("Parsed Row:", row);
+                return row;
+            })
+            .filter(row => row); // Remove null rows
+        
+        
+
 
             renderJobReportTable();
         })
         .catch(error => console.error("Error loading file:", error));
+        
 }
 
 // Render Job Report Table
@@ -50,7 +70,7 @@ function renderJobReportTable() {
             <td>${row.jobname || ''}</td>
             <td>${row.productnumber || ''}</td>
             <td>${row.Description || ''}</td>
-            <td>${row.sellqty || 0}</td>
+            <td>${row.sellqty || ''}</td>
             <td><input type="checkbox" id="checkbox-${index}" ${isChecked ? 'checked' : ''} /></td>
         `;
         jobTableBody.appendChild(tr);
