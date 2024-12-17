@@ -38,61 +38,82 @@ function loadAndParseFile(fileName) {
 
 // Render Job Report Table
 function renderJobReportTable() {
+    console.log('Rendering Job Report Table...');
     jobTableBody.innerHTML = ''; // Clear table content
 
     jobReportData.forEach((row, index) => {
+        if (!row) return; // Skip invalid rows
+
         const tr = document.createElement('tr');
         const isChecked = !!checkboxStates[index];
         tr.innerHTML = `
-            <td>${row.jobname}</td>
-            <td>${row.productnumber}</td>
-            <td>${row.Description}</td>
-            <td>${row.sellqty}</td>
+            <td>${row.jobname || ''}</td>
+            <td>${row.productnumber || ''}</td>
+            <td>${row.Description || ''}</td>
+            <td>${row.sellqty || 0}</td>
             <td><input type="checkbox" id="checkbox-${index}" ${isChecked ? 'checked' : ''} /></td>
         `;
         jobTableBody.appendChild(tr);
+    });
 
-        // Attach Event Listener for Checkboxes
-        tr.querySelector('input[type="checkbox"]').addEventListener('change', (e) => {
-            handleCheckboxChange(e.target.checked, row);
-        });
+    // Attach Event Listener to Table (Delegated)
+    jobTableBody.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+            const rowIndex = parseInt(e.target.id.split('-')[1], 10);
+
+            // Validate rowIndex and rowData
+            if (isNaN(rowIndex) || !jobReportData[rowIndex]) {
+                console.warn(`Invalid row index: ${rowIndex}`);
+                return;
+            }
+
+            const rowData = jobReportData[rowIndex];
+            console.log(`Checkbox Change Detected: Row ${rowIndex}, Checked: ${e.target.checked}`);
+            handleCheckboxChange(e.target.checked, rowData);
+        }
     });
 }
 
+
 // Handle Checkbox State Change
 function handleCheckboxChange(isChecked, rowData) {
-    const productNumber = rowData.productnumber.trim().toUpperCase();
+    const productNumber = rowData.productnumber.trim().toUpperCase(); // Use Product Number as Stock SKU
     const sellQty = rowData.sellqty;
 
+    // Find if the row already exists in finalCountsData
     let existingRow = finalCountsData.find(r => r.stockSku === productNumber);
 
     if (isChecked) {
         if (existingRow) {
-            existingRow.fieldCount += sellQty;
+            existingRow.fieldCount += sellQty; // Update field count if row exists
         } else {
             finalCountsData.push({
-                stockSku: productNumber,
-                fieldCount: sellQty,
-                warehouseCount: 0,
-                currentQOH: 0,
-                discrepancy: 0
+                stockSku: productNumber, // Product number as Stock SKU
+                fieldCount: sellQty,     // Sell qty as Field Count
+                warehouseCount: 0,       // Initialize warehouse count as 0
+                currentQOH: 0,           // Initialize current QOH as 0
+                discrepancy: 0           // Initialize discrepancy as 0
             });
         }
     } else {
+        // If unchecked, reduce or remove the row
         if (existingRow) {
             existingRow.fieldCount -= sellQty;
             if (existingRow.fieldCount <= 0) {
+                // Remove the row if field count becomes zero or less
                 finalCountsData = finalCountsData.filter(r => r.stockSku !== productNumber);
             }
         }
     }
 
-    renderFinalCountsTable();
+    renderFinalCountsTable(); // Re-render the final table
 }
+
 
 // Render Final Counts Table
 function renderFinalCountsTable() {
-    finalTableBody.innerHTML = ''; // Clear existing rows
+    const finalTableBody = document.querySelector('#final-table tbody');
+    finalTableBody.innerHTML = ''; // Clear existing table rows
 
     if (finalCountsData.length === 0) {
         finalTableBody.innerHTML = '<tr><td colspan="6">No data available</td></tr>';
