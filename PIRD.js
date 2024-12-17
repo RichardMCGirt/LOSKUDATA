@@ -130,7 +130,7 @@ function exportToFinalCounts() {
     console.log('Data successfully stored in sessionStorage.');
 
     // Redirect to finalCounts.html
-    window.location.href = 'finalCounts.html';
+    window.location.href = 'FinalCounts.html';
 }
 
 // Add event listener for exporting to finalCounts.html
