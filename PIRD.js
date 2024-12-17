@@ -111,51 +111,6 @@ function loadAndParseFile(fileName) {
 }
 
 
-
-// Handle CSV export
-exportButton.addEventListener('click', () => {
-    if (!rows.length) {
-        alert('No data available to export.');
-        return;
-    }
-
-    // Escape special characters and generate CSV content
-    const escapeValue = (value) => `"${(value || '').replace(/"/g, '""')}"`;
-
-    // Updated headers based on your row data
-    const headers = ['Department', 'Class', 'Product #', 'Product Description', 'QOH B', 'QOH A', 'Cost B', 'Cost A', 'Count V', 'Cost V'];
-
-    // Updated row mapping to match your parsed data structure
-    const csvContent = [
-        headers.join(','),
-        ...rows.map(row =>
-            [
-                escapeValue(row.department),
-                escapeValue(row.class),
-                escapeValue(row.productn),
-                escapeValue(row.qohb),
-                escapeValue(row.qoha),
-                escapeValue(row.costb),
-                escapeValue(row.costa),
-                escapeValue(row.costv)
-            ].join(',')
-        )
-    ].join('\n').trim();
-
-    // Create a Blob and trigger download
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'exported_data.csv'; // Download filename
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    // Display success alert
-    alert('CSV file has been successfully exported.');
-});
-
 // Function to export data to finalCounts.html
 function exportToFinalCounts() {
     if (!rows.length) {

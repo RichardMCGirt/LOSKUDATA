@@ -1,116 +1,124 @@
-// Retrieve the filtered rows and checkbox states from sessionStorage
-let jobReportData = JSON.parse(sessionStorage.getItem('jobReportData') || '[]');
-const checkboxStates = JSON.parse(sessionStorage.getItem('checkboxStates') || '{}'); // Load saved checkbox states
+// Retrieve Job Report Data
+const jobReportData = JSON.parse(sessionStorage.getItem('jobReportData') || '[]');
+const checkboxStates = JSON.parse(sessionStorage.getItem('checkboxStates') || '{}');
 console.log('Retrieved Job Report Data:', jobReportData);
 
-// Log details of the first five records
-jobReportData.slice(0, 5).forEach((row, index) => {
-    console.log(`Record ${index + 1}:`);
-    console.log(`  Counter Person: ${row.cperson}`);
-    console.log(`  Job Name: ${row.jobname}`);
-    console.log(`  Product #: ${row.productnumber}`);
-    console.log(`  Description: ${row.Description}`);
-    console.log(`  Sell Qty: ${row.sellqty}`);
-});
+// Initialize Final Counts Data
+let finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
+console.log('Retrieved Final Counts Data:', finalCountsData);
 
-const tableBody = document.querySelector('#job-report-table tbody');
-jobReportData
-    .filter(row => row.productnumber &&
-        !row.productnumber.trim().toUpperCase().includes('DELIVERY') &&
-        !row.productnumber.trim().toUpperCase().includes('LABOR')) // Filter out rows with "DELIVERY" or "LABOR" in productnumber
-    .forEach((row, index) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td tabindex="0">${row.cperson}</td>
-            <td tabindex="0">${row.jobname}</td>
-            <td tabindex="0">${row.productnumber}</td>
-            <td tabindex="0">${row.Description}</td>
-            <td tabindex="0">${row.sellqty}</td>
-            <td tabindex="0">
-                <input type="checkbox" id="checkbox-${index}" ${checkboxStates[index] ? 'checked' : ''} />
-            </td>
-        `;
-        tableBody.appendChild(tr);
-    });
+// Get Table Bodies
+const jobTableBody = document.querySelector('#job-report-table tbody');
+const finalTableBody = document.querySelector('#final-table tbody');
 
-if (jobReportData.length === 0) {
-    console.warn('No data to display.');
-    alert('No data available for the selected city.');
-}
+// Render Job Report Table
+function renderJobReportTable() {
+    console.log('Rendering Job Report Table...');
+    jobTableBody.innerHTML = ''; // Clear table content
 
+    jobReportData
+        .forEach((row, index) => {
+            const isChecked = !!checkboxStates[index]; // Ensure checkbox state is boolean
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td tabindex="0">${row.jobname}</td>
+                <td tabindex="0">${row.productnumber}</td>
+                <td tabindex="0">${row.Description}</td>
+                <td tabindex="0">${row.sellqty}</td>
+                <td tabindex="0">
+                    <input type="checkbox" id="checkbox-${index}" ${isChecked ? 'checked' : ''} />
+                </td>
+            `;
+            jobTableBody.appendChild(tr);
+        });
 
-/// Save checkbox states and update field count
-function saveCheckboxStates() {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const states = {};
-    checkboxes.forEach((checkbox, index) => {
-        states[index] = checkbox.checked;
-
-        const row = jobReportData[index];
-        if (row) {
-            // Clean and normalize `sellqty`
-            const sellqty = parseFloat(row.sellqty.replace(/[^0-9.]/g, '')) || 0; // Remove non-numeric characters
-            const productnumber = row.productnumber.trim().toUpperCase(); // Normalize for consistent matching
-
-            console.log(`Processing Product: ${productnumber}, Sell Qty: "${row.sellqty}" (Parsed: ${sellqty}), Checked: ${checkbox.checked}`);
-
-            if (checkbox.checked) {
-                console.log(`Checked: Product: ${productnumber}, Quantity: ${sellqty}`);
-                updateFinalCount(productnumber, sellqty, true);
-            } else {
-                console.log(`Unchecked: Product: ${productnumber}, Quantity: ${sellqty}`);
-                updateFinalCount(productnumber, sellqty, false);
-            }
+    // Attach event listeners to checkboxes
+    jobTableBody.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+            const rowIndex = parseInt(e.target.id.split('-')[1], 10);
+            const rowData = jobReportData[rowIndex];
+            console.log(`Checkbox Change Detected: Row ${rowIndex}, Checked: ${e.target.checked}`);
+            handleCheckboxChange(e.target.checked, rowData);
         }
     });
+}
 
-    sessionStorage.setItem('checkboxStates', JSON.stringify(states));
-    sessionStorage.setItem('jobReportData', JSON.stringify(jobReportData));
+function handleCheckboxChange(isChecked, rowData) {
+    const productNumber = rowData.productnumber ? rowData.productnumber.trim().replace(/"/g, '').toUpperCase() : null;
+    const rawSellQty = rowData.sellqty ? rowData.sellqty.trim().replace(/"/g, '') : "0";
+    const sellQty = parseFloat(rawSellQty) || 0;
+
+    if (!productNumber || sellQty <= 0) {
+        console.warn(`Invalid data for row. Product #: "${productNumber}", Sell Qty: ${rawSellQty}`);
+        return;
+    }
+
+    console.log(`Handling Checkbox Change: Product # ${productNumber}, Sell Qty: ${sellQty}, Checked: ${isChecked}`);
+
+    // Find only visible rows with the matching SKU
+    let existingRow = Array.from(finalTableBody.rows).find(
+        r => r.style.display !== 'none' && r.cells[0].textContent.trim().toUpperCase() === productNumber
+    );
+
+    if (isChecked) {
+        if (existingRow) {
+            const currentCount = parseFloat(existingRow.cells[1].textContent) || 0;
+            const newCount = currentCount + sellQty;
+            existingRow.cells[1].textContent = newCount;
+            console.log(`Updated Row: Product # ${productNumber}, New Field Count: ${newCount}`);
+        } else {
+            console.log(`Adding New Row: Product # ${productNumber}, Field Count: ${sellQty}`);
+            const tr = document.createElement('tr');
+            tr.style.display = ''; // Ensure it's visible
+            tr.innerHTML = `
+                <td>${productNumber}</td>
+                <td>${sellQty}</td>
+                <td><input type="number" value="0" min="0" /></td>
+                <td>${sellQty}</td>
+                <td>0</td>
+                <td>0</td>
+            `;
+            finalTableBody.appendChild(tr);
+        }
+    } else {
+        if (existingRow) {
+            const currentCount = parseFloat(existingRow.cells[1].textContent) || 0;
+            const newCount = Math.max(0, currentCount - sellQty);
+            existingRow.cells[1].textContent = newCount;
+            console.log(`Updated Row (Unchecked): Product # ${productNumber}, New Field Count: ${newCount}`);
+
+            if (newCount === 0) {
+                console.log(`Removing Row: Product # ${productNumber} as Field Count is 0`);
+                existingRow.style.display = 'none'; // Hide instead of removing
+            }
+        }
+    }
 }
 
 
-function updateFinalCount(productnumber, quantity, isChecked) {
-    console.log(`Updating Final Count: Product: ${productnumber}, Quantity: ${quantity}, Checked: ${isChecked}`);
-    let finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
 
-    // Find the record in finalCountsData
-    let skuRow = finalCountsData.find(row => row.stockSku.trim().toUpperCase() === productnumber);
+// Render Final Counts Table
+function renderFinalCountsTable() {
+    console.log('Rendering Final Counts Table...');
+    finalTableBody.innerHTML = ''; // Clear existing rows
 
-    if (skuRow) {
-        // Update existing SKU
-        if (isChecked) {
-            skuRow.fieldCount = (parseFloat(skuRow.fieldCount) || 0) + quantity;
-            console.log(`Appended ${quantity} to fieldCount for existing SKU: ${productnumber}, New Field Count: ${skuRow.fieldCount}`);
-        } 
-    } else if (isChecked) {
-        // Add new SKU to finalCountsData
-        skuRow = {
-            stockSku: productnumber,
-            fieldCount: quantity,
-            warehouseCount: 0,
-            currentQOH: 0,
-            discrepancy: 0
-        };
-        finalCountsData.push(skuRow);
-        console.log(`Added new SKU: ${productnumber}, Initial Field Count: ${quantity}`);
-    }
-
-    // Save updated finalCountsData to localStorage
-    localStorage.setItem('finalCountsData', JSON.stringify(finalCountsData));
-    console.log('Final Counts Data saved to localStorage:', finalCountsData);
-
-    // Trigger a storage event manually for instant sync
-    localStorage.setItem('finalCountsUpdated', Date.now().toString());
+    finalCountsData.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.stockSku}</td>
+            <td>${row.fieldCount}</td>
+            <td><input type="number" id="warehouseCount-${index}" value="${row.warehouseCount || 0}" min="0" /></td>
+            <td id="finalInventory-${index}">${parseFloat(row.fieldCount || 0) + parseFloat(row.warehouseCount || 0)}</td>
+            <td>${row.currentQOH}</td>
+            <td>${row.discrepancy}</td>
+        `;
+        finalTableBody.appendChild(tr);
+    });
 }
 
-
-
-
-
-
-// Attach event listener to checkboxes
-tableBody.addEventListener('change', (e) => {
-    if (e.target.type === 'checkbox') {
-        saveCheckboxStates();
-    }
+// Initial Render
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing Page...');
+    renderJobReportTable();
+    renderFinalCountsTable();
 });

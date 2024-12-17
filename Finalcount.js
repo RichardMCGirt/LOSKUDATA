@@ -1,50 +1,114 @@
-// Retrieve the data from localStorage
+// Retrieve data from sessionStorage and localStorage
+let jobReportData = JSON.parse(sessionStorage.getItem('jobReportData') || '[]');
+const checkboxStates = JSON.parse(sessionStorage.getItem('checkboxStates') || '{}');
 let finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
+
+console.log('Retrieved Job Report Data:', jobReportData);
 console.log('Retrieved Final Counts Data:', finalCountsData);
 
-const tableBody = document.querySelector('#final-table tbody');
+// Identify DOM elements
+const jobTableBody = document.querySelector('#job-report-table tbody');
+const finalTableBody = document.querySelector('#final-table tbody');
 
-// Remove duplicates from finalCountsData and accumulate quantities
-function removeDuplicatesAndAccumulate(data) {
-    console.log("Removing duplicates and accumulating fieldCount...");
-    const uniqueData = [];
-    const seenSkus = new Map(); // Map to track seen SKUs and their fieldCount
+// Render Job Report Table
+function renderJobReportTable() {
+    if (!jobTableBody) {
+        console.log('Job Report Table not found on this page. Skipping rendering.');
+        return;
+    }
 
-    data.forEach(row => {
-        console.log(`Processing SKU: ${row.stockSku}, Current Field Count: ${row.fieldCount}`);
-        if (seenSkus.has(row.stockSku)) {
-            // Accumulate fieldCount if SKU already exists
-            const existingRow = seenSkus.get(row.stockSku);
-            const prevFieldCount = parseFloat(existingRow.fieldCount || 0);
-            const addedFieldCount = parseFloat(row.fieldCount || 0);
-            existingRow.fieldCount = prevFieldCount + addedFieldCount;
-            console.log(`Accumulated Field Count for SKU: ${row.stockSku}, Previous: ${prevFieldCount}, Added: ${addedFieldCount}, New: ${existingRow.fieldCount}`);
-        } else {
-            // Add new SKU to uniqueData and Map
-            const newRow = { ...row };
-            seenSkus.set(newRow.stockSku, newRow);
-            uniqueData.push(newRow);
-            console.log(`Added new SKU: ${newRow.stockSku}, Initial Field Count: ${newRow.fieldCount}`);
+    jobTableBody.innerHTML = ''; // Clear existing rows
+    jobReportData
+        .filter(row => row.productnumber &&
+            !row.productnumber.trim().toUpperCase().includes('DELIVERY') &&
+            !row.productnumber.trim().toUpperCase().includes('LABOR')) // Filter out unwanted rows
+        .forEach((row, index) => {
+            const tr = document.createElement('tr');
+            const isChecked = !!checkboxStates[index]; // Ensure checkbox state is boolean
+            tr.innerHTML = `
+                <td tabindex="0">${row.cperson}</td>
+                <td tabindex="0">${row.jobname}</td>
+                <td tabindex="0">${row.productnumber}</td>
+                <td tabindex="0">${row.Description}</td>
+                <td tabindex="0">${row.sellqty}</td>
+                <td tabindex="0">
+                    <input type="checkbox" id="checkbox-${index}" ${isChecked ? 'checked' : ''} />
+                </td>
+            `;
+            jobTableBody.appendChild(tr);
+        });
+
+    // Attach checkbox event listener
+    jobTableBody.addEventListener('change', (e) => {
+        if (e.target.type === 'checkbox') {
+            saveCheckboxStates();
         }
     });
-
-    console.log("Final unique data after duplicate removal:", uniqueData);
-    return uniqueData;
 }
 
+// Save checkbox states and update final counts
+function saveCheckboxStates() {
+    const checkboxes = document.querySelectorAll('#job-report-table input[type="checkbox"]');
+    const states = {};
+    checkboxes.forEach((checkbox, index) => {
+        states[index] = checkbox.checked;
+        const row = jobReportData[index];
+        if (row) {
+            const sellqty = parseFloat(row.sellqty.replace(/[^0-9.]/g, '')) || 0;
+            const productnumber = row.productnumber.trim().toUpperCase();
+            updateFinalCount(productnumber, sellqty, checkbox.checked);
+        }
+    });
+    sessionStorage.setItem('checkboxStates', JSON.stringify(states));
+    sessionStorage.setItem('jobReportData', JSON.stringify(jobReportData));
+    localStorage.setItem('finalCountsUpdated', Date.now().toString());
+}
 
-// Save unique finalCountsData back to localStorage
-finalCountsData = removeDuplicatesAndAccumulate(finalCountsData);
-localStorage.setItem('finalCountsData', JSON.stringify(finalCountsData));
-console.log('Final Counts Data after duplicate removal and accumulation:', finalCountsData);
+// Update Final Count in localStorage
+function updateFinalCount(productnumber, quantity, isChecked) {
+    let finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
+    productnumber = productnumber.trim().toUpperCase();
 
-// Render table rows
+    let skuRow = finalCountsData.find(row => row.stockSku.trim().toUpperCase() === productnumber);
+
+    if (skuRow) {
+        const oldFieldCount = parseFloat(skuRow.fieldCount) || 0;
+        if (isChecked) {
+            skuRow.fieldCount = oldFieldCount + quantity;
+        } else {
+            skuRow.fieldCount = Math.max(0, oldFieldCount - quantity);
+        }
+    } else if (isChecked) {
+        skuRow = {
+            stockSku: productnumber,
+            fieldCount: quantity,
+            warehouseCount: 0,
+            currentQOH: 0,
+            discrepancy: 0
+        };
+        finalCountsData.push(skuRow);
+    }
+
+    localStorage.setItem('finalCountsData', JSON.stringify(finalCountsData));
+    console.log('Updated Final Counts Data (First Record Only):', finalCountsData[0]);
+
+    renderFinalCountsTable();
+}
+
+// Render Final Counts Table
 function renderFinalCountsTable() {
-    console.log("Rendering Final Counts Table...");
-    tableBody.innerHTML = ''; // Clear existing rows
+    if (!finalTableBody) {
+        console.log('Final Counts Table not found on this page. Skipping rendering.');
+        return;
+    }
+
+    finalTableBody.innerHTML = ''; // Clear existing rows
+    if (!finalCountsData || finalCountsData.length === 0) {
+        finalTableBody.innerHTML = '<tr><td colspan="6">No data available</td></tr>';
+        return;
+    }
 
     finalCountsData.forEach((row, index) => {
-        console.log(`Rendering Row for SKU: ${row.stockSku}, Field Count: ${row.fieldCount}, Warehouse Count: ${row.warehouseCount}`);
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${row.stockSku}</td>
@@ -54,61 +118,37 @@ function renderFinalCountsTable() {
             <td>${row.currentQOH}</td>
             <td>${row.discrepancy}</td>
         `;
-        tableBody.appendChild(tr);
+        finalTableBody.appendChild(tr);
+
+        const warehouseCountInput = tr.querySelector(`#warehouseCount-${index}`);
+        if (warehouseCountInput) {
+            warehouseCountInput.addEventListener('input', () => {
+                updateFinalInventory(index, warehouseCountInput.value);
+            });
+        }
     });
 }
 
-// Update Final Inventory and Save Changes to localStorage
-function updateFinalInventory(index) {
-    console.log(`Updating Final Inventory for Row Index: ${index}...`);
-    const warehouseCountInput = document.querySelector(`#warehouseCount-${index}`);
-    const finalInventoryCell = document.querySelector(`#finalInventory-${index}`);
-
-    let warehouseCount = parseFloat(warehouseCountInput.value) || 0;
+// Update Final Inventory
+function updateFinalInventory(index, value) {
+    const warehouseCount = parseFloat(value) || 0;
     const fieldCount = parseFloat(finalCountsData[index].fieldCount) || 0;
 
-    console.log(`Original Warehouse Count: ${warehouseCount}, Field Count: ${fieldCount}`);
+    finalCountsData[index].warehouseCount = Math.max(0, warehouseCount);
+    document.querySelector(`#finalInventory-${index}`).textContent = warehouseCount + fieldCount;
 
-    if (warehouseCount < 0) {
-        warehouseCount = 0;
-        warehouseCountInput.value = 0;
-    }
-
-    const finalInventory = warehouseCount + fieldCount;
-    console.log(`New Final Inventory: ${finalInventory}`);
-    finalInventoryCell.textContent = finalInventory;
-
-    finalCountsData[index].warehouseCount = warehouseCount;
     localStorage.setItem('finalCountsData', JSON.stringify(finalCountsData));
-    console.log('Updated Final Counts Data saved to localStorage:', finalCountsData);
 }
 
-// Attach event listeners to Warehouse Count inputs
-function attachWarehouseListeners() {
-    console.log("Attaching event listeners to Warehouse Count inputs...");
-    finalCountsData.forEach((_, index) => {
-        const warehouseCountInput = document.querySelector(`#warehouseCount-${index}`);
-        warehouseCountInput.addEventListener('input', () => updateFinalInventory(index));
-    });
-}
-
-// Listen for changes in localStorage
+// Listen for Storage Updates
 window.addEventListener('storage', (e) => {
-    if (e.key === 'finalCountsData' || e.key === 'finalCountsUpdated') {
-        console.log("Detected changes in finalCountsData...");
-        finalCountsData = removeDuplicatesAndAccumulate(JSON.parse(localStorage.getItem('finalCountsData') || '[]'));
-        localStorage.setItem('finalCountsData', JSON.stringify(finalCountsData)); // Save the unique data
-        console.log('Final Counts Data updated after storage change:', finalCountsData);
+    if (e.key === 'finalCountsUpdated') {
         renderFinalCountsTable();
-        attachWarehouseListeners();
     }
 });
 
-// Initial render
-console.log("Initial Table Rendering...");
-renderFinalCountsTable();
-attachWarehouseListeners();
-
-if (finalCountsData.length === 0) {
-    console.warn('No data to display.');
-}
+// Initial Render
+document.addEventListener('DOMContentLoaded', () => {
+    renderJobReportTable();
+    renderFinalCountsTable();
+});
