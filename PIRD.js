@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     // Simulate the file upload on page load
-    loadAndParseFile('pid.csv');
+    loadAndParseFile('pird.csv');
 });
 
 // Function to load and parse the file content
@@ -130,7 +130,7 @@ function exportToFinalCounts() {
     console.log('Data successfully stored in sessionStorage.');
 
     // Redirect to finalCounts.html
-    window.location.href = 'FinalCounts.html';
+    window.location.href = 'finalcounts.html';
 }
 
 // Add event listener for exporting to finalCounts.html
