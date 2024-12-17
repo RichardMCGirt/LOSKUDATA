@@ -44,8 +44,14 @@ function renderJobReportTable() {
 }
 
 function handleCheckboxChange(isChecked, rowData) {
-    const productNumber = rowData.productnumber ? rowData.productnumber.trim().replace(/"/g, '').toUpperCase() : null;
-    const rawSellQty = rowData.sellqty ? rowData.sellqty.trim().replace(/"/g, '') : "0";
+    const productNumber = rowData.productnumber
+        ? rowData.productnumber.trim().replace(/^"|"$/g, '').toUpperCase()
+        : null;
+
+    const rawSellQty = rowData.sellqty
+        ? rowData.sellqty.trim().replace(/^"|"$/g, '')
+        : "0";
+
     const sellQty = parseFloat(rawSellQty) || 0;
 
     if (!productNumber || sellQty <= 0) {
@@ -55,7 +61,33 @@ function handleCheckboxChange(isChecked, rowData) {
 
     console.log(`Handling Checkbox Change: Product # ${productNumber}, Sell Qty: ${sellQty}, Checked: ${isChecked}`);
 
-    // Find only visible rows with the matching SKU
+    // Find rows with matching jobname
+    const jobName = rowData.jobname.trim().replace(/^"|"$/g, '');
+
+    Array.from(jobTableBody.querySelectorAll('input[type="checkbox"]')).forEach((checkbox, index) => {
+        const row = jobReportData[index];
+        const currentJobName = row.jobname.trim().replace(/^"|"$/g, '');
+
+        // Check/uncheck boxes with matching jobname
+        if (currentJobName === jobName) {
+            checkbox.checked = isChecked;
+            checkboxStates[index] = isChecked;
+
+            // Handle each row individually
+            const rowProductNumber = row.productnumber.trim().replace(/^"|"$/g, '').toUpperCase();
+            const rowSellQty = parseFloat(row.sellqty.trim().replace(/^"|"$/g, '') || 0);
+
+            console.log(`Handling Row: Product # ${rowProductNumber}, Sell Qty: ${rowSellQty}`);
+
+            updateFinalTable(rowProductNumber, rowSellQty, isChecked);
+        }
+    });
+
+    // Save updated checkbox states
+    sessionStorage.setItem('checkboxStates', JSON.stringify(checkboxStates));
+}
+
+function updateFinalTable(productNumber, sellQty, isChecked) {
     let existingRow = Array.from(finalTableBody.rows).find(
         r => r.style.display !== 'none' && r.cells[0].textContent.trim().toUpperCase() === productNumber
     );
@@ -65,11 +97,11 @@ function handleCheckboxChange(isChecked, rowData) {
             const currentCount = parseFloat(existingRow.cells[1].textContent) || 0;
             const newCount = currentCount + sellQty;
             existingRow.cells[1].textContent = newCount;
-            console.log(`Updated Row: Product # ${productNumber}, New Field Count: ${newCount}`);
+            console.log(`Updated Row (Checked): Product # ${productNumber}, New Field Count: ${newCount}`);
         } else {
             console.log(`Adding New Row: Product # ${productNumber}, Field Count: ${sellQty}`);
             const tr = document.createElement('tr');
-            tr.style.display = ''; // Ensure it's visible
+            tr.style.display = ''; // Ensure visible
             tr.innerHTML = `
                 <td>${productNumber}</td>
                 <td>${sellQty}</td>
@@ -88,12 +120,17 @@ function handleCheckboxChange(isChecked, rowData) {
             console.log(`Updated Row (Unchecked): Product # ${productNumber}, New Field Count: ${newCount}`);
 
             if (newCount === 0) {
-                console.log(`Removing Row: Product # ${productNumber} as Field Count is 0`);
-                existingRow.style.display = 'none'; // Hide instead of removing
+                console.log(`Hiding Row: Product # ${productNumber} as Field Count is 0`);
+                existingRow.style.display = 'none';
             }
         }
     }
 }
+
+
+
+
+
 
 
 
