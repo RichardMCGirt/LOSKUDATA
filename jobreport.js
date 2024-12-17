@@ -1,15 +1,10 @@
 // Retrieve Job Report Data
-const jobReportData = JSON.parse(sessionStorage.getItem('jobReportData') || '[]');
-const checkboxStates = JSON.parse(sessionStorage.getItem('checkboxStates') || '{}');
 console.log('Retrieved Job Report Data:', jobReportData);
 
 // Initialize Final Counts Data
-let finalCountsData = JSON.parse(localStorage.getItem('finalCountsData') || '[]');
 console.log('Retrieved Final Counts Data:', finalCountsData);
 
 // Get Table Bodies
-const jobTableBody = document.querySelector('#job-report-table tbody');
-const finalTableBody = document.querySelector('#final-table tbody');
 
 // Render Job Report Table
 function renderJobReportTable() {

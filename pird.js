@@ -4,7 +4,6 @@ let checkboxStates = {}; // To track checkbox states
 
 // Identify DOM Elements
 const jobTableBody = document.querySelector('#job-report-table tbody');
-const finalTableBody = document.querySelector('#final-table tbody');
 
 // Function to Load CSV Data and Populate Job Report Table
 function loadAndParseFile(fileName) {
