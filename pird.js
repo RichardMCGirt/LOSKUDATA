@@ -1,64 +1,13 @@
-const tableBody = document.querySelector('#result-table tbody');
-const exportButton = document.getElementById('export-button');
+// Global Variables for Data Storage
+let jobReportData = []; // To hold job report data
+let checkboxStates = {}; // To track checkbox states
+let finalCountsData = []; // To store final counts
 
-let rows = []; // To store the parsed data from the uploaded file
+// Identify DOM Elements
+const jobTableBody = document.querySelector('#job-report-table tbody');
+const finalTableBody = document.querySelector('#final-table tbody');
 
-// Function to display rows in the table
-function displayRows() {
-    console.log("Rows to Display:", rows); // Log the rows to display
-    tableBody.innerHTML = ''; // Clear previous rows
-
-    // Debugging: Check if rows is empty
-    if (rows.length === 0) {
-        console.warn("No rows to display.");
-        return;
-    }
-
-    // Add "Total" to the productn field of the last row
-    if (rows.length > 0) {
-        rows[rows.length - 1].productn = 'Total'; // Modify the last row's productn
-    }
-
-    rows.forEach((row, index) => {
-        const tr = document.createElement('tr');
-        if (index === rows.length - 1) {
-            // Add top border style to the last row
-            tr.style.borderTop = '2px solid black';
-        }
-        tr.innerHTML = `
-            <td class="hidden">${row.department}</td> 
-            <td class="hidden">${row.class}</td> 
-            <td>${row.productn}</td>
-            <td>${row.productd}</td>
-            <td>${row.qohb}</td>
-            <td>${row.qoha}</td>
-            <td>${row.costb}</td>
-            <td>${row.costa}</td>
-            <td>${row.qa}</td>
-            <td>${row.qoo}</td>
-        `;
-        tableBody.appendChild(tr);
-    });
-}
-
-
-
-
-// Add the class to hide the first column
-document.addEventListener('DOMContentLoaded', () => {
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .hidden {
-            display: none;
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Simulate the file upload on page load
-    loadAndParseFile('pird.csv');
-});
-
-// Function to load and parse the file content
+// Function to Load CSV Data and Populate Job Report Table
 function loadAndParseFile(fileName) {
     fetch(fileName)
         .then(response => {
@@ -67,67 +16,118 @@ function loadAndParseFile(fileName) {
         })
         .then(text => {
             const lines = text.split('\n');
-
-            console.log("Raw Lines:", lines); // Debug: Log all lines
-
-          
-
-            // Parse headers and data
             const headers = lines[2].split(',').map(header => header.trim());
-            console.log("Headers:", headers); // Debug: Log headers
+            console.log("Headers:", headers);
 
-            rows = lines.slice(3)
-                .map((line, index) => {
-                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g); // Improved parsing
-                    console.log(`Row ${index + 4} Columns:`, columns); // Debug: Log columns for each row
-
-                    if (!columns || columns.length < headers.length) {
-                        return null; // Skip malformed rows
-                    }
-
+            jobReportData = lines.slice(3)
+                .map(line => {
+                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                    if (!columns || columns.length < headers.length) return null;
                     return {
                         department: columns[0]?.trim(),
-                        class: columns[1]?.trim(),
-                        productn: columns[2]?.trim(),
-                        productd: columns[3]?.trim(),
-                        qohb: columns[5]?.trim(),
-                        qoha: columns[6]?.trim(),
-                        costb: columns[7]?.trim(),
-                        costa: columns[8]?.trim(),
-                        qa: columns[11]?.trim(),
-                        qoo: columns[12]?.trim(),
+                        jobname: columns[1]?.trim(),
+                        productnumber: columns[2]?.trim(),
+                        Description: columns[3]?.trim(),
+                        sellqty: parseFloat(columns[5]?.trim()) || 0,
                     };
                 })
-                .filter(row => row); // Remove null rows
+                .filter(row => row);
 
-            console.log("Parsed Rows:", rows); // Debug: Log parsed rows
-            displayRows();
+            renderJobReportTable();
         })
         .catch(error => console.error("Error loading file:", error));
 }
 
+// Render Job Report Table
+function renderJobReportTable() {
+    jobTableBody.innerHTML = ''; // Clear table content
 
-// Function to export data to finalCounts.html
-function exportToFinalCounts() {
-    if (!rows.length) {
-        alert('No data available to export.');
+    jobReportData.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        const isChecked = !!checkboxStates[index];
+        tr.innerHTML = `
+            <td>${row.jobname}</td>
+            <td>${row.productnumber}</td>
+            <td>${row.Description}</td>
+            <td>${row.sellqty}</td>
+            <td><input type="checkbox" id="checkbox-${index}" ${isChecked ? 'checked' : ''} /></td>
+        `;
+        jobTableBody.appendChild(tr);
+
+        // Attach Event Listener for Checkboxes
+        tr.querySelector('input[type="checkbox"]').addEventListener('change', (e) => {
+            handleCheckboxChange(e.target.checked, row);
+        });
+    });
+}
+
+// Handle Checkbox State Change
+function handleCheckboxChange(isChecked, rowData) {
+    const productNumber = rowData.productnumber.trim().toUpperCase();
+    const sellQty = rowData.sellqty;
+
+    let existingRow = finalCountsData.find(r => r.stockSku === productNumber);
+
+    if (isChecked) {
+        if (existingRow) {
+            existingRow.fieldCount += sellQty;
+        } else {
+            finalCountsData.push({
+                stockSku: productNumber,
+                fieldCount: sellQty,
+                warehouseCount: 0,
+                currentQOH: 0,
+                discrepancy: 0
+            });
+        }
+    } else {
+        if (existingRow) {
+            existingRow.fieldCount -= sellQty;
+            if (existingRow.fieldCount <= 0) {
+                finalCountsData = finalCountsData.filter(r => r.stockSku !== productNumber);
+            }
+        }
+    }
+
+    renderFinalCountsTable();
+}
+
+// Render Final Counts Table
+function renderFinalCountsTable() {
+    finalTableBody.innerHTML = ''; // Clear existing rows
+
+    if (finalCountsData.length === 0) {
+        finalTableBody.innerHTML = '<tr><td colspan="6">No data available</td></tr>';
         return;
     }
 
-    // Prepare the data for finalCounts.html (only stockSku)
-    const finalData = rows.map(row => ({
-        stockSku: row.productn || '' // Replace with appropriate field
-    }));
+    finalCountsData.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.stockSku}</td>
+            <td>${row.fieldCount}</td>
+            <td><input type="number" id="warehouseCount-${index}" value="${row.warehouseCount}" min="0" /></td>
+            <td id="finalInventory-${index}">${row.fieldCount + row.warehouseCount}</td>
+            <td>${row.currentQOH}</td>
+            <td>${row.discrepancy}</td>
+        `;
+        finalTableBody.appendChild(tr);
 
-    console.log('Final Data:', finalData); // Debug final data
-
-    // Store the data in sessionStorage
-    sessionStorage.setItem('finalCountsData', JSON.stringify(finalData));
-    console.log('Data successfully stored in sessionStorage.');
-
-    // Redirect to finalCounts.html
-    window.location.href = 'FinalCounts.html';
+        // Attach Input Event for Warehouse Count
+        tr.querySelector(`#warehouseCount-${index}`).addEventListener('input', (e) => {
+            updateWarehouseCount(index, e.target.value);
+        });
+    });
 }
 
-// Add event listener for exporting to finalCounts.html
-document.getElementById('export-button').addEventListener('click', exportToFinalCounts);
+// Update Warehouse Count and Recalculate Inventory
+function updateWarehouseCount(index, value) {
+    finalCountsData[index].warehouseCount = parseFloat(value) || 0;
+    document.getElementById(`finalInventory-${index}`).textContent =
+        finalCountsData[index].fieldCount + finalCountsData[index].warehouseCount;
+}
+
+// Initial CSV Load Simulation
+document.addEventListener('DOMContentLoaded', () => {
+    loadAndParseFile('pird.csv'); // Replace 'pird.csv' with your actual file path
+});

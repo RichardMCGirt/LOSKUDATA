@@ -10,13 +10,7 @@
 <body>
     <h1>Physical Inventory</h1>
 
-    <p>
-        <a href="index2.html" target="_blank">download csv file</a>
-        <a href="openorders.html" target="_blank">Open orders</a>
-        <a href="jobreport.html" target="_blank">Job Report</a>
 
-
-    </p>
 
     <!-- File upload -->
     <!-- <label for="file-input">Upload CSV File:</label>
@@ -41,9 +35,96 @@
         <tbody></tbody>
     </table>
     <button id="export-button">Export CSV</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
-    <script src="pird.js"></script>
 
-</body>
-</html>
+  
+
+    <h1>Job Report</h1>
+    <div class="table-container">
+        <table id="job-report-table">
+            <thead>
+                <tr>
+                    <th>Job Name</th>
+                    <th>Product #</th>
+                    <th>Description</th>
+                    <th>Sell Qty</th>
+                    <th>Checkbox</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
+
+    <h1>Final Inventory</h1>
+    <table id="final-table">
+        <thead>
+            <tr>
+                <th>Stock SKU</th>
+                <th>Field Count</th>
+                <th>Warehouse Count</th>
+                <th>Final Inventory</th>
+                <th>Current QOH</th>
+                <th>Discrepancy</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    
+    
+    
+
+
+   
+      
+        <body>
+            <h1>City Filter with File Upload</h1>
+        
+      
+            <!-- File upload -->
+          <!--  <label for="file-input">Upload CSV File:</label>
+            <input type="file" id="file-input" accept=".csv"> -->
+        
+            <!-- Dropdown for selecting a city -->
+            <div>
+                <label for="city-dropdown">Select a City:</label>
+                <select id="city-dropdown" disabled>
+                    <option value="">-- Select City --</option>
+                    <option value="Raleigh">Raleigh</option>
+                    <option value="Myrtle Beach">Myrtle Beach</option>
+                    <option value="Greensboro">Greensboro</option>
+                    <option value="Columbia">Columbia</option>
+                    <option value="Wilmington">Wilmington</option>
+                    <option value="Greenville">Greenville</option>
+                    <option value="Charlotte">Charlotte</option>
+                </select>
+            </div>
+        
+            <!-- Table to display filtered results -->
+            <table id="result-table">
+                <thead>
+                    <tr>
+                        <th>Master Account Name</th>
+                        <th>Job Name</th>
+                        <th>SO Number</th>
+                        <th>Product Number</th>
+                        <th>Description</th>
+                        <th>Sell Qty</th>
+                   
+        
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="export-button">Export CSV</button>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+        
+            <script src="OpenOrders.js"></script>
+            <script src="pird.js"></script>
+            <script src="jobreport.js"></script>
+
+
+        
+        </body>
+        </html>
+        
