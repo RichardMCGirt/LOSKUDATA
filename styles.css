@@ -42,6 +42,14 @@ position: sticky; /* Keeps the header visible while scrolling */
 top: 0;
 z-index: 1;
 }
+#result-table {
+    display: table; /* Result Table is visible by default */
+}
+
+#job-report-table {
+    display: none; /* Job Report Table is hidden by default */
+}
+
 
 
 

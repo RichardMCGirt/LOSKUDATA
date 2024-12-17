@@ -311,12 +311,26 @@ function renderFinalCountsTable() {
 // Handle Dropdown Change
 cityDropdown.addEventListener('change', () => {
     const selectedCity = cityDropdown.value.toLowerCase();
+    const jobReportTable = document.getElementById('job-report-table');
+    const resultTable = document.getElementById('result-table');
+
+    // Show/Hide Tables based on dropdown selection
+    if (selectedCity) {
+        jobReportTable.style.display = 'table'; // Show Job Report Table
+        resultTable.style.display = 'none';     // Hide Result Table
+    } else {
+        jobReportTable.style.display = 'none';  // Hide Job Report Table
+        resultTable.style.display = 'table';    // Show Result Table
+    }
+
     filteredRows = rows.filter(row => row.branch?.toLowerCase().includes(selectedCity));
-    displayFilteredRows(); // Show filtered rows in the Result Table
-    displayJobReportTable(); // Show rows in Job Report Table
+    displayFilteredRows(); // Populate filtered rows in Result Table
+    displayJobReportTable(); // Populate rows in Job Report Table
     finalCountsData = []; // Reset Final Table
     renderFinalCountsTable(); // Clear Final Table
 });
+
+
 
 // Export Filtered Rows as CSV
 exportButton.addEventListener('click', () => {
