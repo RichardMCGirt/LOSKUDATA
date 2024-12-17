@@ -70,10 +70,7 @@ function loadAndParseFile(fileName) {
 
             console.log("Raw Lines:", lines); // Debug: Log all lines
 
-            if (lines.length < 4) {
-                console.error("File does not contain enough rows.");
-                return;
-            }
+          
 
             // Parse headers and data
             const headers = lines[2].split(',').map(header => header.trim());
@@ -85,7 +82,6 @@ function loadAndParseFile(fileName) {
                     console.log(`Row ${index + 4} Columns:`, columns); // Debug: Log columns for each row
 
                     if (!columns || columns.length < headers.length) {
-                        console.warn(`Row ${index + 4} has insufficient columns:`, columns);
                         return null; // Skip malformed rows
                     }
 
