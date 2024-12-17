@@ -15,46 +15,33 @@ function loadAndParseFile(fileName) {
         .then(text => {
             const lines = text.split('\n');
             const headers = lines[2].split(',').map(header => header.trim());
-            console.log("Headers:", headers);
-         
-            
+
             jobReportData = lines.slice(3)
-            .map(line => {
-                const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g); // Split CSV safely
-                console.log("Raw Columns:", columns); // Debug raw columns
-        
-                if (!columns || columns.length < 7) { // Check for valid row
-                    console.warn("Skipping invalid row:", line);
-                    return null;
-                }
-        
-                // Clean and log sellqty value
-                const rawSellQty = columns[8]?.trim().replace(/^"|"$/g, '');
-                console.log("Raw Sell Qty:", rawSellQty);
-        
-                const row = {
-                    cperson: columns[0]?.trim().replace(/^"|"$/g, ''),
-                    branch: columns[1]?.trim().replace(/^"|"$/g, ''),
-                    jobname: columns[2]?.trim().replace(/^"|"$/g, ''),
-                    sonumber: columns[3]?.trim().replace(/^"|"$/g, ''),
-                    productnumber: columns[4]?.trim().replace(/^"|"$/g, ''),
-                    Description: columns[5]?.trim().replace(/^"|"$/g, ''),
-                    sellqty: parseFloat(rawSellQty) || 0, // Safely parse the sellqty
-                };
-        
-                console.log("Parsed Row:", row);
-                return row;
-            })
-            .filter(row => row); // Remove null rows
-        
-        
+                .map(line => {
+                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                    if (!columns || columns.length < 9) return null;
 
+                    // Clean sellqty properly
+                    const rawSellQty = columns[8]?.trim().replace(/^"|"$/g, '');
+                    const sellQty = parseFloat(rawSellQty) || 0;
 
+                    return {
+                        cperson: columns[0]?.trim().replace(/^"|"$/g, ''),
+                        branch: columns[1]?.trim().replace(/^"|"$/g, ''),
+                        jobname: columns[2]?.trim().replace(/^"|"$/g, ''),
+                        productnumber: columns[4]?.trim().replace(/^"|"$/g, ''),
+                        Description: columns[5]?.trim().replace(/^"|"$/g, ''),
+                        sellqty: sellQty,
+                    };
+                })
+                .filter(row => row);
+
+            console.log("Loaded Job Report Data:", jobReportData);
             renderJobReportTable();
         })
         .catch(error => console.error("Error loading file:", error));
-        
 }
+
 
 // Render Job Report Table
 function renderJobReportTable() {
@@ -94,19 +81,27 @@ function renderJobReportTable() {
     });
 }
 
-
-// Handle Checkbox State Change
 function handleCheckboxChange(isChecked, rowData) {
-    const productNumber = rowData.productnumber.trim().toUpperCase(); // Use Product Number as Stock SKU
+    console.log("---- HANDLE CHECKBOX CHANGE ----");
+    console.log(`Checkbox State: ${isChecked ? 'Checked' : 'Unchecked'}`);
+    console.log("Row Data Received:", rowData);
+
+    // Extract product number and sell quantity
+    const productNumber = rowData.productnumber.trim().toUpperCase();
     const sellQty = rowData.sellqty;
+
+    console.log(`Product Number: "${productNumber}", Sell Qty: ${sellQty}`);
 
     // Find if the row already exists in finalCountsData
     let existingRow = finalCountsData.find(r => r.stockSku === productNumber);
 
     if (isChecked) {
+        console.log("Action: Adding or Updating Row in Final Counts Data");
         if (existingRow) {
-            existingRow.fieldCount += sellQty; // Update field count if row exists
+            console.log(`Existing Row Found: Increasing Field Count by ${sellQty}`);
+            existingRow.fieldCount += sellQty; // Update field count
         } else {
+            console.log(`New Row: Adding Product Number "${productNumber}" with Field Count ${sellQty}`);
             finalCountsData.push({
                 stockSku: productNumber, // Product number as Stock SKU
                 fieldCount: sellQty,     // Sell qty as Field Count
@@ -116,18 +111,28 @@ function handleCheckboxChange(isChecked, rowData) {
             });
         }
     } else {
-        // If unchecked, reduce or remove the row
+        console.log("Action: Removing or Reducing Row in Final Counts Data");
         if (existingRow) {
+            console.log(`Existing Row Found: Reducing Field Count by ${sellQty}`);
             existingRow.fieldCount -= sellQty;
+
             if (existingRow.fieldCount <= 0) {
-                // Remove the row if field count becomes zero or less
+                console.log(`Field Count is 0 or less: Removing Row for Product Number "${productNumber}"`);
                 finalCountsData = finalCountsData.filter(r => r.stockSku !== productNumber);
+            } else {
+                console.log(`Updated Field Count for Product "${productNumber}": ${existingRow.fieldCount}`);
             }
+        } else {
+            console.warn(`Attempted to remove a non-existing row for Product "${productNumber}"`);
         }
     }
 
+    console.log("Updated Final Counts Data:", finalCountsData);
+    console.log("---- END HANDLE CHECKBOX CHANGE ----");
+
     renderFinalCountsTable(); // Re-render the final table
 }
+
 
 
 // Render Final Counts Table
@@ -169,4 +174,170 @@ function updateWarehouseCount(index, value) {
 // Initial CSV Load Simulation
 document.addEventListener('DOMContentLoaded', () => {
     loadAndParseFile('pird.csv'); // Replace 'pird.csv' with your actual file path
+});
+
+
+// DOM Elements
+const cityDropdown = document.getElementById('city-dropdown');
+const tableBody = document.querySelector('#result-table tbody');
+const jobReportTableBody = document.querySelector('#job-report-table tbody');
+const finalTableBody = document.querySelector('#final-table tbody');
+const exportButton = document.getElementById('export-button');
+
+let rows = []; // Full data from CSV
+let filteredRows = []; // Filtered rows based on dropdown selection
+let finalCountsData = []; // Data for Final Table
+
+// Disable city dropdown initially
+cityDropdown.disabled = true;
+
+// Function to load CSV data
+function loadCSV() {
+    const filePath = '/custom/downloads/OpenOrdersByCounterPerson-Detail-1734033634-1221046826.csv';
+    fetch(filePath)
+        .then(response => response.text())
+        .then(text => {
+            const lines = text.split('\n');
+            const headers = lines[2].split(',').map(header => header.trim());
+
+            rows = lines.slice(3)
+                .map(line => {
+                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g); // Safely split the line
+                    if (!columns || columns.length < 9) return null; // Ensure row has enough columns
+
+                    // Clean up sellqty before parsing
+                    const rawSellQty = columns[8]?.trim().replace(/^"|"$/g, ''); // Remove extra quotes
+                    const sellQty = parseFloat(rawSellQty) || 0; // Convert to number or fallback to 0
+
+                    return {
+                        branch: columns[1]?.trim().replace(/^"|"$/g, ''),
+                        jobname: columns[2]?.trim().replace(/^"|"$/g, ''),
+                        productnumber: columns[5]?.trim().replace(/^"|"$/g, ''),
+                        Description: columns[6]?.trim().replace(/^"|"$/g, ''),
+                        sellqty: sellQty, // Use cleaned and parsed sellqty
+                    };
+                })
+                .filter(row => row); // Remove invalid rows
+
+            console.log("Loaded Rows:", rows);
+            cityDropdown.disabled = false; // Enable dropdown
+        })
+        .catch(error => console.error("Error loading CSV:", error));
+}
+
+
+// Display Filtered Rows in the Result Table
+function displayFilteredRows() {
+    tableBody.innerHTML = '';
+    filteredRows.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.branch}</td>
+            <td>${row.jobname}</td>
+            <td>${row.productnumber}</td>
+            <td>${row.Description}</td>
+            <td>${row.sellqty}</td>
+        `;
+        tableBody.appendChild(tr);
+    });
+}
+
+// Display Rows in Job Report Table
+function displayJobReportTable() {
+    jobReportTableBody.innerHTML = '';
+    filteredRows.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.jobname}</td>
+            <td>${row.productnumber}</td>
+            <td>${row.Description}</td>
+            <td>${row.sellqty}</td>
+            <td><input type="checkbox" id="checkbox-${index}" /></td>
+        `;
+        tr.querySelector(`#checkbox-${index}`).addEventListener('change', (e) => {
+            updateFinalTable(row, e.target.checked);
+        });
+        jobReportTableBody.appendChild(tr);
+    });
+}
+
+// Update Final Table based on Checkboxes
+function updateFinalTable(row, isChecked) {
+    const existing = finalCountsData.find(r => r.stockSku === row.productnumber);
+
+    if (isChecked) {
+        if (existing) {
+            existing.fieldCount += row.sellqty;
+        } else {
+            finalCountsData.push({
+                stockSku: row.productnumber,
+                fieldCount: row.sellqty,
+                warehouseCount: 0,
+                currentQOH: 0,
+                discrepancy: 0
+            });
+        }
+    } else if (existing) {
+        existing.fieldCount -= row.sellqty;
+        if (existing.fieldCount <= 0) {
+            finalCountsData = finalCountsData.filter(r => r.stockSku !== row.productnumber);
+        }
+    }
+
+    renderFinalCountsTable();
+}
+
+// Render Final Counts Table
+function renderFinalCountsTable() {
+    finalTableBody.innerHTML = '';
+    finalCountsData.forEach((row, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.stockSku}</td>
+            <td>${row.fieldCount}</td>
+            <td><input type="number" value="${row.warehouseCount}" min="0" id="warehouse-${index}" /></td>
+            <td>${row.fieldCount + row.warehouseCount}</td>
+            <td>${row.currentQOH}</td>
+            <td>${row.discrepancy}</td>
+        `;
+        tr.querySelector(`#warehouse-${index}`).addEventListener('input', (e) => {
+            row.warehouseCount = parseFloat(e.target.value) || 0;
+            renderFinalCountsTable();
+        });
+        finalTableBody.appendChild(tr);
+    });
+}
+
+// Handle Dropdown Change
+cityDropdown.addEventListener('change', () => {
+    const selectedCity = cityDropdown.value.toLowerCase();
+    filteredRows = rows.filter(row => row.branch?.toLowerCase().includes(selectedCity));
+    displayFilteredRows(); // Show filtered rows in the Result Table
+    displayJobReportTable(); // Show rows in Job Report Table
+    finalCountsData = []; // Reset Final Table
+    renderFinalCountsTable(); // Clear Final Table
+});
+
+// Export Filtered Rows as CSV
+exportButton.addEventListener('click', () => {
+    const headers = ['Branch', 'Job Name', 'Product #', 'Description', 'Sell Qty'];
+    const csvContent = [
+        headers.join(','),
+        ...filteredRows.map(row => [
+            `"${row.cperson}"`, `"${row.branch}"`, `"${row.jobname}"`, 
+            `"${row.sonumber}"`, `"${row.productnumber}"`, `"${row.Description}"`, `"${row.sellqty}"`
+        ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${cityDropdown.value}_export.csv`;
+    a.click();
+});
+
+// Initialize Data Loading
+document.addEventListener('DOMContentLoaded', () => {
+    loadCSV();
 });
