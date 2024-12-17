@@ -10,6 +10,32 @@
         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f4f4f4; }
         td:focus { outline: 2px solid blue; } /* Highlight focused cell */
+        .table-container {
+    width: 100%; /* Full width */
+    max-height: 300px; /* Restrict the height, adjust as needed */
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: auto; /* Horizontal scrolling if needed */
+    border: 1px solid #ccc; /* Optional border */
+}
+
+#job-report-table {
+    width: 100%; /* Table takes full width of the container */
+    border-collapse: collapse;
+}
+
+#job-report-table th, #job-report-table td {
+    padding: 8px; /* Add spacing inside cells */
+    border: 1px solid #ddd; /* Optional border for table */
+    text-align: left;
+}
+
+#job-report-table th {
+    background-color: #f9f9f9; /* Header background color */
+    position: sticky; /* Keeps the header visible while scrolling */
+    top: 0;
+    z-index: 1;
+}
+
     </style>
 </head>
 <body>
@@ -21,18 +47,21 @@
     </p>
 
     <h1>Job Report</h1>
-    <table id="job-report-table">
-        <thead>
-            <tr>
-                <th>Job Name</th>
-                <th>Product #</th>
-                <th>Description</th>
-                <th>Sell Qty</th>
-                <th>Checkbox</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="table-container">
+        <table id="job-report-table">
+            <thead>
+                <tr>
+                    <th>Job Name</th>
+                    <th>Product #</th>
+                    <th>Description</th>
+                    <th>Sell Qty</th>
+                    <th>Checkbox</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
 
     <h1>Final Inventory</h1>
     <table id="final-table">
