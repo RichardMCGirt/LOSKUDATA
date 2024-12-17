@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 
     // Simulate the file upload on page load
-    loadAndParseFile('PhysicalInventoryReportbylinecode-1734353330-1485892706.csv');
+    loadAndParseFile('pid.csv');
 });
 
 // Function to load and parse the file content
