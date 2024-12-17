@@ -1,7 +1,6 @@
 // Global Variables for Data Storage
 let jobReportData = []; // To hold job report data
 let checkboxStates = {}; // To track checkbox states
-let finalCountsData = []; // To store final counts
 
 // Identify DOM Elements
 const jobTableBody = document.querySelector('#job-report-table tbody');
