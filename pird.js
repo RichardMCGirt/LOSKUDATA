@@ -193,7 +193,7 @@ cityDropdown.disabled = true;
 
 // Function to load CSV data
 function loadCSV() {
-    const filePath = '/custom/downloads/OpenOrdersByCounterPerson-Detail-1734033634-1221046826.csv';
+    const filePath = 'https://raw.githubusercontent.com/RichardMCGirt/LOSKUDATA/test/custom/downloads/OpenOrdersByCounterPerson-Detail-1734529657-928961849.csv';
     fetch(filePath)
         .then(response => response.text())
         .then(text => {
