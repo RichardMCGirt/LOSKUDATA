@@ -206,7 +206,7 @@ function loadCSV() {
                     if (!columns || columns.length < 9) return null; // Ensure row has enough columns
 
                     // Clean up sellqty before parsing
-                    const rawSellQty = columns[8]?.trim().replace(/^"|"$/g, ''); // Remove extra quotes
+                    const rawSellQty = columns[7]?.trim().replace(/^"|"$/g, ''); // Remove extra quotes
                     const sellQty = parseFloat(rawSellQty) || 0; // Convert to number or fallback to 0
 
                     return {
@@ -332,24 +332,7 @@ cityDropdown.addEventListener('change', () => {
 
 
 
-// Export Filtered Rows as CSV
-exportButton.addEventListener('click', () => {
-    const headers = ['Branch', 'Job Name', 'Product #', 'Description', 'Sell Qty'];
-    const csvContent = [
-        headers.join(','),
-        ...filteredRows.map(row => [
-            `"${row.cperson}"`, `"${row.branch}"`, `"${row.jobname}"`, 
-            `"${row.sonumber}"`, `"${row.productnumber}"`, `"${row.Description}"`, `"${row.sellqty}"`
-        ].join(','))
-    ].join('\n');
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${cityDropdown.value}_export.csv`;
-    a.click();
-});
 
 // Initialize Data Loading
 document.addEventListener('DOMContentLoaded', () => {
