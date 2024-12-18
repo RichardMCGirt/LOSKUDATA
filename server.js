@@ -56,7 +56,7 @@ async function launchPuppeteer() {
 
 // Serve index3.html for the root route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index3.html'));
+    res.sendFile(path.join(__dirname, 'index3.html'));
 });
 
 // Route to download the report
@@ -74,7 +74,7 @@ app.get('/download-report', async (req, res) => {
         });
 
         io.to(socketId).emit('status', 'Navigating to login page...');
-        await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
+        await page.goto('https://vanirlive.omnna-lbm.live/index.php?action=Login&module=Users');
 
         // Check and perform login
         const loginFieldExists = await page.$('#user_name');
@@ -89,7 +89,7 @@ app.get('/download-report', async (req, res) => {
         }
 
         console.log('Navigating to report page...');
-        await page.goto('https://vanirlive.lbmlo.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
+        await page.goto('https://vanirlive.omnna-lbm.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
         await page.waitForSelector('select#ddlSavedTemplate', { visible: true });
         await page.select('select#ddlSavedTemplate', '248');
         await page.click('input#generatenw');

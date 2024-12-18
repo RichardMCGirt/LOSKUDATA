@@ -287,26 +287,34 @@ function updateFinalTable(row, isChecked) {
     renderFinalCountsTable();
 }
 
-// Render Final Counts Table
+// Render Final Counts Table without Summing Columns
 function renderFinalCountsTable() {
-    finalTableBody.innerHTML = '';
+    finalTableBody.innerHTML = ''; // Clear existing table rows
+
+    if (finalCountsData.length === 0) {
+        finalTableBody.innerHTML = '<tr><td colspan="6">No data available</td></tr>';
+        return;
+    }
+
     finalCountsData.forEach((row, index) => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${row.stockSku}</td>
             <td>${row.fieldCount}</td>
             <td><input type="number" value="${row.warehouseCount}" min="0" id="warehouse-${index}" /></td>
-            <td>${row.fieldCount + row.warehouseCount}</td>
+            <td>${row.fieldCount}</td> <!-- Display fieldCount as is -->
             <td>${row.currentQOH}</td>
             <td>${row.discrepancy}</td>
         `;
+        // Attach event listener to update warehouseCount without summing
         tr.querySelector(`#warehouse-${index}`).addEventListener('input', (e) => {
             row.warehouseCount = parseFloat(e.target.value) || 0;
-            renderFinalCountsTable();
+            renderFinalCountsTable(); // Re-render table to reflect changes
         });
         finalTableBody.appendChild(tr);
     });
 }
+
 
 // Handle Dropdown Change
 cityDropdown.addEventListener('change', () => {

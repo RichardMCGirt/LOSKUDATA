@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Generator</title>
+</head>
+<body>
+    
+    <p>
+        <a href="/OpenOrders.html" target="_blank">Open orders</a>
+    </p>
+    
+
+    <h1>Welcome to the Report Generator</h1>
+    <p>Click the button below to generate and download your report:</p>
+    <button id="downloadReport">Download Report</button>
+
+    <div id="progressContainer" style="display:none;">
+        <p id="progressMessage">Generating report...</p>
+        <progress id="progressBar" max="100" value="0"></progress>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
+    <script>
+        // Change the URL based on where your server is running.
+        const socket = io('http://localhost:3001'); // Localhost for local development
+        // or use the live server URL if deployed:
+        // const socket = io('https://your-live-site-url.com'); // Replace with your actual live server URL
+    
+        let socketId = null;
+    
+        // When the connection is established, capture the socketId
+        socket.on('connect', () => {
+            socketId = socket.id;
+            console.log('Socket connected with socketId:', socketId);
+        });
+    
+        document.getElementById('downloadReport').addEventListener('click', async () => {
+            // Wait for socketId to be initialized before making the request
+            if (!socketId) {
+                console.error('Socket ID is not defined. Unable to make request.');
+                alert('Socket ID is not defined. Unable to make request.');
+                return;
+            }
+    
+            try {
+                const progressContainer = document.getElementById('progressContainer');
+                const progressMessage = document.getElementById('progressMessage');
+                const progressBar = document.getElementById('progressBar');
+    
+                // Show progress bar and message
+                progressContainer.style.display = 'block';
+                progressMessage.textContent = 'Generating report...';
+                progressBar.value = 0;
+    
+                // Fetch the report
+                console.log('Fetching report from /download-report...');
+                const response = await fetch(`http://localhost:3001/download-report?socketId=${socketId}`);
+                console.log(`Response status: ${response.status}`);
+    
+                if (response.ok) {
+                    progressMessage.textContent = 'Report generated! Downloading now...';
+                    progressBar.value = 100;
+    
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = 'report.csv';
+                    link.click();
+    
+                    progressMessage.textContent = 'Report downloaded successfully!';
+                    console.log('Report downloaded successfully.');
+                } else {
+                    if (response.status === 404) {
+                        console.error('Error: Report not found (404)');
+                        alert('Error: Report not found.');
+                    } else {
+                        console.error(`Error: ${response.status} - ${response.statusText}`);
+                        alert(`Error: ${response.statusText}`);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching report:', error);
+                alert(`Error: ${error.message}`);
+            }
+        });
+    </script>
+    
+</body>
+</html>
