@@ -1,15 +1,9 @@
-require('dotenv').config();
-const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer'); // Use Puppeteer with bundled Chromium
 const path = require('path');
 const fs = require('fs');
 
-// Set Puppeteer cache directory
-process.env.PUPPETEER_CACHE_DIR = '/tmp/puppeteer';
-process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = 'true';
-
 // Ensure the download directory exists
-const downloadPath = path.resolve(__dirname, 'downloads'); // Local directory
+const downloadPath = path.resolve(__dirname, 'downloads');
 if (!fs.existsSync(downloadPath)) {
     console.log('Creating downloads directory...');
     fs.mkdirSync(downloadPath);
@@ -17,23 +11,12 @@ if (!fs.existsSync(downloadPath)) {
     console.log('Downloads directory already exists:', downloadPath);
 }
 
-async function logExecutablePath() {
-    console.log('Checking Puppeteer executable path...');
-    const executablePath = await chromium.executablePath || puppeteer.executablePath();
-    console.log('Executable Path:', executablePath || 'No executable path found');
-}
-
 async function launchPuppeteer() {
     try {
-        const executablePath = await chromium.executablePath;
-
-        console.log('Resolved Executable Path:', executablePath);
-
+        console.log('Launching Puppeteer...');
         const browser = await puppeteer.launch({
             headless: false,
-            executablePath: executablePath,
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
+            args: ['--no-sandbox', '--disable-setuid-sandbox'],
         });
 
         console.log('Puppeteer launched successfully.');
@@ -44,13 +27,9 @@ async function launchPuppeteer() {
     }
 }
 
-
-
-
 async function generateAndDownloadReport() {
     try {
         console.log('Starting report generation...');
-        await logExecutablePath();
 
         const browser = await launchPuppeteer();
         const page = await browser.newPage();
@@ -62,7 +41,7 @@ async function generateAndDownloadReport() {
         });
 
         console.log('Navigating to login page...');
-        await page.goto('https://vanirlive.lbmlo.live/index.php?action=Login&module=Users');
+        await page.goto('https://vanirlive.omnna-lbm.live/index.php?action=Login&module=Users');
 
         console.log('Checking for login fields...');
         const loginFieldExists = await page.$('#user_name');
@@ -79,7 +58,7 @@ async function generateAndDownloadReport() {
         }
 
         console.log('Navigating to report page...');
-        await page.goto('https://vanirlive.lbmlo.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
+        await page.goto('https://vanirlive.omnna-lbm.live/index.php?module=Customreport&action=CustomreportAjax&file=Customreportview&parenttab=Analytics&entityId=6309241');
         await page.waitForSelector('select#ddlSavedTemplate', { visible: true });
         console.log('Selecting report template...');
         await page.select('select#ddlSavedTemplate', '248');
@@ -114,9 +93,10 @@ async function generateAndDownloadReport() {
         console.log(`Report downloaded successfully: ${filePath}`);
         console.log('Report generation completed.');
 
+        await browser.close();
     } catch (error) {
         console.error('Error during report generation:', error.message);
-        process.exit(1); // Ensure process exits with failure
+        process.exit(1); // Exit with failure
     }
 }
 
