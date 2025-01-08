@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Report</title>
+</head>
+<body>
+    <h1>Generate Report</h1>
+    <button onclick="generateReport()">Generate Report</button>
+    <p id="status"></p>
+
+    <script>
+        async function generateReport() {
+            document.getElementById('status').innerText = 'Generating report...';
+            try {
+                const response = await fetch('/generate-report');
+                const message = await response.text();
+                document.getElementById('status').innerText = message;
+            } catch (error) {
+                document.getElementById('status').innerText = 'Error generating report.';
+            }
+        }
+    </script>
+</body>
+</html>
