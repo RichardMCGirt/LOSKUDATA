@@ -86,46 +86,62 @@ function handleCheckboxChange(isChecked, rowData) {
     console.log(`Checkbox State: ${isChecked ? 'Checked' : 'Unchecked'}`);
     console.log("Row Data Received:", rowData);
 
-    // Extract product number and sell quantity
+    // Extract and normalize data
+    const jobName = rowData.jobname.trim();
     const productNumber = rowData.productnumber.trim().toUpperCase();
     const sellQty = rowData.sellqty;
+    const branch = rowData.branch.trim().toUpperCase();
 
-    console.log(`Product Number: "${productNumber}", Sell Qty: ${sellQty}`);
+    // Prevent adding rows with empty product numbers or zero sell quantity
+    if (!productNumber) {
+        console.warn("Product Number is empty. Skipping row addition.");
+        return;
+    }
 
-    // Find if the row already exists in finalCountsData
+    if (sellQty <= 0) {
+        console.warn("Sell Quantity is zero or invalid. Skipping row addition.");
+        return;
+    }
+
+    console.log(`Job Name: "${jobName}", Product Number: "${productNumber}", Branch: "${branch}", Sell Qty: ${sellQty}`);
+
+    // Check if the product already exists in finalCountsData
     let existingRow = finalCountsData.find(r => r.stockSku === productNumber);
 
     if (isChecked) {
-        console.log("Action: Adding or Updating Row in Final Counts Data");
         if (existingRow) {
-            console.log(`Existing Row Found: Increasing Field Count by ${sellQty}`);
-            existingRow.fieldCount += sellQty; // Update field count
+            console.log(`Updating existing row for product ${productNumber}`);
+            existingRow.fieldCount += sellQty;
         } else {
-            console.log(`New Row: Adding Product Number "${productNumber}" with Field Count ${sellQty}`);
+            console.log(`Adding new row for product ${productNumber}`);
             finalCountsData.push({
-                stockSku: productNumber, // Product number as Stock SKU
-                fieldCount: sellQty,     // Sell qty as Field Count
-                warehouseCount: 0,       // Initialize warehouse count as 0
-                currentQOH: 0,           // Initialize current QOH as 0
-                discrepancy: 0           // Initialize discrepancy as 0
+                stockSku: productNumber,
+                fieldCount: sellQty,
+                warehouseCount: 0,
+                currentQOH: 0,
+                discrepancy: 0
             });
         }
     } else {
-        console.log("Action: Removing or Reducing Row in Final Counts Data");
         if (existingRow) {
-            console.log(`Existing Row Found: Reducing Field Count by ${sellQty}`);
+            console.log(`Reducing row count for product ${productNumber}`);
             existingRow.fieldCount -= sellQty;
-
             if (existingRow.fieldCount <= 0) {
-                console.log(`Field Count is 0 or less: Removing Row for Product Number "${productNumber}"`);
                 finalCountsData = finalCountsData.filter(r => r.stockSku !== productNumber);
-            } else {
-                console.log(`Updated Field Count for Product "${productNumber}": ${existingRow.fieldCount}`);
             }
-        } else {
-            console.warn(`Attempted to remove a non-existing row for Product "${productNumber}"`);
         }
     }
+
+    // ✅ Ensure checkboxes in the UI reflect the state correctly
+    jobReportData.forEach((row, index) => {
+        if (row.jobname.trim() === jobName && row.branch.trim().toUpperCase() === branch) {
+            const checkboxElement = document.getElementById(`checkbox-${index}`);
+            if (checkboxElement) {
+                checkboxElement.checked = isChecked;
+                checkboxStates[index] = isChecked;
+            }
+        }
+    });
 
     console.log("Updated Final Counts Data:", finalCountsData);
     console.log("---- END HANDLE CHECKBOX CHANGE ----");
@@ -134,8 +150,7 @@ function handleCheckboxChange(isChecked, rowData) {
 }
 
 
-
-// Render Final Counts Table
+// Render Final Counts Table with Logging for Second Row
 function renderFinalCountsTable() {
     const finalTableBody = document.querySelector('#final-table tbody');
     finalTableBody.innerHTML = ''; // Clear existing table rows
@@ -150,19 +165,27 @@ function renderFinalCountsTable() {
         tr.innerHTML = `
             <td>${row.stockSku}</td>
             <td>${row.fieldCount}</td>
-            <td><input type="number" id="warehouseCount-${index}" value="${row.warehouseCount}" min="0" /></td>
-            <td id="finalInventory-${index}">${row.fieldCount + row.warehouseCount}</td>
+            <td><input type="number" value="${row.warehouseCount}" min="0" id="warehouse-${index}" /></td>
+            <td>${row.fieldCount + row.warehouseCount}</td>
             <td>${row.currentQOH}</td>
             <td>${row.discrepancy}</td>
         `;
-        finalTableBody.appendChild(tr);
-
-        // Attach Input Event for Warehouse Count
-        tr.querySelector(`#warehouseCount-${index}`).addEventListener('input', (e) => {
-            updateWarehouseCount(index, e.target.value);
+        // Attach event listener to update warehouseCount without summing
+        tr.querySelector(`#warehouse-${index}`).addEventListener('input', (e) => {
+            row.warehouseCount = parseFloat(e.target.value) || 0;
+            renderFinalCountsTable(); // Re-render table to reflect changes
         });
+        finalTableBody.appendChild(tr);
     });
+
+    // Log the second row in finalCountsData if it exists
+    if (finalCountsData.length > 1) {
+        console.log('Logging Second Row in Final Table:', finalCountsData[1]);
+    } else {
+        console.warn('Second row does not exist in Final Table.');
+    }
 }
+
 
 // Update Warehouse Count and Recalculate Inventory
 function updateWarehouseCount(index, value) {
@@ -193,7 +216,7 @@ cityDropdown.disabled = true;
 
 // Function to load CSV data
 function loadCSV() {
-    const filePath = 'https://raw.githubusercontent.com/RichardMCGirt/LOSKUDATA/test/custom/downloads/OpenOrdersByCounterPerson-Detail-1734529657-928961849.csv';
+    const filePath = 'https://raw.githubusercontent.com/RichardMCGirt/LOSKUDATA/aaadeaf01c389da8972a54c7429bd96ce5b4fbef/downloads/OpenOrdersByCounterPerson-Detail-1736179445-745847148.csv';
     fetch(filePath)
         .then(response => response.text())
         .then(text => {

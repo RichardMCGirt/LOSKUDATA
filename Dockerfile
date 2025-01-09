@@ -1,44 +1,41 @@
-# Use Node.js with Debian-based image
-FROM node:18-bullseye
+# Base Image for ARM64 compatibility with Puppeteer
+FROM node:18-slim
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install --legacy-peer-deps --no-fund --no-audit && npm cache clean --force
-
-# Install dependencies for headless Chromium in Cloud Run
+# Install system dependencies for Chromium on ARM64
 RUN apt-get update && apt-get install -y \
     chromium \
-    chromium-driver \
     fonts-liberation \
-    libatk-bridge2.0-0 \
+    libappindicator3-1 \
+    libasound2 \
     libgbm1 \
-    libgtk-3-0 \
     libx11-xcb1 \
     libxcomposite1 \
     libxdamage1 \
     libxfixes3 \
     libxrandr2 \
-    libasound2 \
-    libnspr4 \
-    libnss3 \
+    libxss1 \
     xdg-utils \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Set Puppeteer to use system Chromium
-ENV PUPPETEER_EXECUTABLE_PATH="/usr/bin/chromium"
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
-# Copy all source files
+# Install dependencies using puppeteer-core (no bundled Chromium)
+RUN npm install puppeteer-core
+
+# Copy the app
 COPY . .
 
-# Create downloads directory
-RUN mkdir -p /app/downloads
+# Set the environment variable for Chromium binary location
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
-# Expose port
-EXPOSE 3001
+# Expose the port for Cloud Run
+ENV PORT=8080
+EXPOSE 8080
 
-# Start the application
-CMD ["node", "generateOpenOrders.js"]
+# Start the server
+CMD ["node", "index.js"]

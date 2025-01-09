@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 8080;
 
 // Serve a basic HTML page with a button
 app.get('/', (req, res) => {
@@ -17,35 +17,23 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Set a safer download path inside the container
-const downloadPath = path.join('/app', 'downloads');
-
-// Check and create the directory if it doesn't exist
+// Set the download directory to the user's Desktop
+const downloadPath = '/tmp';
 if (!fs.existsSync(downloadPath)) {
-    console.log('Creating downloads directory in /app...');
-    fs.mkdirSync(downloadPath, { recursive: true });
+    console.log('Creating downloads directory on Desktop...');
+    fs.mkdirSync(downloadPath);
 } else {
-    console.log('Downloads directory already exists:', downloadPath);
+    console.log('Downloads directory already exists on Desktop:', downloadPath);
 }
 
 async function launchPuppeteer() {
     try {
         console.log('Launching Puppeteer with headless mode disabled and security args set.');
         const browser = await puppeteer.launch({
-            headless: "new", 
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-gpu',
-                '--disable-dev-shm-usage',
-                '--disable-software-rasterizer',
-                '--single-process',
-                '--disable-extensions'
-            ],
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH
+            headless: true,
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
         });
-        
-        
+
         console.log('Puppeteer browser launched successfully.');
         return browser;
     } catch (error) {
@@ -62,12 +50,10 @@ async function generateAndDownloadReport() {
         const page = await browser.newPage();
 
         console.log('Configuring download behavior...');
-        const client = await page.target().createCDPSession();
-await client.send('Page.setDownloadBehavior', {
-    behavior: 'allow',
-    downloadPath: downloadPath,
-});
-
+        await page._client().send('Page.setDownloadBehavior', {
+            behavior: 'allow',
+            downloadPath: downloadPath,
+        });
 
         console.log('Navigating to the login page...');
         await page.goto('https://vanirlive.omnna-lbm.live/index.php?action=Login&module=Users');

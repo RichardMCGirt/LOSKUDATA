@@ -25,6 +25,9 @@ overflow-x: auto; /* Horizontal scrolling if needed */
 border: 1px solid #ccc; /* Optional border */
 }
 
+
+
+
 #job-report-table {
 width: 100%; /* Table takes full width of the container */
 border-collapse: collapse;
@@ -49,9 +52,6 @@ z-index: 1;
 #job-report-table {
     display: none; /* Job Report Table is hidden by default */
 }
-
-
-
 
 label {
     font-weight: bold;
