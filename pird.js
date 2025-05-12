@@ -43,43 +43,78 @@ function loadAndParseFile(fileName) {
 }
 
 
-// Render Job Report Table
 function renderJobReportTable() {
     console.log('Rendering Job Report Table...');
-    jobTableBody.innerHTML = ''; // Clear table content
+    jobTableBody.innerHTML = ''; // Clear current table rows
 
     jobReportData.forEach((row, index) => {
-        if (!row) return; // Skip invalid rows
+        if (!row) return;
+
+        const isChecked = !!checkboxStates[index];
 
         const tr = document.createElement('tr');
-        const isChecked = !!checkboxStates[index];
         tr.innerHTML = `
             <td>${row.jobname || ''}</td>
             <td>${row.productnumber || ''}</td>
             <td>${row.Description || ''}</td>
             <td>${row.sellqty || ''}</td>
-            <td><input type="checkbox" id="checkbox-${index}" ${isChecked ? 'checked' : ''} /></td>
+            <td>
+                <input 
+                    type="checkbox" 
+                    class="nav-checkbox" 
+                    id="checkbox-${index}" 
+                    data-index="${index}" 
+                    ${isChecked ? 'checked' : ''} 
+                    tabindex="0"
+                />
+            </td>
         `;
         jobTableBody.appendChild(tr);
     });
 
-    // Attach Event Listener to Table (Delegated)
+    // 🔁 Attach navigation events AFTER checkboxes exist in DOM
+    setTimeout(() => {
+        const allCheckboxes = document.querySelectorAll('.nav-checkbox');
+
+        allCheckboxes.forEach((checkbox) => {
+            checkbox.addEventListener('keydown', (e) => {
+                const currentIndex = parseInt(checkbox.dataset.index, 10);
+
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    const next = document.querySelector(`.nav-checkbox[data-index="${currentIndex + 1}"]`);
+                    if (next) next.focus();
+                }
+
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = document.querySelector(`.nav-checkbox[data-index="${currentIndex - 1}"]`);
+                    if (prev) prev.focus();
+                }
+
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            });
+        });
+    }, 0); // Ensure all checkboxes are rendered first
+
+    // ✅ Delegated change listener
     jobTableBody.addEventListener('change', (e) => {
-        if (e.target.type === 'checkbox') {
-            const rowIndex = parseInt(e.target.id.split('-')[1], 10);
+        if (e.target.classList.contains('nav-checkbox')) {
+            const rowIndex = parseInt(e.target.dataset.index, 10);
+            if (isNaN(rowIndex) || !jobReportData[rowIndex]) return;
 
-            // Validate rowIndex and rowData
-            if (isNaN(rowIndex) || !jobReportData[rowIndex]) {
-                console.warn(`Invalid row index: ${rowIndex}`);
-                return;
-            }
-
-            const rowData = jobReportData[rowIndex];
-            console.log(`Checkbox Change Detected: Row ${rowIndex}, Checked: ${e.target.checked}`);
-            handleCheckboxChange(e.target.checked, rowData);
+            checkboxStates[rowIndex] = e.target.checked;
+            handleCheckboxChange(e.target.checked, jobReportData[rowIndex]);
         }
     });
 }
+
+
+
 
 function handleCheckboxChange(isChecked, rowData) {
     console.log("---- HANDLE CHECKBOX CHANGE ----");
@@ -199,6 +234,23 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAndParseFile('pird.csv'); // Replace 'pird.csv' with your actual file path
 });
 
+document.addEventListener('keydown', function (e) {
+    if (e.target.classList.contains('nav-checkbox')) {
+        const currentIndex = parseInt(e.target.getAttribute('data-index'), 10);
+
+        if (e.key === 'ArrowDown') {
+            const nextCheckbox = document.querySelector(`.nav-checkbox[data-index="${currentIndex + 1}"]`);
+            if (nextCheckbox) nextCheckbox.focus();
+            e.preventDefault();
+        }
+
+        if (e.key === 'ArrowUp') {
+            const prevCheckbox = document.querySelector(`.nav-checkbox[data-index="${currentIndex - 1}"]`);
+            if (prevCheckbox) prevCheckbox.focus();
+            e.preventDefault();
+        }
+    }
+});
 
 // DOM Elements
 const cityDropdown = document.getElementById('city-dropdown');
@@ -275,14 +327,43 @@ function displayJobReportTable() {
             <td>${row.productnumber}</td>
             <td>${row.Description}</td>
             <td>${row.sellqty}</td>
-            <td><input type="checkbox" id="checkbox-${index}" /></td>
+            <td>
+                <input 
+                    type="checkbox" 
+                    class="nav-checkbox"
+                    id="checkbox-${index}" 
+                    data-index="${index}"
+                    tabindex="0"
+                />
+            </td>
         `;
-        tr.querySelector(`#checkbox-${index}`).addEventListener('change', (e) => {
+        const checkbox = tr.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', (e) => {
             updateFinalTable(row, e.target.checked);
         });
+
+        // Add arrow key navigation
+        checkbox.addEventListener('keydown', (e) => {
+            const currentIndex = parseInt(checkbox.dataset.index, 10);
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const next = document.querySelector(`.nav-checkbox[data-index="${currentIndex + 1}"]`);
+                if (next) next.focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const prev = document.querySelector(`.nav-checkbox[data-index="${currentIndex - 1}"]`);
+                if (prev) prev.focus();
+            } else if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+        });
+
         jobReportTableBody.appendChild(tr);
     });
 }
+
 
 // Update Final Table based on Checkboxes
 function updateFinalTable(row, isChecked) {
