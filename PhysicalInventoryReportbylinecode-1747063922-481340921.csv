@@ -1,0 +1,791 @@
+"05-12-2025","Physical Inventory Report by Department","","Raleigh","","","","","","","","","","","","","",""
+"","","","","","","","","","","","","","","","","",""
+"Department","Class","Product Number","Product Description","Product Division","QOH Before","QOH After","Cost Before","Cost After","Count Variance","Cost Variance","QA","QOO","Zone","Shelf","Bin","Aisle","Reorder"
+"NS","","EQUIPMENT","Equipment charge","","47","47","0.00","0.00","0","0","48","4","","","","","Yes"
+"MSC","Special Order","NSCredit21386","INVOICE CREDIT","","7","7","14539.00","14539.00","0","0","0","0","","","","","No"
+"MSC","Special Order","NSCredit08786","Invoice Credit","","1149","1149","0.00","0.00","0","0","0","0","","","","","No"
+"MSC","Special Order","NSCredit08626","Credit invoice 120-108212","","11","11","-26389.00","-26389.00","0","0","0","0","","","","","No"
+"MSC","Special Order","NSCredit08623","Return Credit for Invoice","","4","4","9596.00","9596.00","0","0","0","0","","","","","No"
+"MSC","Special Order","NSCredit08482","Back Charge Credit","","383","383","0.00","0.00","0","0","0","0","","","","","No"
+"Siding","","COILSNO","STOCK ONLY SMOOTH METAL TRIM COIL SNOW","","1777","1777","103066.00","103066.00","0","0","2508","737","","","","","Yes"
+"Siding","Special Order","NSSO00345","MASTIC OVATION DUTCH LAP 4.5 DEEP GRANITE","","33","33","2084.61","2084.61","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO00423","1x10x10 Cedar","","36","36","1170.00","1170.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO00424","1x4x10 Cedar","","45","45","517.50","517.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO00425","1x6x10 Cedar","","65","65","1137.50","1137.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO00513","1x4 PVC GABLE PEDIMENT SPOKED 5' BASE 12/12 PITCH WITHOUT TAIL","","1","1","130.00","130.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01097","1X6X18 Cedar","","9","9","275.40","275.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01103","7-1/4"" Smooth Lap Primed Hardie","","141","141","1119.54","1119.54","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01108","1X4X8 CEDAR","","1","1","8.80","8.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01109","1X6X8 CEDAR","","1","1","13.60","13.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01110","1X4X8 CEDAR","","1","1","8.80","8.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01111","1X6X8 CEDAR","","1","1","13.60","13.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01118","MASTIC OVATION DUTCH LAP 4.5 DEEP GRANITE","","32","32","2378.24","2378.24","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01426","5/4X6 SNOW","","2","2","44.00","44.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01435","8' Tapered columns round fiberglass with a 12"" Base","","2","2","518.66","518.66","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01458","36"" X 4' Black alumn stair rails ection w/brackets","","2","2","341.60","341.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01461","3""x5""x43"" ' Black post w/cap & base","","9","9","823.50","823.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01474","2"" STRAIGHT FINISH NAILS","","80","80","720.00","720.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01536","Mastic Ovation Dutch lap 4.5 Scottish thistle","","37","37","2337.29","2337.29","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01601","EZTRM 2PC VRT U PNL TRM PRI EZ07","","37","37","882.45","882.45","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01602","EZTRM VRT J WND SILL PNL TRM PRI EZ08","","11","11","141.46","141.46","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01603","EXTRM OSCNR LAP TRM ARRW PRI EZ33","","12","12","383.16","383.16","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01718","ROLL SCREEN 72""X100'","","1","1","95.82","95.82","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01744","1x6x8 T&G","","11","11","11.00","11.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01745","1x6x10 T&G","","11","11","11.00","11.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01746","1x6x12 T&G","","11","11","11.00","11.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01747","1x6x14 T&G","","11","11","11.00","11.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01876","8X8X10 SQ
+LamintedTreated","","2","2","353.00","353.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO01888","8X8X10 SQ Laminted
+Treated","","1","1","176.50","176.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02192","8' Tappered columns round
+fiberglass with a 12"" Base","","1","1","259.33","259.33","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02260","CEDAR PEDIMENT 18/12 PITCH 6.6' BASE - VERTICAL & HORIZONTAL PC WILL BE 6"" AND SPOKES 4"" 
+EXTENDED CAP IS 4"" IN HEIGHT","","1","1","345.00","345.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02261","CEDAR PEDIMENT 18/12 PITCH 8' BASE - VERTICAL & HORIZONTAL PC WILL BE 6"" AND SPOKES 4"" 
+EXTENDED CAP IS 4"" IN HEIGHT","","2","2","690.00","690.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02357","2 MIL 12x200 Poly","","60","60","2037.00","2037.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02445","134Roofnail","","1","1","47.99","47.99","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02670","134RoofNails","","1","1","47.99","47.99","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO02727","36"" X 4' CLASSIC SERIES RAIL SECTION W/ BRACKETS","","1","1","73.20","73.20","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03280","10""X9 Permacast RD Plain
+Column Sha","","3","3","618.90","618.90","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03384","10""X10'FG RND COLUMN","","4","4","913.08","913.08","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03385","10"" CAP & BASE","","4","4","231.28","231.28","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03430","1x8x12 Cedar","","30","30","954.00","954.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03651","4x4x10 Post","","2","2","99.98","99.98","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03652","A23 Bracket","","4","4","31.96","31.96","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03905","1x6x8 T&G","","5","5","54.00","54.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO03915","CLASSIC 6' STAIR RAIL SECTION WITH BRACKETS","","1","1","105.53","105.53","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04000","5/8""x4x8 pvc panel","","1","1","113.03","113.03","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04042","36x8' Black Aluminum Stair Rail","","1","1","10.00","10.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04728","3x131 stainless framing nails","","2","2","170.00","170.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04731","ABU44Z - Adjustable Post Base for 4x4","","4","4","20.00","20.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04939","Set 10"" Cap & Base for
+permacas","","3","3","173.46","173.46","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04979","SYN109","","3","3","667.17","667.17","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04980","SYN10CB","","3","3","216.84","216.84","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04983","SYN109","","3","3","667.17","667.17","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO04984","SYN10CB","","3","3","216.84","216.84","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO05283","Mastic Ovation Dutchlap 4.5 Siding - Everest","","11","11","74.69","74.69","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO05547","5/4x8 Allura trim primed","","12","12","337.32","337.32","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO05806","1x6x16 pressure treated wood","","75","75","225.00","225.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06044","Mastic Ovation D4.5 DL (Deep Granite)","","1","1","8.20","8.20","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06055","1x4 Cedar","","12","12","180.00","180.00","0","0","0","12","","","","","No"
+"Siding","Special Order","NSSO06057","1x6 Cedar","","12","12","252.00","252.00","0","0","0","12","","","","","No"
+"Siding","Special Order","NSSO06058","1x8x10 Cedar","","12","12","282.00","282.00","0","0","0","12","","","","","No"
+"Siding","Special Order","NSSO06219","Wall 1 - 107 5/8","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06227","Wall 2 - 107 1/8”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06228","Wall 3 - 107 1/8”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06233","Wall 1 - 107 1/8”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06234","Wall 2 - 107 1/2”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06235","Wall 3 - 107 5/8”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06236","Wall 4 - 107 3/4”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06237","Wall 1 - 107 1/16”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06238","Wall 2 - 106 1/2”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06239","Wall 3 - 106”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06240","Wall 4 - 107 1/2”","","1","1","506.00","506.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06443","Allura Plank 8.25 Cedar Lap Colormax Sterling Gray SDG","","300","300","2970.00","2970.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06531","Custom Flashing | 24GA SCLAD Almond | 10' Section","","7","7","395.50","395.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06544","Bracket kit","","2","2","35.00","35.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06558","1-1/2” pins Galv  976224  Knurled collated  w/o fuel cell","","1","1","83.60","83.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06578","Custom Trim | 24 GA SCLAD Almond | 10' Section","","12","12","419.40","419.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06889","36"" x 6' Black Alum Rail Section w/ Brackets","","2","2","347.70","347.70","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06890","36"" x 8' Black Alum Rail Section w/ Brackets","","1","1","222.65","222.65","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06891","36"" x 10' Black Alum Rail Section w/ Brackets","","1","1","268.40","268.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06915","Bracket 16x10x4","","2","2","0.02","0.02","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO06917","Custom Trim - 24GA SCLAD Almond 10' Section","","85","85","2290.75","2290.75","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07061","Profile #3 | 24GA Almond | 10' Section","","3","3","151.50","151.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07062","Profile #5-A | 24GA Almond | 10' Section","","3","3","151.35","151.35","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07063","Profile #4  | 24GA Almond | 10' Section","","3","3","206.25","206.25","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07064","Profile #6  | 24GA Almond | 10' Section","","3","3","167.85","167.85","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07065","Profile #7  | 24GA Almond | 10' Section","","40","40","1236.00","1236.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07066","Profile #8  | 24GA Almond | 10' Section","","40","40","758.00","758.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07067","Profile #12-A  | 24GA Almond | 10' Section","","17","17","557.60","557.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07068","Profile #16-A  | 24GA Almond | 10' Section","","72","72","1533.60","1533.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07069","Profile #16-B  | 24GA Almond | 10' Section","","69","69","1469.70","1469.70","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07077","Profile #14 | 24GA | 10' section","","77","77","1305.15","1305.15","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07078","Profile #15 | 24GA | 10' section","","77","77","3099.25","3099.25","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07299","EZ.20","","190","190","5158.50","5158.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO07632","Custom Trim | 24Ga SCLAD Almond | 10' Section","","2","2","228.80","228.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08219","GPF 8' Base - spoked - 10/12 -4""","","1","1","208.00","208.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08339","1x4x14' T&G","","2","2","0.02","0.02","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08343","Custom Trim | 24GA SCLAD Almond","","20","20","702.00","702.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08396","Gable Pediment - 8' Base 12/14 Pitch - Spoked -  6"" Spoked","","3","3","624.00","624.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08865","2 Boxes of 3"" x. 131""
+Stainless Steel Rng
+item number -
+JASR10D131SS","","2","2","170.00","170.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08890","House Wrap 1-7/8""x165'","","1","1","27.00","27.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08902","Brad 2in Leg 16ga EG Chisel Spotnails 16GA Finish","","40","40","414.00","414.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO08903","Nail 1-3/4 X .092 Eg Ring Dia 6.8mm pitch Round head coil wire","","12","12","414.00","414.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09148","36"" x 6' Black Alumn Rail Section w/ Brackets","","3","3","521.55","521.55","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09150","3""x3""x42"" Black post w/cap & base","","3","3","274.50","274.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09193","36"" x 8' Classic Series rail Section w/Brackets","","1","1","117.73","117.73","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09196","Vinyl White Trim collar","","10","10","58.80","58.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09564","House wrap tape 1-7/8""x65' ""zip tape""","","1","1","35.00","35.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09678","2"" Finish","","20","20","180.00","180.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09679","1-3/4"" Siding 15 deg coil","","8","8","300.40","300.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09747","Tamlyn XZS5146W Basic Horizontal Z Trim","","1","1","21.00","21.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO09821","3-3/4” x 90’ zip tape item 87415","","144","144","4917.60","4917.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10230","Nail 2-1/4"" X092 HDG Ring Diamond","","6","6","280.20","280.20","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10260","Trim| 5op| 8"" Max
+24GA Sentriclad Almond
+
+Profile #21 - 35 PCS (6""0
+Profile #23 - 35 PCS (9.4"")","","70","70","2122.40","2122.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10261","Trim| 3op| 16"" Max
+24GA Sentriclad Almond
+
+Profile #8 - 10 PCS (3"")
+Profile #7 - 10 PCS (6.5"")
+Profile #17 - 5 PCS (18"")","","25","25","872.75","872.75","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10363","1x4x12 FRT","","50","50","660.00","660.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10429","14X24 J4 SHUTTERS- BLACK","","1","1","0.01","0.01","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10693","1X6 PVC GABLE PEDIMENT 4'' SPOKED 1212 PITCH NO TAIL","","2","2","320.00","320.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10802","1x6x14 Pine T&G","","4","4","75.60","75.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10832","TerraPlank Smooth Lap 6-1/4 Primed","","3080","3080","14383.60","14383.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO10833","TerraPlank Smooth Lap 6-1/4","","3080","3080","14383.60","14383.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO11228","1X6X12 CEDAR","","1","1","14.45","14.45","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO11377","Nail 2in X .092 Eg Ring Dia","","5","5","423.25","423.25","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO11604","Timberbark caulking (10 cases)","","9","9","1135.08","1135.08","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO11605","Cobblestone caulking (10 Cases)","","9","9","1135.08","1135.08","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO11770","VENT STRIPS","","15","15","0.15","0.15","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO11817","4x4x8 Cedar","","3","3","0.03","0.03","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO12363","Dark Bronze Trim Coil","","10","10","1125.00","1125.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO12584","8x8x10 Treated Sq Column","","1","1","120.98","120.98","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO12607","CDR Panels 4x10","","6","6","469.20","469.20","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO12956","Primed Allura Trim 5/4x6","","319","319","4740.34","4740.34","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO13181","REVERSIBLE PRIMED ALLURA TRIM 5/4x6","","119","119","1768.34","1768.34","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14055","2""X8’ ALUM SOFIT CONT VENT WHT","","10","10","73.70","73.70","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14249","2""X8’ ALUM SOFIT","","10","10","72.80","72.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14691","1-3/4” 16 gauge trim nails","","44","44","374.00","374.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14698","24” allura smooth vented soffit - primed","","94","94","2846.32","2846.32","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14724","5/4x8 Allura trim - primed","","482","482","9572.52","9572.52","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14726","5/4x6 Allura trim - primed","","5","5","74.30","74.30","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO14971","VARIFORM VICTORIA HARBOR 6.5
+BEADED IRISH THISTLE","","9","9","157.50","157.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO15019","5.25” smooth Allura terra plank - primed","","150","150","708.00","708.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO15058","EASY 48 - OUTSIDE CORNER","","5","5","94.00","94.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO15059","EASY 40 - OUTSIDE CORNER","","4","4","80.60","80.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO15060","EASY 36 - OUTSIDE CORNER","","2","2","50.10","50.10","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO15066","P41- PERFORATED J-TRIM","","5","5","217.00","217.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO15365","Tamlyn Miscellaneus 08","","80","80","2840.00","2840.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16082","caulking Light Mist Quad Max","","550","550","52217.00","52217.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16083","caulk Arctic White Quad Max","","550","550","52217.00","52217.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16158","2""X8’ ALUM SOFIT CONT VENT WHT","","59","59","411.23","411.23","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16387","8X12X72 TAPER COLUMN W/ Cs & Bs","","2","2","425.50","425.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16569","1x6x12 yellow pine","","20","20","1440.00","1440.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16584","Designer Crown Molding (Vinyl) White","","1","1","16.00","16.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO16586","FinishPin 1-1/2x0.075 15ga Straight E-Galv 15M/BX","","5","5","147.25","147.25","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO17617","Woodsman Select 5"" DUTCHLAP","","297","297","23017.50","23017.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO17652","Woodsman Select 5"" Dutchlap","","306","306","23715.00","23715.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO18029","Tyvek Flashing Tape 4in x 75ft","","48","48","1684.80","1684.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO18392","1x10x10 Cedar","","42","42","1709.40","1709.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO18979","1-3/4X.090 15D EG RG SIDING 9M","","5","5","247.50","247.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO18980","2"" 16G GALV BRAD NAIL 2.5M","","12","12","72.00","72.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO18995","Tyvek Flashing Tape 4in x 75ft","","22","22","1320.00","1320.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20010","Brad 2-1/2in Leg 16ga EG Chisel Spotnails","","8","8","88.00","88.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20177","concrete screws 1/4 x 3-1/4 Hex head","","1","1","1.00","1.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20178","Artic white trim coil","","1","1","2.00","2.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20181","NPST-75 14 Ga Pin Nailer 3","","1","1","385.40","385.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20208","1x6x12' T&G","","2","2","47.04","47.04","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20310","1x6x14 T&G","","1","1","27.44","27.44","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20311","1x6x16 T&G","","4","4","125.44","125.44","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20486","Trim per email | 040 Scrap Material | 10' sections (8 sections per sheet)","","242","242","60500.00","60500.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20524","10x12x60 Tapered Column","","1","1","160.00","160.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20635","EZ4 Trim","","6","6","71.94","71.94","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20637","Tyvek Flashing Tape 4in x 75ft","","24","24","898.80","898.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20658","1x6x16 Clear Pine","","10","10","195.00","195.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20870","Woodsman Select 5"" Dutchlap - Graphite","","10","10","77.50","77.50","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20872","Woodsman Select 5"" Dutchlap","","5","5","38.75","38.75","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO20979","DuPont  4”x75’ peel and stick flashing tape","","55","55","495.00","495.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO21067","81272 PVC Columns","","3","3","638.25","638.25","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO21072","FastPlank V-Notch 6"" Plank","","71","71","5709.82","5709.82","0","0","71","0","","","","","No"
+"Siding","Special Order","NSSO21073","FastPlank 2 Piece J Trim","","30","30","1617.90","1617.90","0","0","30","0","","","","","No"
+"Siding","Special Order","NSSO21074","FastPlank Perforated Starter J","","29","29","1122.30","1122.30","0","0","29","0","","","","","No"
+"Siding","Special Order","NSSO21076","FastPlank Plank Clip 100 pcs","","7","7","387.45","387.45","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO21077","Plank Connectors 50 pcs w/screws","","1","1","34.59","34.59","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO21078","P30 Plank Backer (50 per bag)","","7","7","169.54","169.54","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO21079","FastPlank V-Notch 6"" Plank","","520","520","41818.40","41818.40","0","0","520","0","","","","","No"
+"Siding","Special Order","NSSO21080","FastPlank 2 Piece J Trim","","221","221","11918.53","11918.53","0","0","221","0","","","","","No"
+"Siding","Special Order","NSSO21082","FastPlank Plank Clip 100 pcs","","47","47","2601.45","2601.45","0","0","47","0","","","","","No"
+"Siding","Special Order","NSSO21083","Plank Connectors 50 pcs w/screws","","1","1","34.59","34.59","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO21084","P30 Plank Backer (50 per bag)","","9","9","217.98","217.98","0","0","9","0","","","","","No"
+"Siding","Special Order","NSSO21147","8x12x72 Tapered Column","","3","3","638.25","638.25","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22291","1x8x20 CEDAR","","8","8","400.00","400.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22378","1x6x16 T&G","","225","225","7056.00","7056.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22379","1x6x12 T&G","","550","550","11880.00","11880.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22391","24x30 Non functional","","1","1","68.00","68.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22435","Set of caps and bases for 10"" Columns","","2","2","28.00","28.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22549","SWP RS SPF KD 1x06-14 FL TG EM ANB","","10","10","267.70","267.70","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO22847","Brad 2-1/2in Leg 16ga EG Chisel","","1","1","11.00","11.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23120","Vesta Plank solid HD3 wood grain - 482 Gilded Grain color","","1440","1440","61560.00","61560.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23182","Vintage Wood - Ash (AWP 1818) Macon Product 81 PANELS A7.1-02,","","72","72","7475.76","7475.76","0","0","72","0","","","","","No"
+"Siding","Special Order","NSSO23184","100 LF/Box - 10 Pcs/Box CONTROL JOINT AS REQ","","1","1","85.93","85.93","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO23185","65 LF/Box - 10 Pcs/Box INSIDE CORNER & VERTICAL TRANSITION AS ARCHITECTURAL STONE","","2","2","124.78","124.78","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO23186","100 LF/Box - 10 Pcs/Box","","2","2","343.76","343.76","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO23187","200 LF/Box - 10mm","","1","1","176.58","176.58","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO23395","Trim | 040 SCLAD Sierra Tan | 10' Section","","30","30","759.00","759.00","0","0","30","0","","","","","No"
+"Siding","Special Order","NSSO23584","10-12x6' TPR w/ 12"" Recesspedestal 36"" 9ft Tall","","2","2","797.88","797.88","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO23639","BKT Fypon 18x30x4","","80","80","9523.20","9523.20","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23685","1x8x12 Cedar","","14","14","472.08","472.08","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23695","Trim 11 Ez 2 Pc Vertical U","","200","200","7740.00","7740.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23696","Trim Inside Corner 5/16 in - 3/4in","","20","20","451.00","451.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23705","1-3/4X.090 15D EG RG SIDING 9M","","5","5","240.00","240.00","0","0","5","0","","","","","No"
+"Siding","Special Order","NSSO23764","VersaPin 1-1/2x.100 Knurl Grip PT2000","","2","2","306.40","306.40","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO23765","Vintage Wood - Spruce (AWP 1818) Macon Product 3800 Sq Ft. Includes","","211","211","21908.13","21908.13","0","0","211","0","","","","","No"
+"Siding","Special Order","NSSO23766","50 LF/Tube - 5 Pcs/Tube - Custom Color Window Jambs, Sills, Brick Transitions","","57","57","16356.72","16356.72","0","0","57","0","","","","","No"
+"Siding","Special Order","NSSO23767","100 LF/Box - 10 Pcs/Box","","7","7","1203.16","1203.16","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO23768","65 LF/Box - 10 Pcs/Box Nichiha to Nichiha Inside Corner Trim","","6","6","374.34","374.34","0","0","6","0","","","","","No"
+"Siding","Special Order","NSSO23769","200 LF/Box - 10mm","","3","3","529.74","529.74","0","0","3","0","","","","","No"
+"Siding","Special Order","NSSO23909","ATAS BWR360 BELVEDERE 7.2"" RIB - 36"" x 20' Panel","","354","354","354.00","354.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23914","1194321 625848 1-1/2 TW-S-D12 625848 SFS 1.5304SS 250/box","","20","20","1687.00","1687.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23924","BKT12x24x3","","1","1","59.03","59.03","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23956","Front cleat","","8","8","213.20","213.20","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23964","flashing tape","","8","8","299.60","299.60","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO23985","VersaPin 1-1/2x.100 Knurl Grip PT2000","","2","2","306.40","306.40","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO24058","ULTIMATE CLIP II FOR 5/8""
+30 Clips/Box - Includes Joint Tab Attachments","","10","10","2510.60","2510.60","0","0","10","0","","","","","No"
+"Siding","Special Order","NSSO24169","1x6x8 T&G Pine","","210","210","2948.40","2948.40","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO24170","1x6x10 T&G Pine","","270","270","4455.00","4455.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO24172","1x6x12 T&G Pine","","330","330","6949.80","6949.80","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO24173","1x6x14 T&G Pine","","390","390","9582.30","9582.30","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO24271","Custom tapered columns 6' height 17-12 taper","","4","4","1044.00","1044.00","0","0","4","0","","","","","No"
+"Siding","Special Order","NSSO24423","Plank Connectors W/screws 50/bg","","10","10","476.00","476.00","0","0","10","0","","","","","No"
+"Siding","Special Order","NSSO24424","EASY FUR 4""X25' POLY NET FURRING","","720","720","5421.60","5421.60","0","0","720","0","","","","","No"
+"Siding","Special Order","NSSO24436","Panel Trim 5/16in 2pc Vertical U","","20","20","484.00","484.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO24437","Horizontal Z 5/16 Panel Trim Primed","","120","120","1518.00","1518.00","0","0","120","0","","","","","No"
+"Siding","Special Order","NSSO24438","Horizontal Base B 5/16 Panel Trim Primed","","20","20","291.00","291.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO24439","Vertical Window Sill General J 5/16","","60","60","771.00","771.00","0","0","60","0","","","","","No"
+"Siding","Special Order","NSSO24441","Window Drip Cap 1-3/8in Flashing Primed","","80","80","1344.00","1344.00","0","0","80","0","","","","","No"
+"Siding","Special Order","NSSO24442","Trim 11 Ez 2 Piece Vertical U","","20","20","774.00","774.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO24444","Inside Corner 3/4 LAP Trim Primed","","10","10","250.50","250.50","0","0","10","0","","","","","No"
+"Siding","Special Order","NSSO24445","Trim Inside Corner 5/16in-3/4in","","20","20","451.00","451.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO24446","Trim Lap Arrow Outside Corner 3/4in","","40","40","1532.00","1532.00","0","0","40","0","","","","","No"
+"Siding","Special Order","NSSO24452","040 Sentriclad Almond | 10' sections (8 sections per sheet)","","60","60","1783.20","1783.20","0","0","60","0","","","","","No"
+"Siding","Special Order","NSSO24453","040 Sentriclad Almond | 10' sections (6 sections per sheet)","","30","30","1137.60","1137.60","0","0","30","0","","","","","No"
+"Siding","Special Order","NSSO24570","1 EA NETTING (DEBRIS ONLY), PUMP JACK; WERNER","","1","1","284.00","284.00","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO24571","1 EA TILT TRUCK 1/2 CUBIC YARD UTILITY DUTY TOTER","","1","1","655.00","655.00","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO24679","Window Drip Cap 1-3/8in Flashing Primed","","20","20","336.00","336.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO24680","Horizontal Z 5/16 Panel Trim Primed","","112","112","1416.80","1416.80","0","0","120","8","","","","","No"
+"Siding","Special Order","NSSO24681","Vertical Window Sill General J 5/16","","100","100","1285.00","1285.00","0","0","100","0","","","","","No"
+"Siding","Special Order","NSSO24682","Panel Trim 5/16in 2pc Vertical U","","60","60","1566.00","1566.00","0","0","60","0","","","","","No"
+"Siding","Special Order","NSSO24683","X Outside Corner 5/16 Panel Trim Primed","","20","20","449.00","449.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO24938","NICHIHA ULTIMATE CLIP II FOR 5/8""
+(30)","","3","3","810.60","810.60","0","0","3","0","","","","","No"
+"Siding","Special Order","NSSO25024","NSSO24775","","1999","1999","169.92","169.92","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO25156","Triangle Louver
+8ft .5in x 2ft 2in","","1","1","284.40","284.40","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25180","1x6x16 T&G","","360","360","9504.00","9504.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO25194","Radius Columns Trims","","21","21","5135.55","5135.55","0","0","21","0","","","","","No"
+"Siding","Special Order","NSSO25272","1-3/4"" White Trim Nails","","24","24","6840.48","6840.48","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO25376","12 x 9 Round Tapered fiberglass round columns with tuscan cap and base","","3","3","1160.67","1160.67","0","0","3","0","","","","","No"
+"Siding","Special Order","NSSO25442","Tyvek Flashing Tape 4in x 75ft","","60","60","2247.00","2247.00","0","0","60","0","","","","","No"
+"Siding","Special Order","NSSO25500","1 3/4” Metabo siding nails
+
+12 Boxes","","33","33","1574.10","1574.10","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO25506","Panel Trim 2pc Square Outside Corner","","20","20","557.00","557.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO25540","Horizontal Z 5/16 Panel Trim Primed","","60","60","762.00","762.00","0","0","60","0","","","","","No"
+"Siding","Special Order","NSSO25549","metal vent strips","","210","210","1239.00","1239.00","0","0","0","0","","","","","No"
+"Siding","Special Order","NSSO25564","Patriot leveling post Mounting 4""x4""x37"" (Use w/ 4x4 Sleeve) Color Guard","","7","7","340.48","340.48","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO25565","Classic White Vinyl Level Rail Section 4'x36"" Color Guard (20kits/unit)","","2","2","156.16","156.16","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25566","Classic White Vinyl Level Rail Section 6'x36"" Color Guard (20kits/unit)","","2","2","200.96","200.96","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25567","Classic White Vinyl Stair Rail Section 6'x36"" Color Guard (20kits/unit)","","2","2","224.00","224.00","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25568","White Blank Post Sleeve","","7","7","129.92","129.92","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO25569","White Post Collar Trim (2 piece)","","7","7","49.28","49.28","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO25570","White Flat Post Cap","","7","7","18.82","18.82","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO25572","White Blank Post Sleeve","","7","7","129.92","129.92","0","0","7","0","","","","","No"
+"Siding","Special Order","NSSO25573","Vinyl Stair Rail Section 6'x36""","","2","2","224.00","224.00","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25574","Vinyl Level Rail Section 6'x36""","","2","2","200.96","200.96","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25575","Vinyl Level Rail Section 4'x36""","","2","2","156.16","156.16","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25576","White Blank Post Sleeve","","6","6","111.36","111.36","0","0","6","0","","","","","No"
+"Siding","Special Order","NSSO25577","Vinyl Level Rail Section 6'x36""","","2","2","200.96","200.96","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25578","Vinyl Level Rail Section 4'x36""","","2","2","140.16","140.16","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25601","Greenguard Seam Tape 2-7/8in X 55yd","","21","21","466.20","466.20","0","0","21","0","","","","","No"
+"Siding","Special Order","NSSO25709","6"" White Flat Vinyl Post Caps","","2","2","13.44","13.44","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25719","Horizontal Z 5/16 Panel Trim Primed","","20","20","254.00","254.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO25737","1194321 625848 1-1/2 TW-S-D12","","5","5","461.00","461.00","0","0","5","0","","","","","No"
+"Siding","Special Order","NSSO25776","040 SCRAP - PRIME SIDE AS FINISH SIDE 10' SECTIONS (12 SECTIONS PER SHEET)","","500","500","4250.00","4250.00","0","0","500","0","","","","","No"
+"Siding","Special Order","NSSO25785","JEL778","","25","25","7641.25","7641.25","0","0","25","0","","","","","No"
+"Siding","Special Order","NSSO25786","FHK1015","","10","10","801.00","801.00","0","0","10","0","","","","","No"
+"Siding","Special Order","NSSO25814","EZ 7","","60","60","1566.00","1566.00","0","0","60","0","","","","","No"
+"Siding","Special Order","NSSO25815","EZ 4","","20","20","254.00","254.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO25833","10” tapered fiberglass column","","1","1","0.01","0.01","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25834","split kit for fiberglass column","","1","1","85.91","85.91","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25835","10” base and cap for round tapered column","","1","1","0.01","0.01","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25840","Woodsman Select 5"" Dutchlap","","1","1","7.75","7.75","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25856","DOW 3""X48""X96"" SCOREBOARD","","36","36","2822.40","2822.40","0","0","36","0","","","","","No"
+"Siding","Special Order","NSSO25858","DOW 3""X48""X96"" SCOREBOARD","","25","25","1960.00","1960.00","0","0","25","0","","","","","No"
+"Siding","Special Order","NSSO25859","DOW 3""X48""X96"" SCOREBOARD","","25","25","1960.00","1960.00","0","0","25","0","","","","","No"
+"Siding","Special Order","NSSO25860","DOW 1.5""X48""X96"" SCOREBOARD","","23","23","969.45","969.45","0","0","23","0","","","","","No"
+"Siding","Special Order","NSSO25863","Brad 2in Leg 16ga EG Chisel Spotnails","","10","10","60.50","60.50","0","0","10","0","","","","","No"
+"Siding","Special Order","NSSO25864","Nail 1-3/4in X .092 15deg Ring Eg","","3","3","205.05","205.05","0","0","3","0","","","","","No"
+"Siding","Special Order","NSSO25900","EZ 1","","20","20","456.00","456.00","0","0","20","0","","","","","No"
+"Siding","Special Order","NSSO25901","EZ 4","","140","140","1778.00","1778.00","0","0","140","0","","","","","No"
+"Siding","Special Order","NSSO25902","EZ 7","","200","200","5280.00","5280.00","0","0","200","0","","","","","No"
+"Siding","Special Order","NSSO25903","EZ 3","","40","40","782.00","782.00","0","0","60","20","","","","","No"
+"Siding","Special Order","NSSO25904","EZ 8","","80","80","1020.00","1020.00","0","0","80","0","","","","","No"
+"Siding","Special Order","NSSO25905","1 set of cap and base for 8"" column","","1","1","0.01","0.01","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25906","1 Set of cap and base for 10"" column","","1","1","0.01","0.01","0","0","1","0","","","","","No"
+"Siding","Special Order","NSSO25907","EZ 4","","120","120","1524.00","1524.00","0","0","120","0","","","","","No"
+"Siding","Special Order","NSSO25952","FinishPin 3x0.100 14ga T Head E-Galv","","2","2","162.70","162.70","0","0","2","0","","","","","No"
+"Siding","Special Order","NSSO25953","Tyvek Flashing Tape 4in x 75ft","","48","48","1797.60","1797.60","0","0","48","0","","","","","No"
+"Siding","Special Order","NSSO25954","Nail 2-1/2in 16ga Eg Dia Interchange","","20","20","198.00","198.00","0","0","20","0","","","","","No"
+"Siding","","PVCBMNS","180 PVC BRICKMOULD","","153","153","0.00","0.00","0","0","0","11","","","","","Yes"
+"Siding","","VBCNS","PVC BASE CAP","","1","1","0.00","0.00","0","0","9","115","","","","","Yes"
+"Siding","","VDC","STOCK ONLY #188 VINYL DRIP CAP","","77","77","554.40","554.40","0","0","0","2","","","","","Yes"
+"Allura","Trim","ALCM1412S","Allura Spectrum (Colormax) 1x4x12 Smooth
+","4/4"","136","136","0.00","0.00","0","0","1051","784","","","","","Yes"
+"Allura","Trim","ALCM1612S","Allura Spectrum (Colormax)  1x6x12 Smooth
+","4/4"","13","13","0.00","0.00","0","0","29","18","","","","","Yes"
+"Allura","Trim","ALCM54812S","Allura Spectrum (Colormax) 5/4x8x12 Smooth
+","5/4"","8","8","0.00","0.00","0","0","122","82","","","","","Yes"
+"Allura","Soffit","ALCM24SSS","Allura Spectrum (Colormax) 24 Solid Soffit Smooth
+","Smooth","3","3","0.00","0.00","0","0","15","8","","","","","Yes"
+"Allura","Paint Kits","ALCMTUKIT","Allura Spectrum (Colormax) Paint Touch-Up Kit","","23","23","0.00","0.00","0","0","355","230","","","","","Yes"
+"Allura","Soffit","ALCM12VSS","Allura Spectrum (Colormax) 12 Vented Soffit Smooth
+","Smooth","135","135","0.00","0.00","0","0","352","151","","","","","Yes"
+"Allura","Lap Siding","814ALSCM","Allura Spectrum (Colormax) 8-1/4 Cedarmill Lap Siding
+","Textured","3491","3491","0.00","0.00","0","0","11206","8331","","","","","Yes"
+"Allura","Soffit","ALSSOF2412SP","Allura Solid Soffit 24x12 Smooth Primed
+","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Allura","Trim","ALT11212P","Allura Trim 1x12x12 Primed","4/4"","16","16","0.00","0.00","0","0","0","0","","","","","Yes"
+"Allura","Trim","ALT54612P","Allura Trim 5/4x6x12 Primed","5/4"","88","88","0.00","0.00","0","0","0","0","","","","","Yes"
+"Allura","Trim","ALT54812P","Allura Trim 5/4x8x12 Primed","5/4"","360","360","0.00","0.00","0","0","0","0","","","","","Yes"
+"Alside","Board & Batten","ALBNBS","Alside Board and Batten Vertical Vinyl Siding Standard Colors","","403","403","0.00","0.00","0","0","6851","6054","","","","","Yes"
+"Alside","Trim","ASFTA","Ascend Finish Trim All Colors","","29","29","0.00","0.00","0","0","0","0","","","","","Yes"
+"Alside","Lap Siding","COAKD45A","Charter Oak D4.5 Straight Lap Architectural Colors
+","0.046"","5431","5431","0.00","0.00","0","0","8750","4886","","","","","Yes"
+"Alside","Lap Siding","COAKD45S","Charter Oak D4.5 Straight Lap Standard Colors","0.046"","2067","2067","0.00","0.00","0","0","6619","6930","","","","","Yes"
+"Alside","Lap Siding","CONSD45CS","Conquest Vinyl Siding .040 D4.5 Straight Clapboard Standard Colors","0.040"","2717","2717","0.00","0.00","0","0","18548","17285","","","","","No"
+"Alside","Trim","6DOSCPS","Alside 6in Designer Outside Corner Post 20ft Length Standard Colors
+","","9","9","0.00","0.00","0","0","16","4","","","","","Yes"
+"Alside","Soffit","ECSSD5A","Alside D5 Economy Vinyl Solid Soffit Architectural Colors","","13","13","0.00","0.00","0","0","18","0","","","","","Yes"
+"Alside","Trim","FINISHTRIMA","Alside Finish Trim Architectural Colors
+","Finish Trim","200","200","0.00","0.00","0","0","1532","1297","","","","","Yes"
+"Alside","Trim","34ISCPA","Alside 3/4in Inside Corner Post Architectural Colors
+","ISCP","9","9","0.00","0.00","0","0","52","43","","","","","Yes"
+"Alside","Trim","34ISCPS","Alside 3/4in Inside Corner Post Standard Colors
+","ISCP","21","21","0.00","0.00","0","0","513","627","","","","","Yes"
+"Alside","Trim","34JA","Alside 3/4in J Channel 1in Face Architectural Colors
+","J-channel","1228","1228","0.00","0.00","0","0","5284","4581","","","","","Yes"
+"Alside","Trim","34JS","Alside 3/4in J Channel 1in Face Standard Colors
+","J-channel","4857","4857","0.00","0.00","0","0","21977","20418","","","","","Yes"
+"Alside","Trim","5LINS","Alside 5in Lineal 20ft Standard Colors
+","","85","85","0.00","0.00","0","0","846","684","","","","","Yes"
+"Alside","Trim","35LINS","Alside 3.5 Lineal 20ft Standard Colors
+","Lineal","227","227","0.00","0.00","0","0","1211","1037","","","","","Yes"
+"Alside","Lap Siding","ODYD5A","Odyssey Plus Double 5 (D5) Straight / Clapboard Architectural Colors","0.044"","577","577","0.00","0.00","0","0","373","114","","","","","Yes"
+"Alside","Lap Siding","ODYD5DUTS","Odyssey Plus Double 5 (D5) Dutch Lap Standard Colors","0.044"","240","240","0.00","0.00","0","0","20","0","","","","","Yes"
+"Alside","Trim","4OSCPS","Alside 4in Outside Corner Post Standard Colors
+","","56","56","0.00","0.00","0","0","192","136","","","","","Yes"
+"Alside","Accessories","STKPVCTXTCOIL","STOCK ONLY PVC Textured Coil White
+","","48","48","5177.76","5177.76","0","0","29","70","","","","","Yes"
+"Certainteed","Board & Batten","CTBNB810S","CertainTeed Board & Batten 8inx10ft Standard Colors
+","","37","37","0.00","0.00","0","0","464","381","","","","","Yes"
+"Certainteed","Trim","CTJCHAN34126S","CertainTeed 3/4 J Channel 12ft 6in Standard Colors
+","J-channel","22","22","0.00","0.00","0","0","130","121","","","","","Yes"
+"Certainteed","Trim","CT12JCS","Certainteed 1/2 J-Channel Standard Colors","","262","262","0.00","0.00","0","0","2503","2955","","","","","Yes"
+"Certainteed","Trim","CTLINE31220MS","CertainTeed 3-1/2 Lineal Matte 20ft Standard Colors
+","Lineal","19","19","0.00","0.00","0","0","54","35","","","","","Yes"
+"Certainteed","Shakes","CTSHIMPRSTRTD7S","CertainTeed Cedar Impressions D7 Straight Shake Standard Colors","Straight","77","77","0.00","0.00","0","0","684","764","","","","","Yes"
+"Certainteed","Lap Siding","CTSMAINWGD5DLS","CertainTeed Siding Mainstreet WG D5DL Standard Colors","0.042"","703","703","0.00","0.00","0","0","7671","9458","","","","","Yes"
+"Certainteed","Soffit","CTSSOFFVALUD5S","CertainTeed Value Soffit D5 Solid Standard Colors","Solid","109","109","0.00","0.00","0","0","1134","1282","","","","","Yes"
+"Certainteed","Soffit","CTSSOFFVALUD5W","CertainTeed Value Soffit D5 Solid White","Solid","7","7","0.00","0.00","0","0","30","42","","","","","Yes"
+"Certainteed","Soffit","CTSSOFFVALUT4W","CertainTeed Value Soffit T4 Solid White","Solid","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"Certainteed","Soffit","CTVSOFFVALUD5S","CertainTeed Value Soffit D5 Vented Standard Colors","Vented","137","137","0.00","0.00","0","0","1205","1467","","","","","Yes"
+"Certainteed","Soffit","CTVSOFFVALUT4W","CertainTeed Value Soffit T4 Vented White","Vented","5","5","0.00","0.00","0","0","0","0","","","","","Yes"
+"Color Guard","Post Sleeves","CGBLAPB43","Color Guard 3inx3inx43in Black Lincoln Aluminum Post w/Cap and Base
+","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Color Guard","Post Sleeves","CGPC44","Color Guard 4in x 4in Post Collar White","","15","15","0.00","0.00","0","0","30","5","","","","","Yes"
+"Color Guard","Post Sleeves","CGPMBKT","Color Guard Post Mounting Bracket","","21","21","0.00","0.00","0","0","37","10","","","","","Yes"
+"Color Guard","Post Sleeves","CGPS4438","Color Guard 4x4x38in Post Sleeve White","","2","2","0.00","0.00","0","0","6","0","","","","","Yes"
+"Color Guard","Post Sleeves","CGPS4444","COLOR GUARD 4X4X44 POST SLEEVE BLANK WHITE","","5","5","0.00","0.00","0","0","5","1","","","","","Yes"
+"Color Guard","Post Sleeves","CGPSLV44BW","Color Guard 44in Blank Post White
+","","6","6","0.00","0.00","0","0","6","1","","","","","Yes"
+"Color Guard","Railing Systems","CGRAIL364CLB","Color Guard 36inx4ft Classic Series Straight Rail Section w/Brackets White
+","","1","1","0.00","0.00","0","0","2","2","","","","","Yes"
+"Color Guard","Railing Systems","CGRAIL366CLB","Color Guard 36inx6ft Classic Series Straight Rail Section w/Brackets White
+","","2","2","0.00","0.00","0","0","5","3","","","","","Yes"
+"Color Guard","Railing Systems","CGRAIL366CSTB","Color Guard 36inx6ft Classic Series Stair Rail Section w/Brackets White
+","","1","1","0.00","0.00","0","0","2","0","","","","","Yes"
+"Color Guard","Railing Systems","CG4X4WFPC","Color Guard 4x4 White Flat Post Cap","","16","16","0.00","0.00","0","0","31","4","","","","","Yes"
+"Color Guard","Accessories","6610COLORGUARDW","STOCK ONLY 6x6x10 Colorguard Smooth Vinyl Post Wrap White","","35","35","2391.20","2391.20","0","0","21","27","","","","","Yes"
+"Color Guard","Accessories","STK4410COLORGUARDW","STOCK ONLY 4x4x10 Colorguard Smooth Vinyl Post Wrap White","Post Sleeve","105","105","0.00","0.00","0","0","0","24","","","","","Yes"
+"Fasteners & Sealants","Accessories","A23","STOCK ONLY Simpson A23 Anchor Bracket","","18","18","15.84","15.84","0","0","0","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","ABU44Z","STOCK ONLY ABU44Z Adjustable Post Base for 4x4
+","","46","46","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","BC4","STOCK ONLY BC4 Simpson Post Cap
+","","27","27","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","BUTYLTAPE4","OX TITAN BUTYL WINDOW FLASHING TAPE 4IN X 75FT","","6","6","0.00","0.00","0","0","6","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","BUTYLTAPE6","STOCK ONLY DUPONT 6IN BUTYL TAPE","","179","179","7403.44","7403.44","0","0","77","0","","","","","Yes"
+"Fasteners & Sealants","Caulking","OSIQD","OSI Quad","","1045","1045","0.00","0.00","0","0","1958","1156","","","","","Yes"
+"Fasteners & Sealants","Nails","2ROOFNAIL30","2in Roofing Nails 30#
+","","80","80","0.00","0.00","0","0","411","351","","","","","Yes"
+"Fasteners & Sealants","Nails","2ROOFNAIL50","2in Galvanized Roofing Nails 50#
+","","132","132","0.00","0.00","0","0","47","50","","","","","Yes"
+"Fasteners & Sealants","Nails","134ROOFNAIL50","1-3/4in Galvanized Roofing Nails 50#
+","","1","1","0.00","0.00","0","0","5","4","","","","","Yes"
+"Fasteners & Sealants","Nails","3ROOFNAIL30NS","3in Galvanized Roofing Nails 30# bucket","","6","6","0.00","0.00","0","0","13","7","","","","","Yes"
+"Fasteners & Sealants","Accessories","TYVEKTAPE2","Dupont TyvekTape 2x55ft
+","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fasteners & Sealants","Accessories","WA50414","STOCK ONLY 1/2X4-1/2 Wedge Anchor
+","","42","42","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Brackets","BKT8X6","FYPON BRACKET OGEE 8X6X4 SMOOTH","","3","3","0.00","0.00","0","0","3","3","","","","","Yes"
+"Fypon","Brackets","BKT9X11","STOCK ONLY FYPON BRACKET 11HX3-1/2WX9 PROJECTION
+","","37","37","1275.02","1275.02","0","0","139","0","","","","","Yes"
+"Fypon","Brackets","BKT11X20","FYPON BRACKET POST 20HX3-1/8WX11 PROJECTION
+","","16","16","0.00","0.00","0","0","9","0","","","","","Yes"
+"Fypon","Brackets","BKT12X16","STOCK ONLY FYPON BRACKET 16HX3WX11-1/2 PROJECTION","","68","68","2301.80","2301.80","0","0","119","12","","","","","Yes"
+"Fypon","Brackets","BKT14X14","STOCK ONLY FYPON BRACKET ANGLE 13-1/2HX3-1/2WX13-1/2 PROJECTION","","77","77","2095.94","2095.94","0","0","229","0","","","","","Yes"
+"Fypon","Brackets","BKT16X16","FYPON BRACKET 15-7/8HX2WX15-7/8 PROJECTION
+","","6","6","0.00","0.00","0","0","6","0","","","","","Yes"
+"Fypon","Brackets","BKT17X17","FYPON BRACKET 16-1/2X16-1/2X3-1/2 SMOOTH","","18","18","0.00","0.00","0","0","18","15","","","","","Yes"
+"Fypon","Brackets","BKT22X22","BRACKET 11-1/4X10X9-15/16 SMOOTH","","2","2","0.00","0.00","0","0","0","2","","","","","Yes"
+"Fypon","Brackets","BKT12X12NS","BRACKET 11-1/2X12-1/4X1 SMOOTH","","5","5","0.00","0.00","0","0","5","0","","","","","Yes"
+"Fypon","Brackets","BKT12X16NS","FYPON BRACKET 16HX3WX11-1/2 PROJECTION
+","","20","20","0.00","0.00","0","0","22","0","","","","","Yes"
+"Fypon","Brackets","BKT10X10X9","STOCK ONLY FYPON BRACKET 10HX9-1/8WX10 PROJECTION
+","","27","27","998.46","998.46","0","0","0","0","","","","","Yes"
+"Fypon","Brackets","BKT10X16X4","STOCK ONLY FYPON BRACKET 9-7/8X16X4-7/16 SMOOTH","","100","100","6648.00","6648.00","0","0","10","25","","","","","Yes"
+"Fypon","Brackets","BKT12X12X4","STOCK ONLY FYPON BRACKET 12HX3-1/2WX12 PROJECTION","","41","41","1999.16","1999.16","0","0","8","3","","","","","Yes"
+"Fypon","Brackets","BKT15X18X6","POST BRACKET 15X18X6 SMOOTH","","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Brackets","BKT20X30X6","FYPON BRACKET 30HX5-1/2WX20 PROJECTION
+","","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Brackets","BKT12X12X4NS","FYPON BRACKET 12HX3-1/2WX12 PROJECTION
+","","1","1","0.00","0.00","0","0","4","3","","","","","Yes"
+"Fypon","Brackets","BKT18X18X3X1S","BRACKET 18X18X3-1/2 WOOD GRAIN","","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Vents","CLV22X31","FYPON CATHEDRAL LOUVER DECO 22X31-1/2X2 SMOOTH","","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Corbels","COR7X11S","TIMBER CORBEL WOODGRAIN 11-3/8HX7WX7-3/8 PROJECTION
+","","18","18","0.00","0.00","0","0","38","19","","","","","Yes"
+"Fypon","Corbels","COR8X8X6S","FYPON CORBEL 8X8X6 WOODGRAIN","","14","14","0.00","0.00","0","0","22","7","","","","","Yes"
+"Fypon","Corbels","COR24X8X6S","CORBEL 24X8X6 WOOD GRAIN","","22","22","0.00","0.00","0","0","22","11","","","","","Yes"
+"Fypon","Dentil Blocks","DTLB3X3X3","FYPON DENTIL BLOCK 3-7/16X3-1/2X3-1/2 SMOOTH","","12","12","0.00","0.00","0","0","0","6","","","","","Yes"
+"Fypon","Dentil Blocks","DTLB5X5X3","FYPON DENTIL BLOCK 5-1/2HX3-1/2WX5-1/2 PROJECTION
+","","9","9","0.00","0.00","0","0","17","32","","","","","Yes"
+"Fypon","Dentil Blocks","DTLB5X6X6","DENTIL BLOCK 5X6X6 SMOOTH","","6","6","0.00","0.00","0","0","3","3","","","","","Yes"
+"Fypon","Dentil Blocks","DTLB5X6X8","FYPON DENTIL BLOCK 5HX6WX8-1/2 PROJECTION
+","","26","26","0.00","0.00","0","0","12","10","","","","","Yes"
+"Fypon","Dentil Blocks","DTLB5X6X11","FYPON DENTIL BLOCK 5-1/4HX6WX10-3/4 PROJECTION
+","","3","3","0.00","0.00","0","0","3","0","","","","","Yes"
+"Fypon","Vents","EBLV18X30","FYPON EYBROW LOUVER DECO 18X30X2 SMOOTH","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Vents","FLV12X24","FUNCTIONAL VERTICAL LOUVER 12X24
+","","4","4","0.00","0.00","0","0","9","4","","","","","Yes"
+"Fypon","Vents","FRLV28","FUNCTIONAL ROUND LOUVER 28IN DIAMETER
+","","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Vents","FTRLV60X18","FUNCTIONAL TRIANGLE LOUVER 60X17-1/2X2 SMOOTH
+","","4","4","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Vents","LV8X30","RECTANGLE VERTICAL LOUVER DECO 8X30X2 SMOOTH","","5","5","0.00","0.00","0","0","4","0","","","","","Yes"
+"Fypon","Vents","LV12X18","FYPON VERTICAL LOUVER DECORATIVE 12X18
+","","7","7","0.00","0.00","0","0","21","22","","","","","Yes"
+"Fypon","Vents","LV12X24","STOCK ONLY FYPON VERTICAL LOUVER DECORATIVE 12X24","","72","72","2786.40","2786.40","0","0","54","64","","","","","Yes"
+"Fypon","Vents","LV12X30","FYPON VERTICAL LOUVER DECORATIVE 12X30
+","","4","4","0.00","0.00","0","0","4","3","","","","","Yes"
+"Fypon","Vents","LV12X40","FYPON RECTANGLE VERTICAL LOUVER DECO 12X40X2 SMOOTH","","4","4","0.00","0.00","0","0","2","0","","","","","Yes"
+"Fypon","Vents","LV14X32","FYPON RECTANGLE VERTICAL LOUVER DECO 14X32X2 SMOOTH","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Fypon","Vents","LV16X24","FYPON VERTICAL LOUVER DECORATIVE 16X24
+","","1","1","0.00","0.00","0","0","1","0","","","","","Yes"
+"Fypon","Vents","LV18X24","STOCK ONLY FYPON RECTANGLE VERTICAL LOUVER DECO 18X24X2 SMOOTH","","22","22","1134.54","1134.54","0","0","30","0","","","","","Yes"
+"Fypon","Vents","LV24X24","VERTICAL LOUVER DECORATIVE 24X24
+","","1","1","0.00","0.00","0","0","0","1","","","","","Yes"
+"Fypon","Vents","LV27X17","RECTANGLE VERTICAL LOUVER DECO 27X17X2 SMOOTH","","2","2","0.00","0.00","0","0","2","2","","","","","Yes"
+"Fypon","","LV12X24NS","FYPON VERTICAL LOUVER DECORATIVE 12X24
+","","2","2","0.00","0.00","0","0","3","0","","","","","Yes"
+"Fypon","Vents","LV12X36NS","FYPON VERTICAL LOUVER DECORATIVE 12X36","","1","1","0.00","0.00","0","0","3","2","","","","","Yes"
+"Fypon","Vents","TRLVLR60X25","FYPON 2PC TRIANGLE LOUVER DECO 60X25X2 SMOOTH","","1","1","0.00","0.00","0","0","0","1","","","","","Yes"
+"Fypon","Vents","TRLV64X27","FYPON TRIANGLE LOUVER DECORATIVE 64 W/10/12 PITCH
+","","11","11","0.00","0.00","0","0","5","4","","","","","Yes"
+"Fypon","Vents","TRLV72X36","FYPON TRIANGLE LOUVER DECO 72X36X2 SMOOTH","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"James Hardie","Lap Siding","JHARTASPVGP","James Hardie Artisan/Aspyre V-Groove 8.25inx12ftx5/8in Primed","","113","113","0.00","0.00","0","0","0","0","","","","","Yes"
+"James Hardie","Lap Siding","JHLSPARTVG814P","James Hardie Artisan Lap Siding V-Groove 8-1/4x12 Primed","","28","28","0.00","0.00","0","0","60","32","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP814CD","James Hardie Lap Siding Plank 8-1/4x12 Select Cedarmill Colorplus Dream Collection
+","Textured","1018","1018","0.00","0.00","0","0","1528","510","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP714CP","James Hardie Lap Siding Plank 7-1/4x12 Cedarmill Primed
+","Textured","915","915","0.00","0.00","0","0","421","50","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP814CP","James Hardie Lap Siding Plank 8-1/4x12 Cedarmill Primed
+","Textured","1322","1322","0.00","0.00","0","0","21502","20901","","","","","No"
+"James Hardie","Lap Siding","JHLSP814SD","James Hardie Lap Siding Plank 8-1/4x12 Smooth Dream Collection
+","Smooth","197","197","0.00","0.00","0","0","522","325","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP12SP","James Hardie Lap Siding Plank 12x12 Smooth Primed
+","Smooth","40","40","0.00","0.00","0","0","40","0","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP514SP","James Hardie Lap Siding Plank 5-1/4x12 Smooth Primed
+","Smooth","4143","4143","0.00","0.00","0","0","127","0","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP614SP","James Hardie Lap Siding Plank 6-1/4x12 Smooth Primed
+","Smooth","151","151","0.00","0.00","0","0","800","833","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP714SP","James Hardie Lap Siding Plank 7-1/4x12 Smooth Primed
+","Smooth","21977","21977","152300.61","152300.61","0","0","5040","2520","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP814SP","James Hardie Lap Siding Plank 8-1/4x12 Smooth Primed
+","Smooth","1547","1547","0.00","0.00","0","0","3938","4432","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP614SS","James Hardie Lap Siding Plank 6-1/4x12 Smooth Statement Collection
+","Smooth","112","112","728.00","728.00","0","0","0","0","","","","","Yes"
+"James Hardie","Lap Siding","JHLSP714SS","James Hardie Lap Siding Plank 7-1/4x12 Smooth Statement Collection","Smooth","472","472","0.00","0.00","0","0","0","0","","","","","Yes"
+"James Hardie","Panels","JHP410SD","James Hardie Panel Siding 4x10 Smooth Colorplus Dream Collection
+","Smooth","10","10","0.00","0.00","0","0","129","58","","","","","Yes"
+"James Hardie","Panels","JHP410SP","James Hardie Panel Siding 4x10 Smooth Primed
+","Smooth","1468","1468","0.00","0.00","0","0","2169","1878","","","","","Yes"
+"James Hardie","Panels","JHP48SS","James Hardie Panel Siding 4x8 Smooth Statement Collection
+","Smooth","329","329","0.00","0.00","0","0","0","0","","","","","Yes"
+"James Hardie","Shakes","JHSHSTRTP","James Hardie Shake Straight Edge Notched 48x15.25 Primed
+","Straight","119","119","0.00","0.00","0","0","121","193","","","","","Yes"
+"James Hardie","Soffit","JHSSOF248SP","James Hardie Solid Soffit 24x8 Smooth Primed
+","Solid","215","215","0.00","0.00","0","0","382","167","","","","","Yes"
+"James Hardie","Soffit","JHSSOF1612SP","James Hardie Solid Soffit 16x12 Smooth Primed
+","Solid","69","69","0.00","0.00","0","0","114","17","","","","","Yes"
+"James Hardie","Trim","JHTBS1212SP","James Hardie Trim Batten Strip 1x2-1/2x12 Smooth Primed
+","4/4"","2179","2179","0.00","0.00","0","0","3011","592","","","","","Yes"
+"James Hardie","Trim","JHT1412SD","James Hardie Trim Board 1x4x12 Smooth Colorplus Dream Collection
+","4/4"","50","50","0.00","0.00","0","0","119","52","","","","","Yes"
+"James Hardie","Trim","JHT1612SD","James Hardie Trim Board 1x6x12 Smooth Colorplus Dream Collection
+","4/4"","50","50","0.00","0.00","0","0","93","36","","","","","Yes"
+"James Hardie","Trim","JHT1812SD","James Hardie Trim Board 1x8x12 Smooth Colorplus Dream Collection
+","4/4"","2","2","0.00","0.00","0","0","27","12","","","","","Yes"
+"James Hardie","Trim","JHT11012SD","James Hardie Trim Board 1x10x12 Smooth Colorplus Dream Collection
+","4/4"","1","1","0.00","0.00","0","0","1","1","","","","","Yes"
+"James Hardie","Trim","JHT11212SD","James Hardie Trim Board 1x12x12 Smooth Colorplus Dream Collection
+","4/4"","10","10","0.00","0.00","0","0","36","17","","","","","Yes"
+"James Hardie","Trim","JHT54412SD","James Hardie Trim Board 5/4x4x12 Smooth Colorplus Dream Collection
+","5/4"","142","142","0.00","0.00","0","0","481","223","","","","","Yes"
+"James Hardie","Trim","JHT54612SD","James Hardie Trim Board 5/4x6x12 Smooth Colorplus Dream Collection
+","5/4"","131","131","0.00","0.00","0","0","110","54","","","","","Yes"
+"James Hardie","Trim","JHT54812SD","James Hardie Trim Board 5/4x8x12 Smooth Colorplus Dream Collection
+","5/4"","43","43","0.00","0.00","0","0","91","36","","","","","Yes"
+"James Hardie","Trim","JHT541212SD","James Hardie Trim Board 5/4x12x12 Smooth Colorplus Dream Collection
+","5/4"","17","17","0.00","0.00","0","0","31","14","","","","","Yes"
+"James Hardie","Trim","JHT1412SP","James Hardie Trim Board 1x4x12 Smooth Primed
+","4/4"","1205","1205","0.00","0.00","0","0","2915","2685","","","","","Yes"
+"James Hardie","Trim","JHT1612SP","James Hardie Trim Board 1x6x12 Smooth Primed
+","4/4"","204","204","0.00","0.00","0","0","987","1124","","","","","Yes"
+"James Hardie","Trim","JHT11012SP","James Hardie Trim Board 1x10x12 Smooth Primed
+","4/4"","64","64","0.00","0.00","0","0","187","163","","","","","Yes"
+"James Hardie","Trim","JHT11212SP","James Hardie Trim Board 1x12x12 Smooth Primed
+","4/4"","41","41","0.00","0.00","0","0","227","243","","","","","Yes"
+"James Hardie","Trim","JHT54412SP","James Hardie Trim Board 5/4x4x12 Smooth Primed
+","5/4"","390","390","0.00","0.00","0","0","4289","3542","","","","","Yes"
+"James Hardie","Trim","JHT54512SP","James Hardie Trim Board 5/4x5x12 Smooth Primed
+","5/4"","10","10","0.00","0.00","0","0","423","400","","","","","Yes"
+"James Hardie","Trim","JHT54612SP","James Hardie Trim Board 5/4x6x12 Smooth Primed
+","5/4"","245","245","0.00","0.00","0","0","1243","754","","","","","Yes"
+"James Hardie","Trim","JHT541212SP","James Hardie Trim Board 5/4x12x12 Smooth Primed
+","5/4"","156","156","0.00","0.00","0","0","266","161","","","","","Yes"
+"James Hardie","Trim","JHT1412SS","James Hardie Trim Board 1x4x12 Smooth Colorplus Statement Collection
+","4/4"","978","978","0.00","0.00","0","0","3032","3511","","","","","Yes"
+"James Hardie","Soffit","JHVSOF1612SD","James Hardie Vented Soffit 16x12 Smooth Colorplus Dream Collection
+","Vented","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"James Hardie","Soffit","JHVSOF248SP","James Hardie Vented Soffit 24x8 Smooth Primed
+","Vented","3","3","0.00","0.00","0","0","25","10","","","","","Yes"
+"James Hardie","Soffit","JHVSOF1612SP","James Hardie Vented Soffit 16x12 Smooth Primed
+","Vented","88","88","0.00","0.00","0","0","208","82","","","","","Yes"
+"James Hardie","Accessories","STKJH5CT","STOCK ONLY -James Hardie 5in Corner Tabs 50ct/box","","4","4","0.00","0.00","0","0","7","0","","","","","Yes"
+"James Hardie","Accessories","STKJHFT","STOCK ONLY - James Hardie Flat Tabs 100ct/box","","3","3","0.00","0.00","0","0","7","0","","","","","Yes"
+"LP","Trim","LPEF54616S","LP Expert Finish 5/4x6x16 Smooth
+","","4","4","0.00","0.00","0","0","4","0","","","","","Yes"
+"LP","Soffit","LPEFSSOF1216T","LP Expert Finish 38 Series Solid Soffit 12x16 Textured
+","","58","58","0.00","0.00","0","0","0","15","","","","","Yes"
+"LP","Soffit","LPEFVSOF1216T","LP Expert Finish 38 Series Vented Soffit 12x16 Textured
+","","7","7","0.00","0.00","0","0","0","17","","","","","Yes"
+"LP","Lap Siding","LP814LSCS","LP 8-1/4x16x3/8 Cedar Lap Strand (25797)
+","Textured","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Shakes","LPSHAKECS","LP 12x48x3/8 Shake Strand (42092)
+
+","Textured","236","236","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Soffit","LP12SSCS","LP 12 Non Vented Soffit 3/8 Cedar (25805)
+","Solid","14","14","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Soffit","LP16SSCS","LP 16 Non Vented Soffit 3/8 Cedar (25806)
+","Solid","4","4","0.00","0.00","0","0","4","0","","","","","Yes"
+"LP","Trim","LP1416TWGS","LP 4/4x4x16 Woodgrain Strand (25880)
+","4/4"","4","4","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Trim","LP1616TWGS","LP 4/4x6x16 Woodgrain Strand (25882)
+","4/4"","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Trim","LP1816TWGS","LP 4/4x8x16 Woodgrain Strand (25883)
+","4/4"","12","12","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Trim","LP11216TWGS","LP 4/4x12x16 Woodgrain Strand (25885)
+","4/4"","4","4","0.00","0.00","0","0","0","18","","","","","Yes"
+"LP","Trim","LP54416TWGS","LP 5/4x4x16 Woodgrain Strand (25888)
+","5/4"","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Trim","LP54616TWGS","LP 5/4x6x16 Woodgrain Strand (25890)
+","5/4"","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"LP","Soffit","LP16VSCS","LP 16 Vented Soffit 3/8 Cedar (25823)
+","Vented","4","4","0.00","0.00","0","0","0","0","","","","","Yes"
+"Lumber","Brackets","BKTBROWNSUGAR","STOCK ONLY BR2 Brown Sugar Bracket","","60","60","5230.80","5230.80","0","0","0","0","","","","","Yes"
+"Lumber","Columns","889BROWNSUGAR","STOCK ONLY 8x8x9 Brown Sugar Column","","81","81","11431.53","11431.53","0","0","0","0","","","","","Yes"
+"Lumber","","LATTICECL","STOCK ONLY - 266 Lattice 1/4 x1-1/2 x 12","","48","48","0.00","0.00","0","0","46","68","","","","","Yes"
+"Lumber","Trim","2416P","2x4x16 Pine","","19","19","608.00","608.00","0","0","0","0","","","","","Yes"
+"Lumber","Columns","PTLAM6610","PT Laminate Column 6x6x10
+","","4","4","0.00","0.00","0","0","9","5","","","","","Yes"
+"Lumber","Columns","PTLAM8810","PT Laminate Column 8x8x10
+","","1","1","0.00","0.00","0","0","4","3","","","","","Yes"
+"Lumber","Posts","STKBOX12X12X3T","STOCK ONLY 12X12X3 Treated Wood Box","","21","21","0.00","0.00","0","0","4","0","","","","","Yes"
+"Lumber","Posts","STK8810TSQ","STOCK ONLY 8X8X10 Treated Square Column","","22","22","0.00","0.00","0","0","0","0","","","","","Yes"
+"Lumber","","448T","Treated 4x4x8","","4","4","0.00","0.00","0","0","4","2","","","","","Yes"
+"Lumber","","2416T","Treated 2x4X16","","1186","1186","0.00","0.00","0","0","0","0","","","","","Yes"
+"Lumber","","2816T","Treated 2X8X16","","27","27","0.00","0.00","0","0","0","0","","","","","Yes"
+"Lumber","","4412T","Treated 4x4x12","","2","2","0.00","0.00","0","0","2","0","","","","","Yes"
+"Lumber","Trim","1612TG","1x6x12 Beaded T and G #2 Yellow Pine
+","4/4"","516","516","0.00","0.00","0","0","482","99","","","","","Yes"
+"Lumber","Trim","1616TG","1x6x16 Beaded T and G #2 Yellow Pine
+","4/4"","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"Lumber","","1416TNS","Treated 1x4x16","","754","754","0.00","0.00","0","0","0","0","","","","","Yes"
+"Mastic","Shutters","MAST14714BBNB","Mastic Vinyl Shutters 14x71 4 Board Joined 14
+","4-Board Joined","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Mastic","Shutters","MAST15354BD","Mastic Vinyl Shutters 15X35 4 Board Closed","","1","1","0.00","0.00","0","0","0","1","","","","","Yes"
+"Mastic","Shutters","MAST15634BD","Mastic Vinyl Shutters 15X63 4 Board Closed","","1","1","0.00","0.00","0","0","0","1","","","","","Yes"
+"Mastic","Board & Batten","MASTBNBCL","Mastic 7in BNB Classic Colors
+","","21","21","0.00","0.00","0","0","620","620","","","","","Yes"
+"Mastic","Trim","MASTISCPCL","Mastic Inside Corner Piece Classic Colors","ISCP","4","4","0.00","0.00","0","0","14","10","","","","","Yes"
+"Mastic","Trim","MAST58JDEEP","Mastic 5/8 J-Channel Deep Colors
+","J-channel","2","2","0.00","0.00","0","0","0","111","","","","","Yes"
+"Mastic","Trim","MAST78JDEEP","Mastic 7/8 J-Channel Deep Colors
+","J-channel","4","4","0.00","0.00","0","0","0","0","","","","","Yes"
+"Mastic","Trim","MAST78JLT","Mastic 7/8 J-Channel Light Colors
+","J-channel","35","35","0.00","0.00","0","0","0","5","","","","","Yes"
+"Mastic","Shutters","MAST1548LV","Mastic Vinyl Shutters 15x48 Louvered
+","Louvered","1","1","0.00","0.00","0","0","2","1","","","","","Yes"
+"Mastic","Lap Siding","MASTMCD5DLCL","Mastic Mill Creek D5 DL Classic Colors","0.040"","50","50","0.00","0.00","0","0","50","0","","","","","Yes"
+"Mastic","Lap Siding","MASTMCD45DLCL","Mastic Mill Creek D4.5 DL Classic Colors","0.040"","492","492","0.00","0.00","0","0","1262","770","","","","","Yes"
+"Mastic","Trim","MAST3OSCPCL","Mastic 3in Outside Corner Piece Classic Colors
+","OSCP","10","10","0.00","0.00","0","0","21","11","","","","","Yes"
+"Mastic","Shutters","MAST1563RP","Mastic Vinyl Shutters 15x63 Raised Panel","Raised Panel","7","7","0.00","0.00","0","0","3","1","","","","","Yes"
+"Mastic","Shutters","MAST1571RP","Mastic Vinyl Shutters 15x71 Raised Panel","Raised Panel","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Metal","Coil","ALSCOASCOIL","ALSCO T24 SM COIL ALL COLORS","Smooth","8","8","0.00","0.00","0","0","12","3","","","","","Yes"
+"Metal","Coil","ALSCOSMWHT","ALSCO T24 SM COIL WHT #280","Smooth","31","31","0.00","0.00","0","0","62","19","","","","","Yes"
+"Metal","Accessories","SSALUM","Starter Strip Aluminum 2-1/2x10
+","Starter Strip","59","59","0.00","0.00","0","0","228","171","","","","","Yes"
+"Metal","Accessories","STEELSTARTERSTRIP","Steel Starter Strip 2.5
+","Starter Strip","53","53","0.00","0.00","0","0","7264","7384","","","","","Yes"
+"Metal","Coil","TBPVCCOIL","Tri-Built PVC Textured Aluminum Coil","","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"Mid-America","Mount Blocks","JUMBOB","MAB Jumbo Block All Colors","","92","92","1380.00","1380.00","0","0","1079","984","","","","","Yes"
+"Mid-America","Trim","MASTERMB","MAB Master Mount Block All Colors","Mount Block","96","96","0.00","0.00","0","0","1802","1735","","","","","Yes"
+"Mid-America","Shutters","MAVS14604BBNB","Mid America Vinyl Shutters 14x60 4 Board Joined 14
+","","1","1","0.00","0.00","0","0","1","0","","","","","Yes"
+"Mid-America","Shutters","MAVS14754BBNB","Mid America Vinyl Shutters 14x75 4 Board Joined 14
+","4-Board Joined","1","1","0.00","0.00","0","0","5","5","","","","","Yes"
+"Mid-America","Shutters","MAVS14614BBNBARCH","Mid America Vinyl Shutters 14x61 4 Board Joined 14 Arch Top
+","4-Board Joined","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"Mid-America","Shutters","MAVS14654BBNBARCH","Mid America Vinyl Shutters 14x65 4 Board Joined 14 Arch Top
+","4-Board Joined","1","1","0.00","0.00","0","0","0","2","","","","","Yes"
+"Mid-America","Shutters","MAVS12353BD","Mid America Vinyl Shutters 12x35 3 Board Spaced 12
+","3-Board Spaced","1","1","0.00","0.00","0","0","3","1","","","","","Yes"
+"Mid-America","Shutters","MAVS1535RP","Mid America Vinyl Shutters 15x35 Raised Panel
+","Raised Panel","3","3","0.00","0.00","0","0","3","3","","","","","Yes"
+"Mid-America","Shutters","MAVS1551RP","Mid America Vinyl Shutters 15x51 Raised Panel
+","Raised Panel","1","1","0.00","0.00","0","0","3","0","","","","","Yes"
+"Mid-America","Mount Blocks","RECESSEDMINIB","MAB Recessed Mini Block All Colors","","4","4","0.00","0.00","0","0","15","11","","","","","Yes"
+"Mid-America","Vents","22RNDVENT","MAB Round Vent 22","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Mid-America","Mount Blocks","SPLITMINIB","MAB Split Mini Block All Colors","","41","41","0.00","0.00","0","0","1579","1514","","","","","Yes"
+"Mid-America","Vents","12X18RECTVENT","MAB Rectangle Vent 12x18","","13","13","0.00","0.00","0","0","108","90","","","","","Yes"
+"Mid-America","Vents","20X30RECTVENT","MAB Rectangle Vent 20x30","","1","1","0.00","0.00","0","0","3","2","","","","","Yes"
+"Miratec","Trim","MT1416","Miratec Trim Board 1x4x16
+","4/4"","11","11","0.00","0.00","0","0","9","53","","","","","Yes"
+"Miratec","Trim","MT11016","Miratec Trim Board 1x10x16
+","4/4"","1","1","0.00","0.00","0","0","2","44","","","","","Yes"
+"Miratec","Trim","MT54216","Miratec Trim Board 5/4x2x16
+","5/4"","1","1","0.00","0.00","0","0","64","0","","","","","Yes"
+"Miscellaneous","","CapsandBases","Caps and Bases only for PVC columns","","495","495","0.00","0.00","0","0","0","0","","","","","Yes"
+"Miscellaneous","Vents","CORS400W","Cora S-400 Strip Vent White","","13","13","0.00","0.00","0","0","37","12","","","","","Yes"
+"Miscellaneous","Accessories","JOINTFLASH6X8","STOCK ONLY - JOINT FLASH 6IN X 8IN","","1195","1195","0.00","0.00","0","0","267","0","","","","","Yes"
+"Miscellaneous","Columns","89PRTPCCNS","8X9 PLAIN ROUND TAPERED PERMACAST COLUMN HB&G","","3","3","0.00","0.00","0","0","8","4","","","","","Yes"
+"Miscellaneous","Columns","RNDTFG10X9CBNS","10x9 Round Tapered Fiberglass Column (w/Cap and Base)
+","","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"Miscellaneous","","8RTPTCBNS","8IN ROUND TAPERED PERMACAST TUSCAN CAP AND BASE SET HB&G","","2","2","0.00","0.00","0","0","6","4","","","","","Yes"
+"Miscellaneous","","ScreenPorchInstallation","Screen Porch Installation For Builder Payment","","27","27","0.00","0.00","0","0","20","9","","","","","Yes"
+"Miscellaneous","Paint Kits","SPRAYPRIMER","STOCK ONLY Bullseye Spray Primer","","1196","1196","5501.60","5501.60","0","0","443","0","","","","","Yes"
+"Miscellaneous","Vents","STKLOMC816WH","STOCK ONLY Under Eave Vent 8x16","","54","54","0.00","0.00","0","0","0","0","","","","","Yes"
+"Nichiha","Soffit","NIVSOF1612SP","Nichiha Vented Soffit 16x12 Smooth Primed
+","Vented","14","14","0.00","0.00","0","0","0","0","","","","","Yes"
+"PVC","Brackets","BKT6X17X17","STOCK ONLY Decorative PVC Brace 6x17x17","","129","129","4515.00","4515.00","0","0","87","0","","","","","Yes"
+"PVC","Columns","102065CB","Cap and Base for Tapered column 10-20in","","100","100","1400.00","1400.00","0","0","0","0","","","","","Yes"
+"PVC","Panels","KL38410PVC","Kleer 3/8x4x10 PVC
+","","2","2","0.00","0.00","0","0","2","0","","","","","Yes"
+"PVC","Columns","669PVC","STOCK ONLY 6x6x9 PVC SQ Column Wrap (w/Cap and Base)","","97","97","7954.00","7954.00","0","0","236","79","","","","","Yes"
+"PVC","Columns","889PVC","STOCK ONLY 8x8x9 PVC SQ Column Wrap (w/Cap and Base)
+","","548","548","46125.16","46125.16","0","0","957","329","","","","","Yes"
+"PVC","Panels","3848PVC","PVC 3/8x4x8 Smooth
+","","3","3","0.00","0.00","0","0","10","6","","","","","Yes"
+"PVC","Columns","8810PVC","8x8x10 PVC SQ Column Wrap (w/Cap and Base)
+","","7","7","0.00","0.00","0","0","26","6","","","","","Yes"
+"PVC","Columns","10109PVC","STOCK ONLY 10x10x9 PVC SQ Column Wrap (w/Cap and Base)","","118","118","13334.00","13334.00","0","0","314","53","","","","","Yes"
+"PVC","Columns","12126PVC","12x12x6 PVC SQ Column Wrap (w/Cap and Base)
+","","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"PVC","Columns","51272PVC","STOCK ONLY 5-12x72 PVC Tapered Column Wrap (w/Rams Crown & Base)","","38","38","5776.00","5776.00","0","0","0","0","","","","","Yes"
+"PVC","Trim","58418PVC","PVC 5/8x4x18
+","5/8"","14","14","0.00","0.00","0","0","113","86","","","","","Yes"
+"PVC","Trim","58618PVC","PVC 5/8x6x18
+","5/8"","42","42","0.00","0.00","0","0","129","78","","","","","Yes"
+"PVC","Columns","101465PVC","STOCK ONLY 10-14x65 PVC Tapered Column Wrap (w/Cap and Base)","","30","30","4860.00","4860.00","0","0","25","2","","","","","Yes"
+"PVC","Columns","102065PVC","STOCK ONLY 10-20x65 PVC Tapered Column Wrap (w/Cap and Base)","","30","30","7950.00","7950.00","0","0","4","3","","","","","Yes"
+"PVC","Columns","121210PVC","12x12x10 PVC SQ Column Wrap (w/Cap and Base)
+","","31","31","0.00","0.00","0","0","36","21","","","","","Yes"
+"PVC","Trim","541018PVC","PVC 5/4x10x18
+","5/4"","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"PVC","Trim","581018PVC","PVC 5/8x10x18
+","5/8"","3","3","0.00","0.00","0","0","39","45","","","","","Yes"
+"PVC","Pediments","58PVCARCHGP6","5/8 PVC Flat Arched Gable Pediment 6ft Base (1 to 6 Spokes)
+","","3","3","0.00","0.00","0","0","3","0","","","","","Yes"
+"PVC","Pediments","58PVCARCHGP7","5/8 PVC Flat Arched Gable Pediment 7ft Base (1 to 6 Spokes)
+","","3","3","0.00","0.00","0","0","5","2","","","","","Yes"
+"PVC","Trim","180PVCBM","PVC Brickmould #180","","58","58","0.00","0.00","0","0","155","119","","","","","Yes"
+"PVC","Pediments","58PVCGP6","5/8 PVC Flat Gable Pediment 6ft Base (1 to 6 Spokes)
+","","4","4","0.00","0.00","0","0","10","8","","","","","Yes"
+"PVC","Pediments","58PVCGP7","5/8 PVC Flat Gable Pediment 7ft Base (1 to 6 Spokes)
+","","19","19","0.00","0.00","0","0","35","5","","","","","Yes"
+"PVC","Pediments","58PVCGP8","5/8 PVC Flat Gable Pediment 8ft Base (1 to 6 Spokes)
+","","3","3","0.00","0.00","0","0","8","4","","","","","Yes"
+"PVC","Pediments","58PVCGP9","5/8 PVC Flat Gable Pediment 9ft Base (1 to 6 Spokes)
+","","1","1","0.00","0.00","0","0","4","2","","","","","Yes"
+"PVC","Columns","6610PVCNS","6x6x10 PVC SQ Column Wrap (w/Cap and Base)
+","","2","2","0.00","0.00","0","0","6","4","","","","","Yes"
+"PVC","Columns","10109PVCNS","10x10x9 PVC SQ Column Wrap (w/Cap and Base)","","43","43","0.00","0.00","0","0","4","2","","","","","Yes"
+"PVC","Columns","101010PVCNS","10x10x10 PVC SQ Column Wrap (w/Cap and Base)","","2","2","0.00","0.00","0","0","2","2","","","","","Yes"
+"PVC","Columns","101012PVCNS","10x10x12 PVC SQ Column Wrap (w/Cap and Base)
+","","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"PVC","Columns","102065PVCNS","10-20x65 PVC Tapered Column Wrap (w/Cap and Base)","","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"PVC","Trim","PVCRC","STOCK ONLY PVC Rams Crown 2x16","","9","9","263.52","263.52","0","0","0","0","","","","","Yes"
+"PVC","Columns","STK12129PVC","STOCK ONLY 12X12X9 PVC Column","","39","39","0.00","0.00","0","0","11","0","","","","","Yes"
+"PVC","Trim","358VC","STOCK ONLY 3-5/8 PVC CROWN #49","","22","22","278.08","278.08","0","0","0","11","","","","","Yes"
+"Royal","Trim","RO58JCHT","Royal 5/8 J-Channel Traditional Colors
+","J-channel","582","582","0.00","0.00","0","0","2072","1649","","","","","Yes"
+"Royal","Trim","ROMFTFTT","Royal MFT Finish Trim Traditional Colors","Finish Trim","22","22","0.00","0.00","0","0","43","81","","","","","Yes"
+"Royal","Lap Siding","ROSCRESD4DLT","Royal Siding Crest .040 Double 4 Dutch Lap Traditional Colors","0.040"","220","220","0.00","0.00","0","0","0","0","","","","","Yes"
+"Royal","Lap Siding","ROSCRESD5DLT","Royal Siding Crest .040 Double 5DL Traditional Colors","0.040"","1","1","0.00","0.00","0","0","0","0","","","","","Yes"
+"Royal","Lap Siding","ROSRESID5T","Royal Siding Residential .042 D5 Straight Lap Traditional Colors","0.042"","52","52","0.00","0.00","0","0","0","0","","","","","Yes"
+"Royal","Lap Siding","ROSRESID45T","Royal Siding Residential .042 Double 4.5 Traditional Colors","0.042"","197","197","0.00","0.00","0","0","0","3","","","","","Yes"
+"Royal","Soffit","ROSSOFBUILD5T","Royal Builder D5 Soffit Solid Traditional Colors","Solid","761","761","0.00","0.00","0","0","3232","2333","","","","","Yes"
+"Royal","Soffit","ROVSOFBUILD5T","Royal Builder D5 Soffit Vented Traditional Colors","Vented","303","303","0.00","0.00","0","0","1691","1369","","","","","Yes"
+"Royal","Soffit","ROVSOFBUILT4T","Royal Builder T4 Soffit Vented Traditional Colors","Vented","6","6","0.00","0.00","0","0","0","0","","","","","Yes"
+"Royal","Board & Batten","ROWOODBNBCD","Royal Woodland Board and Batten ColorScapes Dark Colors","","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"Variform","Lap Siding","VFAHD45DLP","Variform Ashton Heights D4.5 Dutch Lap Premium Colors","0.042"","1","1","0.00","0.00","0","0","0","22","","","","","Yes"
+"Variform","Lap Siding","VFAHD45DLS","Variform Ashton Heights D4.5 Dutch Lap Standard Colors","0.042"","195","195","0.00","0.00","0","0","3","308","","","","","Yes"
+"Variform","Lap Siding","VFAHD5SLS","Variform Ashton Heights D5 Straight Lap Standard Colors","0.042"","8","8","0.00","0.00","0","0","0","0","","","","","Yes"
+"Variform","Board & Batten","VFBNBS7S","Variform Board & Batten S7 Standard Colors","","431","431","0.00","0.00","0","0","0","70","","","","","Yes"
+"Variform","Shakes","VFD7HCP","Variform Heritage Cedar D7 Shakes Premium Colors
+","","2","2","0.00","0.00","0","0","0","0","","","","","Yes"
+"Variform","Soffit","VFD5SSOFA","Variform D5 Solid Soffit All Colors","Vented","97","97","0.00","0.00","0","0","480","374","","","","","Yes"
+"Variform","Trim","VFFTS","Variform Undersill/Finish Trim Standard Colors","Finish Trim","21","21","0.00","0.00","0","0","0","36","","","","","Yes"
+"Variform","Trim","VF58JS","Variform 5/8 J-channel Standard Colors","J-channel","174","174","0.00","0.00","0","0","0","252","","","","","Yes"
+"Variform","Trim","VFLIGHT","Variform Universal Mount/ Light Block Standard Colors","Mount Block","1","1","0.00","0.00","0","0","0","49","","","","","Yes"
+"Variform","Trim","VF4OSCPS","Variform 4in OSCP Standard Colors
+","OSCP","1","1","0.00","0.00","0","0","0","55","","","","","Yes"
+"Variform","Shutters","VFRP1259","Variform Raised Panel Shutter 12x59","Raised Panel","3","3","0.00","0.00","0","0","0","0","","","","","Yes"
+"Variform","Trim","VFSPLIT","Variform Split Block/Hose Bib Standard Colors","Mount Block","1","1","0.00","0.00","0","0","0","18","","","","","Yes"
+"Variform","Soffit","VFT4SSOFS","Variform T4 Solid Soffit Standard Colors","Solid","84","84","0.00","0.00","0","0","0","145","","","","","Yes"
+"Variform","Soffit","VFT4VSOFS","Variform T4 Vented Soffit Standard Colors","Vented","58","58","0.00","0.00","0","0","0","78","","","","","Yes"
+"LABOR","","LABORSFF","Labor - Soffit/ Fascia/ Frieze","","8","8","0.00","0.00","0","0","8","0","","","","","Yes"
+"Imported Codes","","CONTRACT","Siding Installation","","2","2","0.00","0.00","0","0","7","4","","","","","Yes"
+"Tax","","TINATAX","SALES TAX","","43","43","0.00","0.00","0","0","0","0","","","","","Yes"
+"Norandex","","NDXSMD45S","Norandex Summit Manor D4.5 Standard Colors","","636","636","0.00","0.00","0","0","1707","1355","","","","","Yes"
+"Contractors Choice","","CCD45DLS","Contractors Choice D4.5 Dutch Lap .040 Standard Colors","","75","75","0.00","0.00","0","0","0","1899","","","","","Yes"
+"Diamond Hill","Columns","PRTPSC10X9NS","10IN X 9FT PLAIN ROUND TAPERED PERMACAST SPLIT COLUMN HB&G","","1","1","0.00","0.00","0","0","1","0","","","","","Yes"
+"Diamond Hill","Columns","10RTPSCCBNS","10IN ROUND TAPERED PERMACAST SPLIT CAP AND BASE HB&G","","1","1","0.00","0.00","0","0","1","0","","","","","Yes"
+"Kleer","","KL54418PVC","Kleer 5/4x4x18 PVC
+","","4","4","0.00","0.00","0","0","4","0","","","","","Yes"
+"Kleer","","KL58418PVC","Kleer 5/8x4x18 PVC","","29","29","0.00","0.00","0","0","180","181","","","","","Yes"
+"Kleer","","KL58618PVC","Kleer 5/8x6x18 PVC","","25","25","0.00","0.00","0","0","257","252","","","","","Yes"
+"Kleer","","KL58818PVC","Kleer 5/8x8x18 PVC","","109","109","0.00","0.00","0","0","283","192","","","","","Yes"
+"Kleer","","KL581018PVC","Kleer 5/8x10x18 PVC","","110","110","0.00","0.00","0","0","321","237","","","","","Yes"
+"Kleer","","KL581218PVC","Kleer 5/8x12x18 PVC","","4","4","0.00","0.00","0","0","12","21","","","","","Yes"
+"Gentek","Trim","GT312OSCPW","Gentek 3-1/2in OSCP White","","6","6","0.00","0.00","0","0","44","22","","","","","Yes"
+"Gentek","Soffit","GTOXFPD5SSW","Gentek Oxford Premium D5 Solid Soffit White","Solid","44","44","0.00","0.00","0","0","194","150","","","","","Yes"
+"Gentek","Soffit","GTOXFPD5VSW","Gentek Oxford Premium D5 Vented Soffit White","Vented","25","25","0.00","0.00","0","0","83","58","","","","","Yes"
+"Gentek","Trim","GTUSILLW","Gentek Undersill White","","13","13","0.00","0.00","0","0","38","25","","","","","Yes"
+"Total","","","","","106702","","1,090,652.19","1,090,652.19","","","","","","","",""

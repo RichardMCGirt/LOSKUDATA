@@ -6,6 +6,49 @@ body {
     color: #333;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+  }
+
+  table th, table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  #job-report-table tbody tr:nth-child(even),
+  #result-table tbody tr:nth-child(even),
+  #final-table tbody tr:nth-child(even) {
+    background-color: #2c2c2c !important; /* Slightly lighter dark gray for striping */
+    color: white !important;
+  }
+
+  #job-report-table tbody tr:nth-child(odd),
+  #result-table tbody tr:nth-child(odd),
+  #final-table tbody tr:nth-child(odd) {
+    background-color: #1e1e1e !important; /* Dark base color */
+    color: white !important;
+    text-align: center !important;
+  }
+
+  #job-report-table,
+  #result-table{
+    color: #f1f1f1 !important; /* Light text for contrast */
+    background-color: #1e1e1e;
+
+  }
+
+  input[type="checkbox"],
+  input[type="number"] {
+    text-align: center;
+    background-color: transparent !important;
+    color: white !important;
+  }
+
+
 h1 {
     color: #2c3e50;
     font-size: 24px;
@@ -13,13 +56,13 @@ h1 {
 }
 
 body { font-family: Arial, sans-serif; margin: 20px; }
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+table { width: 100%; border-collapse: collapse; }
 th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
 th { background-color: #f4f4f4; }
 td:focus { outline: 2px solid blue; } /* Highlight focused cell */
 .table-container {
 width: 100%; /* Full width */
-max-height: 300px; /* Restrict the height, adjust as needed */
+max-height: 600px; /* Restrict the height, adjust as needed */
 overflow-y: auto; /* Vertical scrolling */
 overflow-x: auto; /* Horizontal scrolling if needed */
 border: 1px solid #ccc; /* Optional border */
@@ -40,7 +83,7 @@ text-align: left;
 }
 
 #job-report-table th {
-background-color: #f9f9f9; /* Header background color */
+background-color: grey; /* Header background color */
 position: sticky; /* Keeps the header visible while scrolling */
 top: 0;
 z-index: 1;

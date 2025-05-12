@@ -34,7 +34,7 @@ function loadAndParseFile(fileName) {
                         sellqty: sellQty,
                     };
                 })
-                .filter(row => row);
+                .filter(row => row && !row.productnumber.toLowerCase().includes('labor'));
 
             console.log("Loaded Job Report Data:", jobReportData);
             renderJobReportTable();
@@ -292,7 +292,7 @@ function loadCSV() {
                         sellqty: sellQty, // Use cleaned and parsed sellqty
                     };
                 })
-                .filter(row => row); // Remove invalid rows
+                .filter(row => row && !row.productnumber.toLowerCase().includes('labor'));
 
             console.log("Loaded Rows:", rows);
             cityDropdown.disabled = false; // Enable dropdown
@@ -306,7 +306,9 @@ function displayFilteredRows() {
     tableBody.innerHTML = '';
     filteredRows.forEach(row => {
         const tr = document.createElement('tr');
-        tr.innerHTML = `
+        tr.style.backgroundColor = '#1e1e1e'; // Dark gray/black
+        tr.style.color = '#f1f1f1'; // Light text for contrast
+                tr.innerHTML = `
             <td>${row.branch}</td>
             <td>${row.jobname}</td>
             <td>${row.productnumber}</td>
@@ -321,7 +323,9 @@ function displayFilteredRows() {
 function displayJobReportTable() {
     jobReportTableBody.innerHTML = '';
     filteredRows.forEach((row, index) => {
-        const tr = document.createElement('tr');
+const tr = document.createElement('tr');
+tr.style.backgroundColor = '#1e1e1e'; // Dark gray/black
+tr.style.color = '#f1f1f1'; // Light text for contrast
         tr.innerHTML = `
             <td>${row.jobname}</td>
             <td>${row.productnumber}</td>
@@ -435,8 +439,10 @@ cityDropdown.addEventListener('change', () => {
         resultTable.style.display = 'table';    // Show Result Table
     }
 
-    filteredRows = rows.filter(row => row.branch?.toLowerCase().includes(selectedCity));
-    displayFilteredRows(); // Populate filtered rows in Result Table
+    filteredRows = rows
+    .filter(row => row.branch?.toLowerCase().includes(selectedCity))
+    .filter(row => !row.productnumber.toLowerCase().includes('labor'));
+      displayFilteredRows(); // Populate filtered rows in Result Table
     displayJobReportTable(); // Populate rows in Job Report Table
     finalCountsData = []; // Reset Final Table
     renderFinalCountsTable(); // Clear Final Table
