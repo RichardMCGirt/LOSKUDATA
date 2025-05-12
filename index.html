@@ -16,7 +16,21 @@
 
     </p>
     </header>
-
+     <!-- Dropdown for selecting a city -->
+     <div>
+        <label for="city-dropdown">Select a City:</label>
+        <select id="city-dropdown" disabled>
+            <option value="">-- Select City --</option>
+            <option value="Charleston">Charleston</option>
+            <option value="Charlotte">Charlotte</option>
+            <option value="Columbia">Columbia</option>
+            <option value="Greensboro">Greensboro</option>
+            <option value="Greenville">Greenville</option>
+            <option value="Myrtle Beach">Myrtle Beach</option>
+            <option value="Raleigh">Raleigh</option>
+            <option value="Wilmington">Wilmington</option>
+        </select>
+    </div>
 
 <!-- Table to display filtered results -->
 <table id="result-table" style="display: none;">
@@ -45,7 +59,7 @@
                     <th>Product #</th>
                     <th>Description</th>
                     <th>Sell Qty</th>
-                    <th>Checkbox</th>
+                    <th>(In The Feild)</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -60,7 +74,7 @@
                 <th>Stock SKU</th>
                 <th>Field Count</th>
                 <th>Warehouse Count</th>
-                <th>Final Inventory</th>
+                <th>In the feild</th>
                 <th>Current QOH</th>
                 <th>Discrepancy</th>
             </tr>
@@ -77,21 +91,7 @@
           <!--  <label for="file-input">Upload CSV File:</label>
             <input type="file" id="file-input" accept=".csv"> -->
         
-            <!-- Dropdown for selecting a city -->
-            <div>
-                <label for="city-dropdown">Select a City:</label>
-                <select id="city-dropdown" disabled>
-                    <option value="">-- Select City --</option>
-                    <option value="Charleston">Charleston</option>
-                    <option value="Charlotte">Charlotte</option>
-                    <option value="Columbia">Columbia</option>
-                    <option value="Greensboro">Greensboro</option>
-                    <option value="Greenville">Greenville</option>
-                    <option value="Myrtle Beach">Myrtle Beach</option>
-                    <option value="Raleigh">Raleigh</option>
-                    <option value="Wilmington">Wilmington</option>
-                </select>
-            </div>
+       
         
            
             <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>

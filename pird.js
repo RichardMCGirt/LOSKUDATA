@@ -35,8 +35,13 @@ function loadAndParseFile(fileName) {
                         sellqty: sellQty,
                     };
                 })
-                .filter(row => row && row.productnumber && !row.productnumber.toLowerCase().includes('labor'));
-
+                .filter(row => 
+                    row &&
+                    row.productnumber &&
+                    !row.productnumber.toLowerCase().includes('labor') &&
+                    !row.productnumber.toLowerCase().includes('delivery')
+                );
+                
             console.log("Loaded Job Report Data:", jobReportData);
             renderJobReportTable();
         })
@@ -347,8 +352,13 @@ function loadCSV() {
                         sellqty: sellQty,
                     };
                 })
-                .filter(row => row && row.productnumber && !row.productnumber.toLowerCase().includes('labor'));
-
+                .filter(row => 
+                    row &&
+                    row.productnumber &&
+                    !row.productnumber.toLowerCase().includes('labor') &&
+                    !row.productnumber.toLowerCase().includes('delivery')
+                );
+                
                 if (hasJumbobRow) {
                     console.log("✅ Loaded Rows (JUMBOB present):", rows);
                 }
@@ -483,7 +493,7 @@ function renderFinalCountsTable() {
             <td>${row.fieldCount}</td>
             <td><input type="number" value="${row.warehouseCount}" min="0" id="warehouse-${index}" /></td>
             <td>${row.fieldCount}</td>
-            <td>${row.currentQOH}</td>
+<td>${(parseInt(row.warehouseCount || 0) + parseInt(row.fieldCount || 0))}</td>
             <td>${row.discrepancy}</td>
         `;
 
@@ -517,8 +527,13 @@ cityDropdown.addEventListener('change', () => {
 
     filteredRows = rows
     .filter(row => row.branch?.toLowerCase().includes(selectedCity))
-    .filter(row => row && row.productnumber && !row.productnumber.toLowerCase().includes('labor'));
-    displayFilteredRows(); // Populate filtered rows in Result Table
+    .filter(row => 
+        row &&
+        row.productnumber &&
+        !row.productnumber.toLowerCase().includes('labor') &&
+        !row.productnumber.toLowerCase().includes('delivery')
+    );
+        displayFilteredRows(); // Populate filtered rows in Result Table
     displayJobReportTable(); // Populate rows in Job Report Table
     finalCountsData = []; // Reset Final Table
     renderFinalCountsTable(); // Clear Final Table
