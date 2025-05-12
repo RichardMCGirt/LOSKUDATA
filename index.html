@@ -50,7 +50,6 @@
 
   
 
-    <h1>Job Report</h1>
     <div class="table-container">
         <table id="job-report-table">
             <thead>
@@ -67,20 +66,23 @@
     </div>
     
 
-    <h1>Final Inventory</h1>
-    <table id="final-table">
-        <thead>
-            <tr>
-                <th>Stock SKU</th>
-                <th>Field Count</th>
-                <th>Warehouse Count</th>
-                <th>In the feild</th>
-                <th>Current QOH</th>
-                <th>Discrepancy</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div id="final-inventory-container" style="display: none;">
+        <h1>Final Inventory</h1>
+        <table id="final-table">
+            <thead>
+                <tr>
+                    <th>Stock SKU</th>
+                    <th>Field Count</th>
+                    <th>Warehouse Count</th>
+                    <th>In the feild</th>
+                    <th>Current QOH</th>
+                    <th>Discrepancy</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    
 
       
         
@@ -95,7 +97,22 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
         
             <script src="pird.js"></script>
+            <script>
+                const finalInventoryContainer = document.getElementById('final-inventory-container');
+            
+                cityDropdown.disabled = false; // Enable dropdown on page load
+            
+                cityDropdown.addEventListener('change', () => {
+    console.log("City selected:", cityDropdown.value); // <-- Debug log
+    if (cityDropdown.value) {
+        finalInventoryContainer.style.display = 'block';
+    } else {
+        finalInventoryContainer.style.display = 'none';
+    }
+});
 
+            </script>
+            
 
         
         </body>
