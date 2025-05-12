@@ -1,6 +1,7 @@
 // Global Variables for Data Storage
 let jobReportData = []; // To hold job report data
 let checkboxStates = {}; // To track checkbox states
+let qohMap = {}; // Maps stockSku -> QOH Before
 
 // Identify DOM Elements
 const jobTableBody = document.querySelector('#job-report-table tbody');
@@ -29,12 +30,12 @@ function loadAndParseFile(fileName) {
                         cperson: columns[0]?.trim().replace(/^"|"$/g, ''),
                         branch: columns[1]?.trim().replace(/^"|"$/g, ''),
                         jobname: columns[2]?.trim().replace(/^"|"$/g, ''),
-                        productnumber: columns[4]?.trim().replace(/^"|"$/g, ''),
+                        productnumber: columns[4]?.trim().replace(/^"|"$/g, '') || '',
                         Description: columns[5]?.trim().replace(/^"|"$/g, ''),
                         sellqty: sellQty,
                     };
                 })
-                .filter(row => row && !row.productnumber.toLowerCase().includes('labor'));
+                .filter(row => row && row.productnumber && !row.productnumber.toLowerCase().includes('labor'));
 
             console.log("Loaded Job Report Data:", jobReportData);
             renderJobReportTable();
@@ -113,9 +114,6 @@ function renderJobReportTable() {
     });
 }
 
-
-
-
 function handleCheckboxChange(isChecked, rowData) {
     console.log("---- HANDLE CHECKBOX CHANGE ----");
     console.log(`Checkbox State: ${isChecked ? 'Checked' : 'Unchecked'}`);
@@ -129,9 +127,10 @@ function handleCheckboxChange(isChecked, rowData) {
 
     // Prevent adding rows with empty product numbers or zero sell quantity
     if (!productNumber) {
-        console.warn("Product Number is empty. Skipping row addition.");
+        console.warn("⚠️ Product Number is empty for row:", rowData);
         return;
     }
+    
 
     if (sellQty <= 0) {
         console.warn("Sell Quantity is zero or invalid. Skipping row addition.");
@@ -187,7 +186,6 @@ function handleCheckboxChange(isChecked, rowData) {
 
 // Render Final Counts Table with Logging for Second Row
 function renderFinalCountsTable() {
-    const finalTableBody = document.querySelector('#final-table tbody');
     finalTableBody.innerHTML = ''; // Clear existing table rows
 
     if (finalCountsData.length === 0) {
@@ -196,30 +194,42 @@ function renderFinalCountsTable() {
     }
 
     finalCountsData.forEach((row, index) => {
+        const sku = row.stockSku.toUpperCase();
+        const qohValue = qohMap[sku];
+        const warehouseValue = row.warehouseCount || qohValue || 0;
+        row.warehouseCount = warehouseValue;
+
+        // ✅ Add log for expected behavior
+        if (typeof qohValue === 'number' && row.warehouseCount === qohValue) {
+            console.log(`✅ Appended ${qohValue} into warehouseCount for SKU: ${sku}`);
+        }
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${row.stockSku}</td>
             <td>${row.fieldCount}</td>
-            <td><input type="number" value="${row.warehouseCount}" min="0" id="warehouse-${index}" /></td>
-            <td>${row.fieldCount + row.warehouseCount}</td>
+            <td><input type="number" value="${warehouseValue}" min="0" id="warehouse-${index}" /></td>
+            <td>${row.fieldCount}</td>
             <td>${row.currentQOH}</td>
             <td>${row.discrepancy}</td>
         `;
-        // Attach event listener to update warehouseCount without summing
+
+        // Attach event listener to update warehouseCount
         tr.querySelector(`#warehouse-${index}`).addEventListener('input', (e) => {
             row.warehouseCount = parseFloat(e.target.value) || 0;
             renderFinalCountsTable(); // Re-render table to reflect changes
         });
+
         finalTableBody.appendChild(tr);
     });
 
-    // Log the second row in finalCountsData if it exists
     if (finalCountsData.length > 1) {
         console.log('Logging Second Row in Final Table:', finalCountsData[1]);
     } else {
         console.warn('Second row does not exist in Final Table.');
     }
 }
+
 
 
 // Update Warehouse Count and Recalculate Inventory
@@ -252,6 +262,45 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
+async function loadQOHData() {
+    const qohUrl = 'https://raw.githubusercontent.com/RichardMCGirt/LOSKUDATA/refs/heads/test/PhysicalInventoryReportbylinecode-1747063922-481340921.csv';
+
+    try {
+        const response = await fetch(qohUrl);
+        const text = await response.text();
+        const lines = text.split('\n');
+        const headers = lines[2].split(',').map(h => h.replace(/^"|"$/g, '').trim());
+        console.log("📌 QOH CSV Headers:", headers);
+
+
+        const stockIndex = headers.indexOf("Product Number");
+        const qohIndex = headers.indexOf("QOH Before");
+        const descIndex = headers.indexOf("Product Description");
+        
+        lines.slice(3).forEach(line => {
+            const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+            if (!columns || columns.length <= Math.max(stockIndex, qohIndex, descIndex)) return;
+
+            const stock = columns[stockIndex]?.replace(/^"|"$/g, '').trim().toUpperCase();
+            const qoh = parseFloat(columns[qohIndex]?.replace(/^"|"$/g, '').trim()) || 0;
+            const description = columns[descIndex]?.replace(/^"|"$/g, '').trim();
+
+            if (stock) {
+                qohMap[stock] = qoh;
+            }
+
+            if (description === "JUMBOB") {
+                console.log(`🟡 Found JUMBOB: Stock = ${stock}, QOH Before = ${qoh}`);
+            }
+            
+        });
+
+        console.log("✅ Loaded QOH Map:", qohMap);
+    } catch (err) {
+        console.error("❌ Failed to load QOH CSV:", err);
+    }
+}
+
 // DOM Elements
 const cityDropdown = document.getElementById('city-dropdown');
 const tableBody = document.querySelector('#result-table tbody');
@@ -267,6 +316,8 @@ let finalCountsData = []; // Data for Final Table
 cityDropdown.disabled = true;
 
 // Function to load CSV data
+let hasJumbobRow = false; // Add this flag at the top of your script
+
 function loadCSV() {
     const filePath = 'https://raw.githubusercontent.com/RichardMCGirt/LOSKUDATA/aaadeaf01c389da8972a54c7429bd96ce5b4fbef/downloads/OpenOrdersByCounterPerson-Detail-1736179445-745847148.csv';
     fetch(filePath)
@@ -277,28 +328,35 @@ function loadCSV() {
 
             rows = lines.slice(3)
                 .map(line => {
-                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g); // Safely split the line
-                    if (!columns || columns.length < 9) return null; // Ensure row has enough columns
+                    const columns = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                    if (!columns || columns.length < 9) return null;
 
-                    // Clean up sellqty before parsing
-                    const rawSellQty = columns[7]?.trim().replace(/^"|"$/g, ''); // Remove extra quotes
-                    const sellQty = parseFloat(rawSellQty) || 0; // Convert to number or fallback to 0
+                    const description = columns[6]?.trim().replace(/^"|"$/g, '');
+                    if (description === "JUMBOB") {
+                        hasJumbobRow = true;
+                    }
+
+                    const rawSellQty = columns[7]?.trim().replace(/^"|"$/g, '');
+                    const sellQty = parseFloat(rawSellQty) || 0;
 
                     return {
                         branch: columns[1]?.trim().replace(/^"|"$/g, ''),
                         jobname: columns[2]?.trim().replace(/^"|"$/g, ''),
                         productnumber: columns[5]?.trim().replace(/^"|"$/g, ''),
-                        Description: columns[6]?.trim().replace(/^"|"$/g, ''),
-                        sellqty: sellQty, // Use cleaned and parsed sellqty
+                        Description: description,
+                        sellqty: sellQty,
                     };
                 })
-                .filter(row => row && !row.productnumber.toLowerCase().includes('labor'));
+                .filter(row => row && row.productnumber && !row.productnumber.toLowerCase().includes('labor'));
 
-            console.log("Loaded Rows:", rows);
-            cityDropdown.disabled = false; // Enable dropdown
+                if (hasJumbobRow) {
+                    console.log("✅ Loaded Rows (JUMBOB present):", rows);
+                }
+                            cityDropdown.disabled = false;
         })
         .catch(error => console.error("Error loading CSV:", error));
 }
+
 
 
 // Display Filtered Rows in the Result Table
@@ -405,23 +463,41 @@ function renderFinalCountsTable() {
     }
 
     finalCountsData.forEach((row, index) => {
+        const sku = row.stockSku.toUpperCase();
+        const qohValue = qohMap[sku];
+
+        // ✅ Force-load QOH into warehouseCount
+        row.warehouseCount = typeof qohValue === 'number' ? qohValue : 0;
+
+        // ✅ Calculate discrepancy
+        row.discrepancy = row.fieldCount - row.warehouseCount;
+
+        // ✅ Optional: Log only when QOH exists and JUMBOB was in loaded rows
+        if (typeof qohValue === 'number' && hasJumbobRow) {
+            console.log(`✅ Appended ${qohValue} into warehouseCount for SKU: ${sku}`);
+        }
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${row.stockSku}</td>
             <td>${row.fieldCount}</td>
             <td><input type="number" value="${row.warehouseCount}" min="0" id="warehouse-${index}" /></td>
-            <td>${row.fieldCount}</td> <!-- Display fieldCount as is -->
+            <td>${row.fieldCount}</td>
             <td>${row.currentQOH}</td>
             <td>${row.discrepancy}</td>
         `;
-        // Attach event listener to update warehouseCount without summing
+
         tr.querySelector(`#warehouse-${index}`).addEventListener('input', (e) => {
             row.warehouseCount = parseFloat(e.target.value) || 0;
-            renderFinalCountsTable(); // Re-render table to reflect changes
+            row.discrepancy = row.fieldCount - row.warehouseCount; // ✅ Recalculate on input
+            renderFinalCountsTable(); // Re-render table
         });
+
         finalTableBody.appendChild(tr);
     });
 }
+
+
 
 
 // Handle Dropdown Change
@@ -441,8 +517,8 @@ cityDropdown.addEventListener('change', () => {
 
     filteredRows = rows
     .filter(row => row.branch?.toLowerCase().includes(selectedCity))
-    .filter(row => !row.productnumber.toLowerCase().includes('labor'));
-      displayFilteredRows(); // Populate filtered rows in Result Table
+    .filter(row => row && row.productnumber && !row.productnumber.toLowerCase().includes('labor'));
+    displayFilteredRows(); // Populate filtered rows in Result Table
     displayJobReportTable(); // Populate rows in Job Report Table
     finalCountsData = []; // Reset Final Table
     renderFinalCountsTable(); // Clear Final Table
@@ -453,6 +529,8 @@ cityDropdown.addEventListener('change', () => {
 
 
 // Initialize Data Loading
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadQOHData();
     loadCSV();
 });
+
