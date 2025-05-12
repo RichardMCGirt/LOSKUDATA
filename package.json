@@ -4,23 +4,46 @@
   "description": "A Node.js app for LOSKUDATA",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": ""
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "browser": {
+    "path": "path-browserify"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^8.17.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
     "inquirer": "^8.2.6",
+    "net-browserify": "^0.2.4",
+    "os-browserify": "^0.3.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "puppeteer": "^22.8.2",
-    "puppeteer-core": "^10.4.0",
+    "path-browserify": "^1.0.1",
+    "react-scripts": "^5.0.1",
     "socket.io": "^4.8.1",
-    "socket.io-client": "^4.8.1"
+    "socket.io-client": "^4.8.1",
+    "stream-http": "^3.2.0",
+    "tls-browserify": "^0.2.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "react-app-rewired": "^2.2.1"
   }
 }

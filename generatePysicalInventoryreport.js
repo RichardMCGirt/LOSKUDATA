@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer'); // Use Puppeteer with bundled Chromium
 const path = require('path');
-const fs = require('fs');
 const inquirer = require('inquirer'); // Use inquirer for enhanced user input
 
 // Ensure the download directory exists
