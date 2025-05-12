@@ -438,30 +438,45 @@ tr.style.color = '#f1f1f1'; // Light text for contrast
 
 
 // Update Final Table based on Checkboxes
-function updateFinalTable(row, isChecked) {
-    const existing = finalCountsData.find(r => r.stockSku === row.productnumber);
+function updateFinalTable(clickedRow, isChecked) {
+    const jobName = clickedRow.jobname.trim();
+    const branch = clickedRow.branch.trim();
+    
+    // Apply the checkbox change to all matching rows (same jobname and branch)
+    filteredRows.forEach((row, index) => {
+        const matchesJob = row.jobname.trim() === jobName && row.branch.trim() === branch;
+        if (!matchesJob) return;
 
-    if (isChecked) {
-        if (existing) {
-            existing.fieldCount += row.sellqty;
-        } else {
-            finalCountsData.push({
-                stockSku: row.productnumber,
-                fieldCount: row.sellqty,
-                warehouseCount: 0,
-                currentQOH: 0,
-                discrepancy: 0
-            });
+        const checkbox = document.getElementById(`checkbox-${index}`);
+        if (checkbox) {
+            checkbox.checked = isChecked;
         }
-    } else if (existing) {
-        existing.fieldCount -= row.sellqty;
-        if (existing.fieldCount <= 0) {
-            finalCountsData = finalCountsData.filter(r => r.stockSku !== row.productnumber);
+
+        const existing = finalCountsData.find(r => r.stockSku === row.productnumber);
+
+        if (isChecked) {
+            if (existing) {
+                existing.fieldCount += row.sellqty;
+            } else {
+                finalCountsData.push({
+                    stockSku: row.productnumber,
+                    fieldCount: row.sellqty,
+                    warehouseCount: 0,
+                    currentQOH: 0,
+                    discrepancy: 0
+                });
+            }
+        } else if (existing) {
+            existing.fieldCount -= row.sellqty;
+            if (existing.fieldCount <= 0) {
+                finalCountsData = finalCountsData.filter(r => r.stockSku !== row.productnumber);
+            }
         }
-    }
+    });
 
     renderFinalCountsTable();
 }
+
 
 // Render Final Counts Table without Summing Columns
 function renderFinalCountsTable() {
